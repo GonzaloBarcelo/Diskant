@@ -68,7 +68,7 @@ public class SocketServer extends Thread {
 				Thread.sleep(15000);
 				System.out.println("Me levanto");
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+				// TO DO Auto-generated catch block
 				e.printStackTrace();
 			}*/
             // create an object output stream from the output stream so we can send an object through it
@@ -85,7 +85,7 @@ public class SocketServer extends Thread {
         } catch (IOException ex) {
             System.out.println("Unable to get streams from client");
         } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
+            // TO DO Auto-generated catch block
             e.printStackTrace();
         } finally {
             try {
