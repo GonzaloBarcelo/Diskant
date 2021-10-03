@@ -13,13 +13,14 @@ public class Message implements Serializable {
     private static final long serialVersionUID = 1L;
     private String context;
     private Map<String, Object> session;
-    private Boolean correct=false;
+    private Boolean correct;
     private Customer customer;
 
 
     public Message () {
         context=new String();
         session=new HashMap<String, Object>();
+        correct= false;
 
     }
 

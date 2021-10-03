@@ -58,20 +58,21 @@ public class SocketServer extends Thread {
                     CustomerControler customerCont=new CustomerControler();
                     ArrayList<Customer> listaCust=new ArrayList<Customer>();
                     customerCont.getCustomer(listaCust);
-                    System.out.println("FF");
                     for (Customer customer : listaCust){
-
                         if (customerIN.equals(customer)){
                             mensajeOut.setCorrect(true);
-                            System.out.println("Se han autenticado con el id: "+customer.getId()+"  y con nombre: "+customer.getName());
-                            objectOutputStream.writeObject(mensajeOut);
                             break;
                         }
                         else{
                             mensajeOut.setCorrect(false);
                         }
                     }
-                    System.out.println("Se ha introducido mal la contraseña para el ID"+customerIN.getId());
+                    if (mensajeOut.getCorrect()){
+                        System.out.println("Se ha autenticado el usuario: "+customerIN.getId());
+                    }
+                    else{
+                        System.out.println("Se ha introducido mal la contraseña para el ID"+customerIN.getId());
+                    }
                     objectOutputStream.writeObject(mensajeOut);
                     break;
 

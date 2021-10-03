@@ -38,7 +38,7 @@ public class Client {
         mensajeEnvio.setContext("/getAccess");
 
         //Prueba para id de customer
-        Customer prueba= new Customer("1","Maria");
+        Customer prueba= new Customer("1","Gonzalo");
         mensajeEnvio.setCustomer(prueba);
         mensajeEnvio.setSession(session);
         cliente.sent(mensajeEnvio,mensajeVuelta);
@@ -54,8 +54,10 @@ public class Client {
 
             case "/getAccessResponse":
                 System.out.println("Pasa");
-                if (mensajeVuelta.getCorrect())
+                Boolean correct= (Boolean) mensajeVuelta.getCorrect();
+                if (correct){
                     System.out.println("El usuario se ha autenticado correctamente");
+                }
                 break;
 
 
