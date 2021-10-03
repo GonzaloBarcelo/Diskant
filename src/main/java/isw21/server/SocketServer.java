@@ -1,4 +1,4 @@
-package src.main.java.isw21.server;
+package main.java.isw21.server;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,9 +10,9 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import src.main.java.isw21.controler.CustomerControler;
-import src.main.java.isw21.domain.Customer;
-import src.main.java.isw21.message.Message;
+import main.java.isw21.controler.CustomerControler;
+import main.java.isw21.domain.Customer;
+import main.java.isw21.message.Message;
 
 public class SocketServer extends Thread {
     public static final int PORT_NUMBER = 8081;
@@ -49,6 +49,29 @@ public class SocketServer extends Thread {
                     HashMap<String,Object> session=new HashMap<String, Object>();
                     session.put("Customer",lista);
                     mensajeOut.setSession(session);
+                    objectOutputStream.writeObject(mensajeOut);
+                    break;
+
+                case "/getAccess":
+                    Customer customerIN= mensajeIn.getCustomer();
+                    mensajeOut.setContext("/getAccessResponse");
+                    CustomerControler customerCont=new CustomerControler();
+                    ArrayList<Customer> listaCust=new ArrayList<Customer>();
+                    customerCont.getCustomer(listaCust);
+                    System.out.println("FF");
+                    for (Customer customer : listaCust){
+
+                        if (customerIN.equals(customer)){
+                            mensajeOut.setCorrect(true);
+                            System.out.println("Se han autenticado con el id: "+customer.getId()+"  y con nombre: "+customer.getName());
+                            objectOutputStream.writeObject(mensajeOut);
+                            break;
+                        }
+                        else{
+                            mensajeOut.setCorrect(false);
+                        }
+                    }
+                    System.out.println("Se ha introducido mal la contraseña para el ID"+customerIN.getId());
                     objectOutputStream.writeObject(mensajeOut);
                     break;
 
@@ -114,6 +137,7 @@ public class SocketServer extends Thread {
             }
         } catch (IOException ex) {
             System.out.println("Unable to start server.");
+            ex.printStackTrace();
         } finally {
             try {
                 if (server != null)

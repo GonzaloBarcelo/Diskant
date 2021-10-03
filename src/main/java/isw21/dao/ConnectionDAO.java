@@ -1,10 +1,10 @@
-package src.main.java.isw21.dao;
+package main.java.isw21.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import src.main.java.isw21.configuration.PropertiesISW;
+import main.java.isw21.configuration.PropertiesISW;
 
 public class ConnectionDAO {
     private static ConnectionDAO connectionDAO;

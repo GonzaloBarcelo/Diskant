@@ -1,4 +1,4 @@
-package src.main.java.isw21.configuration;
+package main.java.isw21.configuration;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

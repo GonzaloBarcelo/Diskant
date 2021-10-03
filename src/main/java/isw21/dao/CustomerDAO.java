@@ -1,4 +1,4 @@
-package src.main.java.isw21.dao;
+package main.java.isw21.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import src.main.java.isw21.domain.Customer;
-import src.main.java.isw21.dao.ConnectionDAO;
+import main.java.isw21.domain.Customer;
+import main.java.isw21.dao.ConnectionDAO;
 
 public class CustomerDAO {
 

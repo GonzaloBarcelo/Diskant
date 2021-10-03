@@ -1,4 +1,4 @@
-package src.main.java.isw21.domain;
+package main.java.isw21.domain;
 
 import java.io.Serializable;
 
@@ -36,5 +36,20 @@ public class Customer implements Serializable{
         this.name = name;
     }
 
+    @Override
+    public boolean equals(Object o){
+        if (o instanceof Customer){
+            Customer customerIN=(Customer)o;
+            if (customerIN.getId().equals(this.id) && customerIN.getName().equals(this.name)){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
+    }
 
 }

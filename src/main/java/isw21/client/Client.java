@@ -1,4 +1,4 @@
-package src.main.java.isw21.client;
+package main.java.isw21.client;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,13 +12,13 @@ import java.util.HashMap;
 
 import org.apache.log4j.Logger;
 
-import src.main.java.isw21.configuration.PropertiesISW;
-import src.main.java.isw21.domain.Customer;
-import src.main.java.isw21.message.Message;
+import main.java.isw21.configuration.PropertiesISW;
+import main.java.isw21.domain.Customer;
+import main.java.isw21.message.Message;
 
 public class Client {
-    private String host;
-    private int port;
+    private final String host;
+    private final int port;
     final static Logger logger = Logger.getLogger(Client.class);
 
     public static void main(String args[]) {
@@ -34,7 +34,12 @@ public class Client {
 
         Message mensajeEnvio=new Message();
         Message mensajeVuelta=new Message();
-        mensajeEnvio.setContext("/getCustomer");
+
+        mensajeEnvio.setContext("/getAccess");
+
+        //Prueba para id de customer
+        Customer prueba= new Customer("1","Maria");
+        mensajeEnvio.setCustomer(prueba);
         mensajeEnvio.setSession(session);
         cliente.sent(mensajeEnvio,mensajeVuelta);
 
@@ -46,6 +51,16 @@ public class Client {
                     System.out.println("He leído el id: "+customer.getId()+" con nombre: "+customer.getName());
                 }
                 break;
+
+            case "/getAccessResponse":
+                System.out.println("Pasa");
+                if (mensajeVuelta.getCorrect())
+                    System.out.println("El usuario se ha autenticado correctamente");
+                break;
+
+
+
+
 
             default:
                 Logger.getRootLogger().info("Option not found");
