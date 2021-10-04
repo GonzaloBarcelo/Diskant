@@ -35,16 +35,21 @@ public class Client {
         Message mensajeEnvio=new Message();
         Message mensajeVuelta=new Message();
 
-        mensajeEnvio.setContext("/getAccess");
+        mensajeEnvio.setContext("/addNewUser");
 
         //Prueba para id de customer
-        Customer prueba= new Customer("1","Gonzalo");
+        Customer prueba= new Customer("2","Maria");
         mensajeEnvio.setCustomer(prueba);
-        mensajeEnvio.setSession(session);
+        //mensajeEnvio.setSession(session);
         cliente.sent(mensajeEnvio,mensajeVuelta);
 
 
         switch (mensajeVuelta.getContext()) {
+            case "/addNewUserResponse":
+                if (mensajeVuelta.getCorrect()){
+                    System.out.println("El usuario ya se encuentra en la base de datos");
+                }
+                break;
             case "/getCustomerResponse":
                 ArrayList<Customer> customerList=(ArrayList<Customer>)(mensajeVuelta.getSession().get("Customer"));
                 for (Customer customer : customerList) {
@@ -53,9 +58,10 @@ public class Client {
                 break;
 
             case "/getAccessResponse":
-                System.out.println("Pasa");
+                //System.out.println("Pasa");
                 Boolean correct= (Boolean) mensajeVuelta.getCorrect();
-                if (correct){
+                Customer customerIn= (Customer) mensajeVuelta.getCustomer();
+                if (customerIn!=null){
                     System.out.println("El usuario se ha autenticado correctamente");
                 }
                 break;

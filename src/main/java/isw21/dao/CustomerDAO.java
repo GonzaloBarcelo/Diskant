@@ -27,6 +27,20 @@ public class CustomerDAO {
             System.out.println(ex.getMessage());
         }
     }
+    public static void getDatosCLiente(ArrayList<Customer> lista, Customer customer) {
+        Connection con=ConnectionDAO.getInstance().getConnection();
+        try (PreparedStatement pst = con.prepareStatement("SELECT * FROM usuarios WHERE id="+customer.getId());
+             ResultSet rs = pst.executeQuery()) {
+
+            while (rs.next()) {
+                lista.add(new Customer(rs.getString(1),rs.getString(2)));
+            }
+
+        } catch (SQLException ex) {
+
+            System.out.println(ex.getMessage());
+        }
+    }
 
     public static void main(String[] args) {
 

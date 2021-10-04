@@ -7,10 +7,15 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import main.java.isw21.controler.CustomerControler;
+import main.java.isw21.dao.ConnectionDAO;
 import main.java.isw21.domain.Customer;
 import main.java.isw21.message.Message;
 
@@ -55,18 +60,7 @@ public class SocketServer extends Thread {
                 case "/getAccess":
                     Customer customerIN= mensajeIn.getCustomer();
                     mensajeOut.setContext("/getAccessResponse");
-                    CustomerControler customerCont=new CustomerControler();
-                    ArrayList<Customer> listaCust=new ArrayList<Customer>();
-                    customerCont.getCustomer(listaCust);
-                    for (Customer customer : listaCust){
-                        if (customerIN.equals(customer)){
-                            mensajeOut.setCorrect(true);
-                            break;
-                        }
-                        else{
-                            mensajeOut.setCorrect(false);
-                        }
-                    }
+                    mensajeOut.setCorrect(isInBase(customerIN)!=null);
                     if (mensajeOut.getCorrect()){
                         System.out.println("Se ha autenticado el usuario: "+customerIN.getId());
                     }
@@ -75,7 +69,15 @@ public class SocketServer extends Thread {
                     }
                     objectOutputStream.writeObject(mensajeOut);
                     break;
-
+                case "/addNewUser":
+                    customerIN = mensajeIn.getCustomer();
+                    mensajeOut.setContext("/addNewUserResponse");
+                    this.addCliente(customerIN);
+                    if (this.isInBase(customerIN)!=null){
+                        mensajeOut.setCorrect(true);
+                    }
+                    objectOutputStream.writeObject(mensajeOut);
+                    break;
 
                 default:
                     System.out.println("\nParámetro no encontrado");
@@ -123,6 +125,17 @@ public class SocketServer extends Thread {
             }
         }
     }
+    public Customer isInBase(Customer customerIN){
+        CustomerControler customerControler=new CustomerControler();
+        ArrayList<Customer> listaCust=new ArrayList<Customer>();
+        customerControler.getCustomer(listaCust);
+        for (Customer customer : listaCust) {
+            if (customerIN.equals(customer)) {
+                return customer;
+            }
+        }
+        return null;
+    }
 
     public static void main(String[] args) {
         System.out.println("SocketServer Example");
@@ -147,5 +160,23 @@ public class SocketServer extends Thread {
                 ex.printStackTrace();
             }
         }
+    }
+    public void addCliente(Customer customer){
+
+        if (this.isInBase(customer)==null){
+            Connection con= ConnectionDAO.getInstance().getConnection();
+            try{
+                PreparedStatement pst = con.prepareStatement("INSERT INTO usuarios VALUES ('"+customer.getId()+"','"+customer.getName()+"');");
+                ResultSet rs = pst.executeQuery();
+            }
+            catch (SQLException ex){
+                System.out.println(ex.getMessage());
+            }
+        }
+        else{
+            System.out.println("El usuario ya se encuentra dentro de la base de datos.");
+        }
+
+
     }
 }
