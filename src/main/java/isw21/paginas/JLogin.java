@@ -1,4 +1,8 @@
 package main.java.isw21.paginas;
+import main.java.isw21.client.Client;
+import main.java.isw21.configuration.PropertiesISW;
+import org.apache.log4j.Logger;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -76,10 +80,18 @@ public class JLogin extends JFrame
 
         pnlSur.add(btnLogin);
 
+        //Creamos un nuevo cliente
+        String host = PropertiesISW.getInstance().getProperty("host");
+        int port = Integer.parseInt(PropertiesISW.getInstance().getProperty("port"));
+        Logger.getRootLogger().info("Host: "+host+" port"+port);
+        //Create a cliente class
+        Client cliente=new Client(host, port);
+
         btnLogin.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
+                cliente.run(cliente);
                 setVisible(false);
             };
         });

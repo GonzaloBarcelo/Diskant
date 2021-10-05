@@ -21,13 +21,13 @@ public class Client {
     private final int port;
     final static Logger logger = Logger.getLogger(Client.class);
 
-    public static void main(String args[]) {
+    public static void run(Client cliente) {
         //Configure connections
-        String host = PropertiesISW.getInstance().getProperty("host");
+        /*String host = PropertiesISW.getInstance().getProperty("host");
         int port = Integer.parseInt(PropertiesISW.getInstance().getProperty("port"));
         Logger.getRootLogger().info("Host: "+host+" port"+port);
         //Create a cliente class
-        Client cliente=new Client(host, port);
+        Client cliente=new Client(host, port);*/
 
         HashMap<String,Object> session=new HashMap<String, Object>();
         //session.put("/getCustomer","");
@@ -40,7 +40,7 @@ public class Client {
         //Prueba para id de customer
         Customer prueba= new Customer("2","Maria");
         mensajeEnvio.setCustomer(prueba);
-        //mensajeEnvio.setSession(session);
+        mensajeEnvio.setSession(session);
         cliente.sent(mensajeEnvio,mensajeVuelta);
 
 
