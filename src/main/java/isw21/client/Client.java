@@ -19,6 +19,9 @@ import main.java.isw21.message.Message;
 public class Client {
     private final String host;
     private final int port;
+    static String nombre;
+    static String id;
+    static Boolean identification=false;
     final static Logger logger = Logger.getLogger(Client.class);
 
     public static void run(Client cliente) {
@@ -35,10 +38,10 @@ public class Client {
         Message mensajeEnvio=new Message();
         Message mensajeVuelta=new Message();
 
-        mensajeEnvio.setContext("/addNewUser");
+        mensajeEnvio.setContext("/getAccess");
 
         //Prueba para id de customer
-        Customer prueba= new Customer("2","Maria");
+        Customer prueba= new Customer(id, nombre);
         mensajeEnvio.setCustomer(prueba);
         mensajeEnvio.setSession(session);
         cliente.sent(mensajeEnvio,mensajeVuelta);
@@ -58,12 +61,7 @@ public class Client {
                 break;
 
             case "/getAccessResponse":
-                //System.out.println("Pasa");
-                Boolean correct= (Boolean) mensajeVuelta.getCorrect();
-                Customer customerIn= (Customer) mensajeVuelta.getCustomer();
-                if (customerIn!=null){
-                    System.out.println("El usuario se ha autenticado correctamente");
-                }
+                identification = (Boolean)(mensajeVuelta.getSession().get("Customer"));
                 break;
 
 
@@ -127,5 +125,28 @@ public class Client {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public void setNombre(String nombre){
+        this.nombre=nombre;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public static Boolean getIdentification() {
+        return identification;
+    }
+
+    public static void setIdentification(Boolean identification) {
+        Client.identification = identification;
     }
 }

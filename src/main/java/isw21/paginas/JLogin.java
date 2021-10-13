@@ -9,6 +9,12 @@ import java.awt.event.*;
 import java.awt.Color;
 import java.awt.Font;
 
+import main.java.isw21.client.Client;
+import main.java.isw21.configuration.PropertiesISW;
+import main.java.isw21.message.Message;
+import main.java.isw21.domain.Customer;
+import org.apache.log4j.Logger;
+
 public class JLogin extends JFrame
 {
     public static void main(String args[])
@@ -17,6 +23,11 @@ public class JLogin extends JFrame
     }
     public JLogin()
     {
+        String host = PropertiesISW.getInstance().getProperty("host");
+        int port = Integer.parseInt(PropertiesISW.getInstance().getProperty("port"));
+        Logger.getRootLogger().info("Host: "+host+" port"+port);
+        Client cliente=new Client(host, port);
+
         setSize(450,600);
         //this.setColor(BLUE);
         this.setLayout(new BorderLayout());
@@ -81,18 +92,22 @@ public class JLogin extends JFrame
         pnlSur.add(btnLogin);
 
         //Creamos un nuevo cliente
-        String host = PropertiesISW.getInstance().getProperty("host");
-        int port = Integer.parseInt(PropertiesISW.getInstance().getProperty("port"));
+        host = PropertiesISW.getInstance().getProperty("host");
+        port = Integer.parseInt(PropertiesISW.getInstance().getProperty("port"));
         Logger.getRootLogger().info("Host: "+host+" port"+port);
         //Create a cliente class
-        Client cliente=new Client(host, port);
 
         btnLogin.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
+                cliente.setNombre(txtPassword.getText());
+                cliente.setId(txtUser.getText());
                 cliente.run(cliente);
-                setVisible(false);
+                if (cliente.getIdentification()){
+                    System.out.println("Se ha logeado");
+                }
+                setVisible(true);
             };
         });
         pnlSur.setBorder(BorderFactory.createEtchedBorder());

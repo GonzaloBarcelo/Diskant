@@ -60,15 +60,21 @@ public class SocketServer extends Thread {
                 case "/getAccess":
                     Customer customerIN= mensajeIn.getCustomer();
                     mensajeOut.setContext("/getAccessResponse");
-                    mensajeOut.setCorrect(isInBase(customerIN)!=null);
-                    if (mensajeOut.getCorrect()){
+                    lista=new ArrayList<Customer>();
+                    session=new HashMap<String, Object>();
+                    session.put("Customer",false);
+                    if (isInBase(customerIN)!=null){
+                        session.put("Customer",true);
                         System.out.println("Se ha autenticado el usuario: "+customerIN.getId());
                     }
                     else{
+                        session.put("Customer",false);
                         System.out.println("Se ha introducido mal la contraseña para el ID"+customerIN.getId());
                     }
+                    mensajeOut.setSession(session);
                     objectOutputStream.writeObject(mensajeOut);
                     break;
+
                 case "/addNewUser":
                     customerIN = mensajeIn.getCustomer();
                     mensajeOut.setContext("/addNewUserResponse");
