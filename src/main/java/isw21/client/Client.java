@@ -20,6 +20,7 @@ public class Client {
     private final String host;
     private final int port;
     static String nombre;
+    static String context;
     static String id;
     static Boolean identification=false;
     final static Logger logger = Logger.getLogger(Client.class);
@@ -38,7 +39,7 @@ public class Client {
         Message mensajeEnvio=new Message();
         Message mensajeVuelta=new Message();
 
-        mensajeEnvio.setContext("/getAccess");
+        mensajeEnvio.setContext(context);
 
         //Prueba para id de customer
         Customer prueba= new Customer(id, nombre);
@@ -49,8 +50,14 @@ public class Client {
 
         switch (mensajeVuelta.getContext()) {
             case "/addNewUserResponse":
-                if (mensajeVuelta.getCorrect()){
-                    System.out.println("El usuario ya se encuentra en la base de datos");
+                identification=false;
+                Boolean temp=(Boolean)(mensajeVuelta.getSession().get("Customer"));
+                if (temp){
+                    System.out.println("El usuario se ha añadido a la base");
+                    identification=true;
+                }
+                else{
+                    System.out.println("El usuario a añadir ya se encuentra en la base");
                 }
                 break;
             case "/getCustomerResponse":
@@ -148,5 +155,13 @@ public class Client {
 
     public static void setIdentification(Boolean identification) {
         Client.identification = identification;
+    }
+
+    public static void setContext(String context) {
+        Client.context = context;
+    }
+
+    public static String getContext() {
+        return context;
     }
 }

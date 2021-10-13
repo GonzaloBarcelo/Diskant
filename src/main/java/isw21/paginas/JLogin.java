@@ -86,10 +86,14 @@ public class JLogin extends JFrame
         JPanel pnlSur = new JPanel();
         pnlSur.setPreferredSize(new Dimension(350, 100));
         JButton btnLogin = new JButton("Login");
-        btnLogin.setForeground(Color.BLUE);  //new Color(254, 155, 32)
+        JButton btnRegister = new JButton("Register");
+
+        btnLogin.setForeground(Color.BLUE);
+        btnRegister.setForeground(Color.BLUE);//new Color(254, 155, 32)
         //pnlSur.add(new JLabel( "prueba",JLabel.CENTER ),BorderLayout.CENTER );
 
         pnlSur.add(btnLogin);
+        pnlSur.add(btnRegister);
 
         //Creamos un nuevo cliente
         host = PropertiesISW.getInstance().getProperty("host");
@@ -101,11 +105,27 @@ public class JLogin extends JFrame
         {
             public void actionPerformed(ActionEvent e)
             {
+                cliente.setContext("/getAccess");
                 cliente.setNombre(txtPassword.getText());
                 cliente.setId(txtUser.getText());
                 cliente.run(cliente);
                 if (cliente.getIdentification()){
                     System.out.println("Se ha logeado");
+                }
+                setVisible(true);
+            };
+        });
+
+        btnRegister.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                cliente.setContext("/addNewUser");
+                cliente.setNombre(txtPassword.getText());
+                cliente.setId(txtUser.getText());
+                cliente.run(cliente);
+                if (cliente.getIdentification()){
+                    System.out.println("Se ha añadido el usuario a la base de datos");
                 }
                 setVisible(true);
             };

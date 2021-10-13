@@ -60,7 +60,7 @@ public class SocketServer extends Thread {
                 case "/getAccess":
                     Customer customerIN= mensajeIn.getCustomer();
                     mensajeOut.setContext("/getAccessResponse");
-                    lista=new ArrayList<Customer>();
+
                     session=new HashMap<String, Object>();
                     session.put("Customer",false);
                     if (isInBase(customerIN)!=null){
@@ -78,10 +78,18 @@ public class SocketServer extends Thread {
                 case "/addNewUser":
                     customerIN = mensajeIn.getCustomer();
                     mensajeOut.setContext("/addNewUserResponse");
-                    this.addCliente(customerIN);
+                    session=new HashMap<String, Object>();
+                    session.put("Customer",false);
                     if (this.isInBase(customerIN)!=null){
-                        mensajeOut.setCorrect(true);
+                        session.put("Customer",false);
                     }
+                    else{
+                        this.addCliente(customerIN);
+                        if (this.isInBase(customerIN)!=null){
+                            session.put("Customer",true);
+                        }
+                    }
+                    mensajeOut.setSession(session);
                     objectOutputStream.writeObject(mensajeOut);
                     break;
 
