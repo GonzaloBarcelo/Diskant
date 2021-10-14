@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="JLogin:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/JLogin_jar</output-path>
+  <artifact type="jar" name="Servert:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Servert_jar</output-path>
     <root id="archive" name="Diskant.jar">
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />

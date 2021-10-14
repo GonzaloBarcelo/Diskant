@@ -8,23 +8,18 @@ import java.awt.Font;
 
 import main.java.isw21.client.Client;
 import main.java.isw21.configuration.PropertiesISW;
-import main.java.isw21.paginas.JRegister;
-import org.apache.log4j.Logger;
-import main.java.isw21.client.Client;
-import main.java.isw21.configuration.PropertiesISW;
 import main.java.isw21.message.Message;
 import main.java.isw21.domain.Customer;
 import org.apache.log4j.Logger;
 
-public class JLogin extends JFrame
+public class JRegister extends JFrame
 {
     public static void main(String args[])
     {
-        new JLogin();
+        new JRegister();
     }
-    public JLogin()
+    public JRegister()
     {
-
         String host = PropertiesISW.getInstance().getProperty("host");
         int port = Integer.parseInt(PropertiesISW.getInstance().getProperty("port"));
         Logger.getRootLogger().info("Host: "+host+" port"+port);
@@ -40,7 +35,7 @@ public class JLogin extends JFrame
 
         JPanel pnlNorte = new JPanel();
         pnlNorte.setPreferredSize(new Dimension(350, 100));
-        JLabel lblTitulo = new JLabel("Login");
+        JLabel lblTitulo = new JLabel("Register");
         lblTitulo.setFont(fuente);
         pnlNorte.setAlignmentX(lblTitulo.CENTER_ALIGNMENT);
         pnlNorte.add(lblTitulo);
@@ -51,14 +46,7 @@ public class JLogin extends JFrame
         //CENTRO
 
         JPanel pnlCentro = new JPanel();
-        JPanel pnlCentro1 = new JPanel();
-        JPanel pnlCentro2 = new JPanel();
-
-
-
-        pnlCentro1.setLayout(new GridLayout(3,3));
-
-        pnlCentro2.setLayout(new FlowLayout());
+        pnlCentro.setLayout(new GridLayout(3,2));
 
 
 
@@ -71,47 +59,35 @@ public class JLogin extends JFrame
         txtUser.setFont(fuente);
         txtUser.setForeground(new Color(148, 148, 148));
 
+
         JLabel lblPassword = new JLabel("Password");
         lblPassword.setFont(fuente);
         JTextField txtPassword = new JTextField("Type your password", 10);
         txtPassword.setFont(fuente);
         txtPassword.setForeground(new Color(148, 148, 148));
 
-        JLabel l = new JLabel("");
-        //JLabel ll = new JLabel("kjb");
-
-        //l.setBorder(BorderFactory.createEtchedBorder());
-        JLabel lblRegister = new JLabel("¿Don´t have an account?");
-        lblRegister.setFont(fuente2);
-        JButton btnRegister = new JButton("Register");
-        btnRegister.setFont(fuente);
+        JLabel lblMail = new JLabel("Email");
+        lblMail.setFont(fuente);
+        JTextField txtMail = new JTextField("Type your email", 10);
+        txtMail.setFont(fuente);
+        txtMail.setForeground(new Color(148, 148, 148));
 
 
 
 
 
 
-        pnlCentro1.add(lblUser);
-        pnlCentro1.add(txtUser);
-        pnlCentro1.add(lblPassword);
-        pnlCentro1.add(txtPassword);
-        pnlCentro1.add(l);
-        pnlCentro1.add(pnlCentro2);
 
-        //pnlCentro3.add(ll);
-        pnlCentro2.add(lblRegister);
-        pnlCentro2.add(btnRegister);
+        pnlCentro.add(lblUser);
+        pnlCentro.add(txtUser);
+        pnlCentro.add(lblMail);
+        pnlCentro.add(txtMail);
+        pnlCentro.add(lblPassword);
+        pnlCentro.add(txtPassword);
 
 
-        pnlCentro.add(pnlCentro1);
-
-        pnlCentro.setAlignmentX(pnlCentro1.CENTER_ALIGNMENT);
 
         //pnlCentro.setBorder(BorderFactory.createEtchedBorder());
-        //pnlCentro1.setBorder(BorderFactory.createEtchedBorder());
-        //pnlCentro2.setBorder(BorderFactory.createEtchedBorder());
-
-
 
 
 
@@ -120,11 +96,11 @@ public class JLogin extends JFrame
 
         JPanel pnlSur = new JPanel();
         pnlSur.setPreferredSize(new Dimension(350, 100));
-        JButton btnLogin = new JButton("Login");
-        btnLogin.setForeground(Color.BLUE);  //new Color(254, 155, 32)
+        JButton btnRegister = new JButton("Register");
+        btnRegister.setForeground(Color.BLUE);  //new Color(254, 155, 32)
         //pnlSur.add(new JLabel( "prueba",JLabel.CENTER ),BorderLayout.CENTER );
 
-        pnlSur.add(btnLogin);
+        pnlSur.add(btnRegister);
         //pnlSur.setBorder(BorderFactory.createEtchedBorder());
 
 
@@ -133,23 +109,13 @@ public class JLogin extends JFrame
         {
             public void actionPerformed(ActionEvent e)
             {
-                JRegister register = new JRegister();
-            }
-        });
-        btnLogin.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                cliente.setContext("/getAccess");
+                cliente.setContext("/addNewUser");
                 cliente.setNombre(txtPassword.getText());
                 cliente.setId(txtUser.getText());
                 cliente.run(cliente);
                 if (cliente.getIdentification()){
-                    System.out.println("Se ha logeado");
+                    System.out.println("Se ha añadido el usuario a la base de datos");
                     setVisible(false);
-                }
-                else{
-                    setVisible(true);
                 }
 
             };
@@ -165,6 +131,27 @@ public class JLogin extends JFrame
         });
 
         txtUser.addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyPressed(KeyEvent e)
+            {
+                if(e.getKeyCode()==KeyEvent.VK_ENTER) //valor de key: enter
+                    txtMail.requestFocus();
+                txtMail.setText("");
+            }
+        });
+
+
+        txtMail.addMouseListener(new MouseAdapter()
+        {
+            //@Override
+            public void mouseClicked(MouseEvent e)
+            {
+                txtMail.setText("");
+            }
+        });
+
+        txtMail.addKeyListener(new KeyAdapter()
         {
             @Override
             public void keyPressed(KeyEvent e)
@@ -189,7 +176,7 @@ public class JLogin extends JFrame
             public void keyPressed(KeyEvent e)
             {
                 if(e.getKeyCode()==KeyEvent.VK_ENTER) //valor de key: enter
-                    btnLogin.requestFocus();
+                    btnRegister.requestFocus();
             }
         });
 
@@ -205,4 +192,3 @@ public class JLogin extends JFrame
 
     }
 }
-
