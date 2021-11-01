@@ -71,10 +71,6 @@ public class Client {
                 identification = (Boolean)(mensajeVuelta.getSession().get("Customer"));
                 break;
 
-
-
-
-
             default:
                 Logger.getRootLogger().info("Option not found");
                 System.out.println("\nError a la vuelta");

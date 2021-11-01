@@ -16,6 +16,7 @@ import java.util.HashMap;
 
 import main.java.isw21.controler.CustomerControler;
 import main.java.isw21.dao.ConnectionDAO;
+import main.java.isw21.descuentos.Descuento;
 import main.java.isw21.domain.Customer;
 import main.java.isw21.message.Message;
 
@@ -93,9 +94,15 @@ public class SocketServer extends Thread {
                     objectOutputStream.writeObject(mensajeOut);
                     break;
 
+                case "/addDescuento":
+                    Descuento descuento= (Descuento) mensajeIn.getSession().get("Descuento");
+                    this.addDescuento(descuento);
+                    System.out.println("Se ha añadido el descuento");
+
                 default:
                     System.out.println("\nParámetro no encontrado");
                     break;
+
             }
 
             //Lógica del controlador
@@ -190,7 +197,15 @@ public class SocketServer extends Thread {
         else{
             System.out.println("El usuario ya se encuentra dentro de la base de datos.");
         }
-
-
+    }
+    public void addDescuento(Descuento descuento) {
+        Connection con = ConnectionDAO.getInstance().getConnection();
+        try {
+            PreparedStatement pst = con.prepareStatement("INSERT INTO descuentos VALUES ('" + descuento.getFechaIn() + "','" + descuento.getFechaFin() +"','"
+                    +descuento.getComercio()+"','"+ descuento.getTipo()+"','"+descuento.getTipo()+"','"+descuento.getValor()+"');");
+            ResultSet rs = pst.executeQuery();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }

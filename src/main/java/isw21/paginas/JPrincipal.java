@@ -18,9 +18,12 @@ public class JPrincipal extends JFrame
         JLabel lblBienvenida= new JLabel("Bienvenido a DiskAnt");
         Font fuente = new Font("Serif", 0, 35);
         lblBienvenida.setFont(fuente);
+
+
         JPanel pnlNorte= new JPanel();
         pnlNorte.add(lblBienvenida);
-
+        JLabel logoDiskAnt= new JLabel(new ImageIcon("main/java/isw21/LogoDiskAnt.jpeg"));
+        pnlNorte.add(logoDiskAnt);
         JPanel pnlCentro = new JPanel();
         JButton btnLogin = new JButton("Log in");
         //btn_login.setPreferredSize(new Dimension(200, 50));
