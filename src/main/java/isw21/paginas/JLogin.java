@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.Color;
 import java.awt.Font;
+//se guarda?
+
 
 import main.java.isw21.client.Client;
 import main.java.isw21.configuration.PropertiesISW;
