@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.Color;
 import java.awt.Font;
-//se guarda?
+
 
 
 import main.java.isw21.client.Client;
@@ -31,6 +31,8 @@ public class JLogin extends JFrame
         int port = Integer.parseInt(PropertiesISW.getInstance().getProperty("port"));
         Logger.getRootLogger().info("Host: "+host+" port"+port);
         Client cliente=new Client(host, port);
+        
+        
         //setSize(450,350);
         //this.setColor(BLUE);
         this.setLayout(new BorderLayout());
@@ -43,7 +45,7 @@ public class JLogin extends JFrame
         JPanel pnlNorte = new JPanel();
         pnlNorte.setPreferredSize(new Dimension(350, 100));
         JLabel lblTitulo = new JLabel("Login");
-        lblTitulo.setFont(fuente);
+        lblTitulo.setFont(fuente3);
         pnlNorte.setAlignmentX(lblTitulo.CENTER_ALIGNMENT);
         pnlNorte.add(lblTitulo);
         //pnlNorte.setBorder(BorderFactory.createEtchedBorder());
@@ -80,17 +82,12 @@ public class JLogin extends JFrame
         txtPassword.setForeground(new Color(148, 148, 148));
 
         JLabel l = new JLabel("");
-        //JLabel ll = new JLabel("kjb");
-
+        
         //l.setBorder(BorderFactory.createEtchedBorder());
         JLabel lblRegister = new JLabel("¿Don´t have an account?");
         lblRegister.setFont(fuente2);
         JButton btnRegister = new JButton("Register");
         btnRegister.setFont(fuente);
-
-
-
-
 
 
         pnlCentro1.add(lblUser);
@@ -100,7 +97,7 @@ public class JLogin extends JFrame
         pnlCentro1.add(l);
         pnlCentro1.add(pnlCentro2);
 
-        //pnlCentro3.add(ll);
+       
         pnlCentro2.add(lblRegister);
         pnlCentro2.add(btnRegister);
 
