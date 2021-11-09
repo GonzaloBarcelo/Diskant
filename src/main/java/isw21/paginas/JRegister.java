@@ -186,7 +186,7 @@ public class JRegister extends JFrame
 
 
         this.pack();
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
         this.setLocation(500, 100);
 

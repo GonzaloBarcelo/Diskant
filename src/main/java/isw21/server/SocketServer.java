@@ -95,9 +95,12 @@ public class SocketServer extends Thread {
                     break;
 
                 case "/addDescuento":
+                    Customer customer =(Customer) mensajeIn.getSession().get("Customer");
                     Descuento descuento= (Descuento) mensajeIn.getSession().get("Descuento");
-                    this.addDescuento(descuento);
+                    this.addDescuento(customer,descuento);
                     System.out.println("Se ha añadido el descuento");
+                    //Se debe inlcuir codigo para evitar introucir descuentos repetidos
+
 
                 default:
                     System.out.println("\nParámetro no encontrado");
@@ -198,11 +201,13 @@ public class SocketServer extends Thread {
             System.out.println("El usuario ya se encuentra dentro de la base de datos.");
         }
     }
-    public void addDescuento(Descuento descuento) {
+
+    //Codigo que inserta en la base de datos los descuentos de cada cliente
+    public void addDescuento(Customer customer,Descuento descuento) {
         Connection con = ConnectionDAO.getInstance().getConnection();
         try {
-            PreparedStatement pst = con.prepareStatement("INSERT INTO descuentos VALUES ('" + descuento.getFechaIn() + "','" + descuento.getFechaFin() +"','"
-                    +descuento.getComercio()+"','"+ descuento.getTipo()+"','"+descuento.getTipo()+"','"+descuento.getValor()+"');");
+            PreparedStatement pst = con.prepareStatement("INSERT INTO descuentos VALUES ('" + customer +"','"+descuento.getComercio() + "','" + descuento.getFechaFin() +"','"
+                    +descuento.getFechaIn()+"','"+ descuento.getTipo()+"','"+descuento.getTipo()+"','"+descuento.getValor()+"');");
             ResultSet rs = pst.executeQuery();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

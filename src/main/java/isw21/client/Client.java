@@ -10,6 +10,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import main.java.isw21.descuentos.Descuento;
 import org.apache.log4j.Logger;
 
 import main.java.isw21.configuration.PropertiesISW;
@@ -49,6 +50,9 @@ public class Client {
 
 
         switch (mensajeVuelta.getContext()) {
+            case "/addDescuentoResponse":
+                Descuento descuento=(Descuento) (mensajeVuelta.getSession().get("Descuento"));
+
             case "/addNewUserResponse":
                 identification=false;
                 Boolean temp=(Boolean)(mensajeVuelta.getSession().get("Customer"));

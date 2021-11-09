@@ -45,7 +45,7 @@ public class JLogin extends JFrame
         JPanel pnlNorte = new JPanel();
         pnlNorte.setPreferredSize(new Dimension(350, 100));
         JLabel lblTitulo = new JLabel("Login");
-        lblTitulo.setFont(fuente3);
+        lblTitulo.setFont(fuente2);
         pnlNorte.setAlignmentX(lblTitulo.CENTER_ALIGNMENT);
         pnlNorte.add(lblTitulo);
         //pnlNorte.setBorder(BorderFactory.createEtchedBorder());
@@ -198,7 +198,7 @@ public class JLogin extends JFrame
 
 
         this.pack();
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
         this.setLocation(500, 100);
 
