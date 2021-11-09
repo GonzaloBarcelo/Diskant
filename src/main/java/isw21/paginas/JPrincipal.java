@@ -34,7 +34,9 @@ public class JPrincipal extends JFrame
         {
             public void actionPerformed(ActionEvent e)
             {
+
                 JLogin login = new JLogin();
+
             };
         });
 
@@ -60,6 +62,5 @@ public class JPrincipal extends JFrame
         this.setVisible(true);
         this.setLocation(250, 100);
     }
-
 
 }

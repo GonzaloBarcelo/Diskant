@@ -17,13 +17,13 @@ import main.java.isw21.configuration.PropertiesISW;
 import main.java.isw21.message.Message;
 import main.java.isw21.domain.Customer;
 import org.apache.log4j.Logger;
+import main.java.isw21.paginas.JPrincipal;
 
 public class JLogin extends JFrame
 {
-    public static void main(String args[])
-    {
-        new JLogin();
-    }
+    public Boolean logCorrect;
+    public Customer customer;
+
     public JLogin()
     {
 
@@ -144,7 +144,10 @@ public class JLogin extends JFrame
                 cliente.setId(txtUser.getText());
                 cliente.run(cliente);
                 if (cliente.getIdentification()){
+                    logCorrect=true;
+                    customer= new Customer(txtUser.getText(),txtPassword.getText());
                     System.out.println("Se ha logeado");
+                    JInicio inicio= new JInicio(customer);
                     setVisible(false);
                 }
                 else{
@@ -202,6 +205,14 @@ public class JLogin extends JFrame
         this.setVisible(true);
         this.setLocation(500, 100);
 
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public Boolean getLogCorrect() {
+        return logCorrect;
     }
 }
 

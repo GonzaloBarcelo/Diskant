@@ -206,11 +206,16 @@ public class SocketServer extends Thread {
     public void addDescuento(Customer customer,Descuento descuento) {
         Connection con = ConnectionDAO.getInstance().getConnection();
         try {
-            PreparedStatement pst = con.prepareStatement("INSERT INTO descuentos VALUES ('" + customer +"','"+descuento.getComercio() + "','" + descuento.getFechaFin() +"','"
-                    +descuento.getFechaIn()+"','"+ descuento.getTipo()+"','"+descuento.getTipo()+"','"+descuento.getValor()+"');");
+            PreparedStatement pst = con.prepareStatement("INSERT INTO descuentos VALUES ('" + customer +"','"+descuento.getComercio() + "','" + descuento.getFechaIn() +"','"
+                    +descuento.getFechaFin()+"','"+ descuento.getTipo()+"','"+descuento.getValor()+"','"+descuento.getCodigo()+"');");
             ResultSet rs = pst.executeQuery();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }
+
+    //public ArrayList<Descuento> getDescuentos (){
+
+    //}
+
 }

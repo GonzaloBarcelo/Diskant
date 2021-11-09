@@ -8,14 +8,16 @@ public class Descuento {
     public Date fechaFin;
     public int tipo;
     public int valor;
+    public String codigo;
     public Comercio comercio;
 
-    public Descuento(Date fechaIn, Date fechaFin, int tipo,int valor, Comercio comercio ){
+    public Descuento(Date fechaIn, Date fechaFin, int tipo,int valor, Comercio comercio, String codigo ){
         this.fechaIn=fechaIn;
         this.fechaFin=fechaFin;
         this.valor=valor;
         this.tipo=tipo;
         this.comercio=comercio;
+        this.codigo=codigo;
     }
 
     public Date getFechaFin() {
@@ -56,5 +58,13 @@ public class Descuento {
 
     public void setValor(int valor) {
         this.valor = valor;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getCodigo() {
+        return codigo;
     }
 }
