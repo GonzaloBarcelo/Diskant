@@ -14,17 +14,20 @@ public class JPrincipal extends JFrame
     }
     public JPrincipal()
     {
-        setSize(900,600);
-
+        setSize(500,400);
+        this.setLayout(new GridLayout(2,1));
+        
+        JPanel pnlNorte= new JPanel();
         JLabel lblBienvenida= new JLabel("Bienvenido a DiskAnt");
         Font fuente = new Font("Serif", 0, 35);
         lblBienvenida.setFont(fuente);
 
 
-        JPanel pnlNorte= new JPanel();
+       
         pnlNorte.add(lblBienvenida);
         JLabel logoDiskAnt= new JLabel(new ImageIcon("main/java/isw21/LogoDiskAnt.jpeg"));
         pnlNorte.add(logoDiskAnt);
+        
         JPanel pnlCentro = new JPanel();
         JButton btnLogin = new JButton("Log in");
         //btn_login.setPreferredSize(new Dimension(200, 50));
@@ -50,17 +53,15 @@ public class JPrincipal extends JFrame
                 JRegister register = new JRegister();
             }
         });
-        this.setLayout(new GridLayout(2,1));
+        
         this.add(pnlNorte);
-
         this.add(pnlCentro);
-        this.pack();
-        this.setSize(500,400);
+
 
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
-        this.setLocation(250, 100);
+        this.setLocation(500, 100);
     }
 
 }
