@@ -38,6 +38,7 @@ public class JLogin extends JFrame
         this.setLayout(new BorderLayout());
         Font fuente = new Font("Serif", 0, 15);
         Font fuente2 = new Font("Serif", 0, 12);
+        Font fuente3 = new Font("Serif", 0, 18);
 
 //GRÁFICO
         //NORTE
@@ -45,7 +46,7 @@ public class JLogin extends JFrame
         JPanel pnlNorte = new JPanel();
         pnlNorte.setPreferredSize(new Dimension(350, 100));
         JLabel lblTitulo = new JLabel("Login");
-        lblTitulo.setFont(fuente2);
+        lblTitulo.setFont(fuente3);
         pnlNorte.setAlignmentX(lblTitulo.CENTER_ALIGNMENT);
         pnlNorte.add(lblTitulo);
         //pnlNorte.setBorder(BorderFactory.createEtchedBorder());
@@ -133,8 +134,32 @@ public class JLogin extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 JRegister register = new JRegister();
+                setVisible(false);
             }
         });
+         //Para que funcione al darle enter en Login:
+		btnLogin.addKeyListener(new java.awt.event.KeyAdapter() 
+		{
+            public void keyPressed(java.awt.event.KeyEvent e) 
+            {
+                 cliente.setContext("/getAccess");
+                cliente.setNombre(txtPassword.getText());
+                cliente.setId(txtUser.getText());
+                cliente.run(cliente);
+                if (cliente.getIdentification()){
+                    logCorrect=true;
+                    customer= new Customer(txtUser.getText(),txtPassword.getText());
+                    System.out.println("Se ha logeado");
+                    JInicio inicio= new JInicio(customer);
+                    setVisible(false);
+                }
+                else{
+                    setVisible(true);
+                }
+            };
+         });
+         
+		//Al darle click:
         btnLogin.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -157,6 +182,8 @@ public class JLogin extends JFrame
             };
         });
 
+        
+
         txtUser.addMouseListener(new MouseAdapter()
         {
             //@Override
@@ -173,7 +200,7 @@ public class JLogin extends JFrame
             {
                 if(e.getKeyCode()==KeyEvent.VK_ENTER) //valor de key: enter
                     txtPassword.requestFocus();
-                txtPassword.setText("");
+   
             }
         });
 
