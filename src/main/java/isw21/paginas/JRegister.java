@@ -120,6 +120,20 @@ public class JRegister extends JFrame
 
             };
         });
+        btnRegister.addKeyListener(new java.awt.event.KeyAdapter() 
+		{
+            public void keyPressed(java.awt.event.KeyEvent e) 
+            {
+                cliente.setContext("/addNewUser");
+                cliente.setNombre(txtPassword.getText());
+                cliente.setId(txtUser.getText());
+                cliente.run(cliente);
+                if (cliente.getIdentification()){
+                    System.out.println("Se ha añadido el usuario a la base de datos");
+                    setVisible(false);
+                }
+            }
+         });
 
         txtUser.addMouseListener(new MouseAdapter()
         {
@@ -137,7 +151,6 @@ public class JRegister extends JFrame
             {
                 if(e.getKeyCode()==KeyEvent.VK_ENTER) //valor de key: enter
                     txtMail.requestFocus();
-                txtMail.setText("");
             }
         });
 
@@ -158,7 +171,6 @@ public class JRegister extends JFrame
             {
                 if(e.getKeyCode()==KeyEvent.VK_ENTER) //valor de key: enter
                     txtPassword.requestFocus();
-                txtPassword.setText("");
             }
         });
 
