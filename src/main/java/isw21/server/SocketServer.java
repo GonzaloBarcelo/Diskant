@@ -95,11 +95,17 @@ public class SocketServer extends Thread {
                     break;
 
                 case "/addDescuento":
+                    mensajeOut.setContext("/addDescuentoResponse");
                     Customer customer =(Customer) mensajeIn.getSession().get("Customer");
                     Descuento descuento= (Descuento) mensajeIn.getSession().get("Descuento");
                     this.addDescuento(customer,descuento);
+                    session=new HashMap<String, Object>();
+                    session.put("Descuento",descuento);
+                    mensajeOut.setSession(session);
+                    objectOutputStream.writeObject(mensajeOut);
                     System.out.println("Se ha añadido el descuento");
                     //Se debe inlcuir codigo para evitar introucir descuentos repetidos
+                    break;
 
 
                 default:

@@ -1,8 +1,10 @@
 package main.java.isw21.descuentos;
 import main.java.isw21.comercio.Comercio;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class Descuento {
+public class Descuento implements Serializable {
 
     public String fechaIn;
     public String fechaFin;

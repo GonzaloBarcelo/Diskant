@@ -1,6 +1,8 @@
 package main.java.isw21.comercio;
 
-public class Comercio {
+import java.io.Serializable;
+
+public class Comercio implements Serializable {
     String direccion;
     String nombre;
     String horario;

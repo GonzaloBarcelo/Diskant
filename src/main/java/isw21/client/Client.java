@@ -46,6 +46,7 @@ public class Client {
         switch (mensajeVuelta.getContext()) {
             case "/addDescuentoResponse":
                 Descuento descuento=(Descuento) (mensajeVuelta.getSession().get("Descuento"));
+                break;
 
             case "/addNewUserResponse":
                 identification=false;
@@ -100,7 +101,9 @@ public class Client {
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(out);
 
                 //Create the objetct to send
+
                 objectOutputStream.writeObject(messageOut);
+                System.out.println(messageOut);
 
                 // create a DataInputStream so we can read data from it.
                 ObjectInputStream objectInputStream = new ObjectInputStream(in);
