@@ -5,13 +5,13 @@ import java.awt.*;
 import java.awt.event.*;
 import main.java.isw21.descuentos.Descuento;
 import main.java.isw21.domain.Customer;
-
+import main.java.isw21.client.Client;
 
 public class JInicio extends JFrame
 {
     Customer customer;
 
-    public JInicio(Customer customer)
+    public JInicio(Customer customer,Client cliente)
     {
 
         setSize(900,600);
@@ -31,7 +31,7 @@ public class JInicio extends JFrame
         {
             public void actionPerformed(ActionEvent e)
             {
-                JDescuento descuento = new JDescuento(customer);
+                JDescuento descuento = new JDescuento(customer,cliente);
             }
         });
         //JButton btnMisDescuentos = new JButton("Mis descuentos");

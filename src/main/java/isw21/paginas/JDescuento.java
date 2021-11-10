@@ -17,13 +17,11 @@ import main.java.isw21.descuentos.Descuento;
 public class JDescuento extends JFrame
 {
     Customer customer;
-    public JDescuento(Customer customer)
+    Client cliente;
+    public JDescuento(Customer customer, Client cliente)
     {
-        String host = PropertiesISW.getInstance().getProperty("host");
-        int port = Integer.parseInt(PropertiesISW.getInstance().getProperty("port"));
-        Logger.getRootLogger().info("Host: "+host+" port"+port);
-        Client cliente=new Client(host, port);
-
+        this.customer=customer;
+        this.cliente=cliente;
 
         Font fuente = new Font("Serif", 0, 15);
         Font fuente3 = new Font("Serif", 0, 18);

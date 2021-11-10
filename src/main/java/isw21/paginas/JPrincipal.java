@@ -25,7 +25,7 @@ public class JPrincipal extends JFrame
 
        
         pnlNorte.add(lblBienvenida);
-        JLabel logoDiskAnt= new JLabel(new ImageIcon("main/java/isw21/LogoDiskAnt.jpeg"));
+        JLabel logoDiskAnt= new JLabel(new ImageIcon("main/java/isw21/media/LogoDiskAnt.jpeg"));
         pnlNorte.add(logoDiskAnt);
         
         JPanel pnlCentro = new JPanel();
@@ -40,7 +40,7 @@ public class JPrincipal extends JFrame
 
                 JLogin login = new JLogin();
 
-            };
+            }
         });
 
         JButton btnRegister = new JButton("Register");

@@ -150,7 +150,7 @@ public class JLogin extends JFrame
                     logCorrect=true;
                     customer= new Customer(txtUser.getText(),txtPassword.getText());
                     System.out.println("Se ha logeado");
-                    JInicio inicio= new JInicio(customer);
+                    JInicio inicio= new JInicio(customer,cliente);
                     setVisible(false);
                 }
                 else{
@@ -172,7 +172,7 @@ public class JLogin extends JFrame
                     logCorrect=true;
                     customer= new Customer(txtUser.getText(),txtPassword.getText());
                     System.out.println("Se ha logeado");
-                    JInicio inicio= new JInicio(customer);
+                    JInicio inicio= new JInicio(customer,cliente);
                     setVisible(false);
                 }
                 else{
