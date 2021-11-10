@@ -31,7 +31,7 @@ public class JInicio extends JFrame
         {
             public void actionPerformed(ActionEvent e)
             {
-                JDescuento descuento = new JDescuento();
+                JDescuento descuento = new JDescuento(customer);
             }
         });
         //JButton btnMisDescuentos = new JButton("Mis descuentos");

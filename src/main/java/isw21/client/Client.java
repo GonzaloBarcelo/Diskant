@@ -25,26 +25,20 @@ public class Client {
     static String id;
     static Boolean identification=false;
     final static Logger logger = Logger.getLogger(Client.class);
+    public HashMap<String,Object> session=new HashMap<String, Object>();
 
-    public static void run(Client cliente) {
-        //Configure connections
-        /*String host = PropertiesISW.getInstance().getProperty("host");
-        int port = Integer.parseInt(PropertiesISW.getInstance().getProperty("port"));
-        Logger.getRootLogger().info("Host: "+host+" port"+port);
-        //Create a cliente class
-        Client cliente=new Client(host, port);*/
 
-        HashMap<String,Object> session=new HashMap<String, Object>();
-        //session.put("/getCustomer","");
+    public void run(Client cliente) {
 
+        System.out.println(context);
         Message mensajeEnvio=new Message();
         Message mensajeVuelta=new Message();
 
         mensajeEnvio.setContext(context);
 
         //Prueba para id de customer
-        Customer prueba= new Customer(id, nombre);
-        mensajeEnvio.setCustomer(prueba);
+        Customer customer2= new Customer(id, nombre);
+        mensajeEnvio.setCustomer(customer2);
         mensajeEnvio.setSession(session);
         cliente.sent(mensajeEnvio,mensajeVuelta);
 
@@ -163,5 +157,13 @@ public class Client {
 
     public static String getContext() {
         return context;
+    }
+
+    public void setSession(HashMap<String, Object> session) {
+        this.session = session;
+    }
+
+    public HashMap<String, Object> getSession() {
+        return session;
     }
 }

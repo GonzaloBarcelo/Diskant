@@ -1,19 +1,30 @@
 package main.java.isw21.paginas;
 
+import main.java.isw21.client.Client;
+import main.java.isw21.configuration.PropertiesISW;
+import main.java.isw21.domain.Customer;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.HashMap;
 
-
+import main.java.isw21.domain.Customer;
+import org.apache.log4j.Logger;
+import main.java.isw21.client.Client;
+import main.java.isw21.descuentos.Descuento;
 
 public class JDescuento extends JFrame
 {
-    public static void main(String args[])
+    Customer customer;
+    public JDescuento(Customer customer)
     {
-        new JDescuento();
-    }
-    public JDescuento()
-    {
+        String host = PropertiesISW.getInstance().getProperty("host");
+        int port = Integer.parseInt(PropertiesISW.getInstance().getProperty("port"));
+        Logger.getRootLogger().info("Host: "+host+" port"+port);
+        Client cliente=new Client(host, port);
+
+
         Font fuente = new Font("Serif", 0, 15);
         Font fuente3 = new Font("Serif", 0, 18);
 
@@ -27,15 +38,6 @@ public class JDescuento extends JFrame
         JPanel pnlSur = new JPanel();
         JButton btnCrear = new JButton("Crear Descuento");
         btnCrear.setFont(fuente);
-        btnCrear.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                setVisible(false);
-            }
-
-        });
-        pnlSur.add(btnCrear);
 
         JPanel pnlCentro = new JPanel();
         pnlCentro.setLayout(new GridLayout(6,2));
@@ -134,6 +136,22 @@ facilita en el caso de agregar un calendario.
 
 
 
+        btnCrear.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                cliente.setContext("/addDescuento");
+                HashMap<String,Object> session= new HashMap<String,Object>();
+                Descuento descuento = new Descuento(txtInicio.getText(),txtFin.getText(),cbxTipo.getSelectedIndex(),Integer.parseInt(txtValor.getText()),txtEntidad.getText(),txtCodigo.getText());
+                session.put("Descuento",descuento);
+                session.put("Customer",customer);
+                cliente.setSession(session);
+                cliente.run(cliente);
+                setVisible(false);
+            }
+
+        });
+        pnlSur.add(btnCrear);
 
 
         pnlCentro.add(lblEntidad);

@@ -4,14 +4,14 @@ import java.util.Date;
 
 public class Descuento {
 
-    public Date fechaIn;
-    public Date fechaFin;
+    public String fechaIn;
+    public String fechaFin;
     public int tipo;
     public int valor;
     public String codigo;
-    public Comercio comercio;
+    public String comercio;
 
-    public Descuento(Date fechaIn, Date fechaFin, int tipo,int valor, Comercio comercio, String codigo ){
+    public Descuento(String fechaIn, String fechaFin, int tipo,int valor, String comercio, String codigo ){
         this.fechaIn=fechaIn;
         this.fechaFin=fechaFin;
         this.valor=valor;
@@ -20,27 +20,27 @@ public class Descuento {
         this.codigo=codigo;
     }
 
-    public Date getFechaFin() {
+    public String getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(Date fechaFin) {
+    public void setFechaFin(String fechaFin) {
         this.fechaFin = fechaFin;
     }
 
-    public Date getFechaIn() {
+    public String getFechaIn() {
         return fechaIn;
     }
 
-    public void setFechaIn(Date fechaIn) {
+    public void setFechaIn(String fechaIn) {
         this.fechaIn = fechaIn;
     }
 
-    public Comercio getComercio() {
+    public String getComercio() {
         return comercio;
     }
 
-    public void setComercio(Comercio comercio) {
+    public void setComercio(String comercio) {
         this.comercio = comercio;
     }
 
