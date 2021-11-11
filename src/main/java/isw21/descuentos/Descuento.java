@@ -13,7 +13,7 @@ public class Descuento implements Serializable {
     public String codigo;
     public String comercio;
 
-    public Descuento(String fechaIn, String fechaFin, int tipo,int valor, String comercio, String codigo ){
+    public Descuento(String comercio,String fechaIn, String fechaFin, int tipo,int valor, String codigo){
         this.fechaIn=fechaIn;
         this.fechaFin=fechaFin;
         this.valor=valor;

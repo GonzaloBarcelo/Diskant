@@ -96,7 +96,6 @@ public class SocketServer extends Thread {
 
                 case "/addDescuento":
                     mensajeOut.setContext("/addDescuentoResponse");
-                    System.out.println("Pasa por aquí 1");
                     Customer customer =(Customer) mensajeIn.getSession().get("Customer");
                     Descuento descuento= (Descuento) mensajeIn.getSession().get("Descuento");
                     this.addDescuento(customer,descuento);
@@ -107,7 +106,16 @@ public class SocketServer extends Thread {
                     System.out.println("Se ha añadido el descuento");
                     //Se debe inlcuir codigo para evitar introucir descuentos repetidos
                     break;
-
+                case "/getDescuentos":
+                    mensajeOut.setContext("/getDescuentosResponse");
+                    customer =(Customer) mensajeIn.getSession().get("Customer");
+                    ArrayList<Descuento> descuentos = (ArrayList<Descuento>) mensajeIn.getSession().get("Descuentos");
+                    this.getDescuentos(descuentos,customer);
+                    session=new HashMap<String, Object>();
+                    session.put("Descuentos",descuentos);
+                    mensajeOut.setSession(session);
+                    objectOutputStream.writeObject(mensajeOut);
+                    break;
 
                 default:
                     System.out.println("\nParámetro no encontrado");
@@ -213,13 +221,26 @@ public class SocketServer extends Thread {
     public void addDescuento(Customer customer,Descuento descuento) {
         Connection con = ConnectionDAO.getInstance().getConnection();
         try {
-            System.out.println("Pasa por aquí");
             PreparedStatement pst = con.prepareStatement("INSERT INTO descuentos VALUES ('" + customer.getId() +"','"+descuento.getComercio() + "','" + descuento.getFechaIn() +"','"
                     +descuento.getFechaFin()+"','"+ descuento.getTipo()+"','"+descuento.getValor()+"','"+descuento.getCodigo()+"');");
             ResultSet rs = pst.executeQuery();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    public void getDescuentos(ArrayList<Descuento> lista, Customer customer){
+        Connection con = ConnectionDAO.getInstance().getConnection();
+        try (PreparedStatement pst = con.prepareStatement("SELECT * FROM descuentos WHERE usuario="+customer.getId());
+             ResultSet rs = pst.executeQuery()) {
+
+            while (rs.next()) {
+                lista.add(new Descuento(rs.getString(2),rs.getString(3),rs.getString(5),rs.getInt(5),rs.getInt(6),rs.getString(7)));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
     }
 
     //public ArrayList<Descuento> getDescuentos (){
