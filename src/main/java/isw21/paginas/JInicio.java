@@ -3,6 +3,8 @@ package main.java.isw21.paginas;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+
 import main.java.isw21.descuentos.Descuento;
 import main.java.isw21.domain.Customer;
 import main.java.isw21.client.Client;
@@ -52,10 +54,13 @@ public class JInicio extends JFrame
         //pnlCentro.add(btnMisDescuentos);
         this.add(pnlCentro, BorderLayout.NORTH);
 
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
         this.setLocation(250, 100);
     }
 
+    public ArrayList<Descuento> getDescuentos(Customer customer){
+
+    }
 
 }
