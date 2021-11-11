@@ -14,9 +14,12 @@ public class JInicio extends JFrame
 {
     Customer customer;
     Client cliente;
+    ArrayList<Descuento> plDescuentos;
 
     public JInicio(Customer customer,Client cliente)
     {
+        this.customer = customer;
+        this.cliente = cliente;
 
         setSize(900,600);
         this.setLayout(new BorderLayout());
@@ -35,13 +38,21 @@ public class JInicio extends JFrame
         {
             public void actionPerformed(ActionEvent e)
             {
-                JDescuento descuento = new JDescuento(customer,cliente);
+                JDescuento descuento = new JDescuento(customer,cliente,plDescuentos);
+                //plDescuentos= getDescuentos(customer);
             }
         });
 
-        ArrayList<Descuento> plDescuentos= getDescuentos(customer);
-        for (Descuento d:plDescuentos){
-            System.out.println(d.getCodigo());
+        plDescuentos= getDescuentos(customer);
+
+        if(plDescuentos == null || plDescuentos.size() == 0)
+        {
+            System.out.println("No hay descuentos");
+        }
+        else {
+            for (Descuento d : plDescuentos) {
+                System.out.println(d.getCodigo());
+            }
         }
         //JButton btnMisDescuentos = new JButton("Mis descuentos");
         //pnlCentro.add(btnMisDescuentos);
@@ -71,6 +82,7 @@ public class JInicio extends JFrame
         HashMap<String,Object> session= new HashMap<String,Object>();
         session.put("Customer",customer);
         ArrayList<Descuento> descuentos= new ArrayList<Descuento>();
+        descuentos.add(new Descuento("Diskant (Bienvenida)","Hoy","Nunca",1,50,"DISKANTMOLA"));
         session.put("Descuentos",descuentos);
         cliente.setSession(session);
         cliente.run(cliente);

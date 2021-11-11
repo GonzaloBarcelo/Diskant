@@ -7,6 +7,7 @@ import main.java.isw21.domain.Customer;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import main.java.isw21.domain.Customer;
@@ -18,7 +19,7 @@ public class JDescuento extends JFrame
 {
     Customer customer;
     Client cliente;
-    public JDescuento(Customer customer, Client cliente)
+    public JDescuento(Customer customer, Client cliente, ArrayList<Descuento> descuentos)
     {
         this.customer=customer;
         this.cliente=cliente;
@@ -141,6 +142,7 @@ facilita en el caso de agregar un calendario.
                 cliente.setContext("/addDescuento");
                 HashMap<String,Object> session= new HashMap<String,Object>();
                 Descuento descuento = new Descuento(txtEntidad.getText(),txtInicio.getText(),txtFin.getText(),cbxTipo.getSelectedIndex(),Integer.parseInt(txtValor.getText()),txtCodigo.getText());
+                descuentos.add(descuento);
                 session.put("Descuento",descuento);
                 session.put("Customer",customer);
                 cliente.setSession(session);

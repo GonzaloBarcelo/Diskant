@@ -48,7 +48,7 @@ public class Client {
                 Descuento descuento=(Descuento) (mensajeVuelta.getSession().get("Descuento"));
                 break;
             case "/getDescuentosResponse":
-                ArrayList<Descuento> descuentos= (ArrayList<Descuento>) (mensajeVuelta.getSession().get("Descuentos"));
+                descuentos= (ArrayList<Descuento>) (mensajeVuelta.getSession().get("Descuentos"));
                 break;
 
             case "/addNewUserResponse":

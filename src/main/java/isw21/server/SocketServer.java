@@ -107,6 +107,7 @@ public class SocketServer extends Thread {
                     //Se debe inlcuir codigo para evitar introucir descuentos repetidos
                     break;
                 case "/getDescuentos":
+                    System.out.println("Pasa por aquí");
                     mensajeOut.setContext("/getDescuentosResponse");
                     customer =(Customer) mensajeIn.getSession().get("Customer");
                     ArrayList<Descuento> descuentos = (ArrayList<Descuento>) mensajeIn.getSession().get("Descuentos");
@@ -231,11 +232,16 @@ public class SocketServer extends Thread {
 
     public void getDescuentos(ArrayList<Descuento> lista, Customer customer){
         Connection con = ConnectionDAO.getInstance().getConnection();
-        try (PreparedStatement pst = con.prepareStatement("SELECT * FROM descuentos WHERE usuario="+customer.getId());
+        if(lista == null || lista.size() == 0)
+        {
+            lista = new ArrayList<Descuento>();
+        }
+        try (PreparedStatement pst = con.prepareStatement("SELECT * FROM descuentos WHERE usuario= '"+customer.getId()+ "';");
              ResultSet rs = pst.executeQuery()) {
 
             while (rs.next()) {
-                lista.add(new Descuento(rs.getString(2),rs.getString(3),rs.getString(5),rs.getInt(5),rs.getInt(6),rs.getString(7)));
+                System.out.println("Hla");
+                lista.add(new Descuento(rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getInt(6),rs.getString(7)));
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
