@@ -38,6 +38,11 @@ public class JInicio extends JFrame
                 JDescuento descuento = new JDescuento(customer,cliente);
             }
         });
+
+        ArrayList<Descuento> plDescuentos= getDescuentos(customer);
+        for (Descuento d:plDescuentos){
+            System.out.println(d.getCodigo());
+        }
         //JButton btnMisDescuentos = new JButton("Mis descuentos");
         //pnlCentro.add(btnMisDescuentos);
 
