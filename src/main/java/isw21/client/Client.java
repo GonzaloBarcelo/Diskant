@@ -26,7 +26,7 @@ public class Client {
     static Boolean identification=false;
     final static Logger logger = Logger.getLogger(Client.class);
     public HashMap<String,Object> session=new HashMap<String, Object>();
-
+    public ArrayList<Descuento> descuentos;
 
     public void run(Client cliente) {
 
@@ -46,6 +46,9 @@ public class Client {
         switch (mensajeVuelta.getContext()) {
             case "/addDescuentoResponse":
                 Descuento descuento=(Descuento) (mensajeVuelta.getSession().get("Descuento"));
+                break;
+            case "/getDescuentosResponse":
+                ArrayList<Descuento> descuentos= (ArrayList<Descuento>) (mensajeVuelta.getSession().get("Descuentos"));
                 break;
 
             case "/addNewUserResponse":
@@ -168,5 +171,13 @@ public class Client {
 
     public HashMap<String, Object> getSession() {
         return session;
+    }
+
+    public void setDescuentos(ArrayList<Descuento> descuentos) {
+        this.descuentos = descuentos;
+    }
+
+    public ArrayList<Descuento> getDescuentos() {
+        return descuentos;
     }
 }

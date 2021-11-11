@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import main.java.isw21.descuentos.Descuento;
 import main.java.isw21.domain.Customer;
@@ -12,6 +13,7 @@ import main.java.isw21.client.Client;
 public class JInicio extends JFrame
 {
     Customer customer;
+    Client cliente;
 
     public JInicio(Customer customer,Client cliente)
     {
@@ -60,7 +62,14 @@ public class JInicio extends JFrame
     }
 
     public ArrayList<Descuento> getDescuentos(Customer customer){
-
+        cliente.setContext("/getDescuentos");
+        HashMap<String,Object> session= new HashMap<String,Object>();
+        session.put("Customer",customer);
+        ArrayList<Descuento> descuentos= new ArrayList<Descuento>();
+        session.put("Descuentos",descuentos);
+        cliente.setSession(session);
+        cliente.run(cliente);
+        return cliente.getDescuentos();
     }
 
 }

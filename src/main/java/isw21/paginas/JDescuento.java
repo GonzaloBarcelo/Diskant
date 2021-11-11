@@ -140,7 +140,7 @@ facilita en el caso de agregar un calendario.
             {
                 cliente.setContext("/addDescuento");
                 HashMap<String,Object> session= new HashMap<String,Object>();
-                Descuento descuento = new Descuento(txtInicio.getText(),txtFin.getText(),cbxTipo.getSelectedIndex(),Integer.parseInt(txtValor.getText()),txtEntidad.getText(),txtCodigo.getText());
+                Descuento descuento = new Descuento(txtEntidad.getText(),txtInicio.getText(),txtFin.getText(),cbxTipo.getSelectedIndex(),Integer.parseInt(txtValor.getText()),txtCodigo.getText());
                 session.put("Descuento",descuento);
                 session.put("Customer",customer);
                 cliente.setSession(session);
@@ -174,6 +174,4 @@ facilita en el caso de agregar un calendario.
         this.setVisible(true);
         this.setLocation(550, 250);
     }
-
-
 }

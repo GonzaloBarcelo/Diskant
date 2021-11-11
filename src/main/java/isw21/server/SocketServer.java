@@ -241,7 +241,7 @@ public class SocketServer extends Thread {
             System.out.println(ex.getMessage());
         }
     }
-    }
+
 
     //public ArrayList<Descuento> getDescuentos (){
 
