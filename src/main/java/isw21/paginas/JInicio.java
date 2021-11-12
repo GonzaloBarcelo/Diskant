@@ -15,6 +15,7 @@ public class JInicio extends JFrame
     Customer customer;
     Client cliente;
     ArrayList<Descuento> plDescuentos;
+    private Timer timer;
 
     public JInicio(Customer customer,Client cliente)
     {
@@ -45,15 +46,14 @@ public class JInicio extends JFrame
 
         plDescuentos= getDescuentos(customer);
 
-        if(plDescuentos == null || plDescuentos.size() == 0)
-        {
-            System.out.println("No hay descuentos");
-        }
-        else {
-            for (Descuento d : plDescuentos) {
-                System.out.println(d.getCodigo());
-            }
-        }
+        timer = new Timer(1000,e ->{
+            mostrarDescuentos();
+        });
+        timer.start();
+
+
+
+
         //JButton btnMisDescuentos = new JButton("Mis descuentos");
         //pnlCentro.add(btnMisDescuentos);
 
@@ -87,6 +87,18 @@ public class JInicio extends JFrame
         cliente.setSession(session);
         cliente.run(cliente);
         return cliente.getDescuentos();
+    }
+
+    public void mostrarDescuentos(){
+        if(plDescuentos == null || plDescuentos.size() == 0)
+        {
+            System.out.println("No hay descuentos. Añade con el código los que tengas");
+        }
+        else {
+            for (Descuento d : plDescuentos) {
+                System.out.println(d.getCodigo());
+            }
+        }
     }
 
 }
