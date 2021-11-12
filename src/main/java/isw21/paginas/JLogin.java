@@ -131,8 +131,8 @@ public class JLogin extends JFrame
         //pnlSur.setBorder(BorderFactory.createEtchedBorder());
 	JPanel pnlEste = new JPanel();
 
-		JPanel pnlOeste = new JPanel();
-		pnlOeste.setPreferredSize(new Dimension(60, 60));
+	JPanel pnlOeste = new JPanel();
+	pnlOeste.setPreferredSize(new Dimension(60, 60));
 
 //FUNCIONES
         btnRegister.addActionListener(new ActionListener()
@@ -144,8 +144,8 @@ public class JLogin extends JFrame
             }
         });
          //Para que funcione al darle enter en Login:
-		btnLogin.addKeyListener(new java.awt.event.KeyAdapter() 
-		{
+	btnLogin.addKeyListener(new java.awt.event.KeyAdapter() 
+	{
             public void keyPressed(java.awt.event.KeyEvent e) 
             {
                  cliente.setContext("/getAccess");
@@ -231,12 +231,14 @@ public class JLogin extends JFrame
         this.add(pnlNorte, BorderLayout.NORTH);
         this.add(pnlCentro, BorderLayout.CENTER);
         this.add(pnlSur, BorderLayout.SOUTH);
+	this.add(pnlEste, BorderLayout.EAST);
+	this.add(pnlOeste, BorderLayout.WEST);
 
 
         this.pack();
         //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
-        this.setLocation(500, 100);
+        this.setLocation(480, 200);
 
     }
 
