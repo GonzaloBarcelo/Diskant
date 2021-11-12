@@ -33,20 +33,23 @@ public class JLogin extends JFrame
         Client cliente=new Client(host, port);
         
         
-        //setSize(450,350);
+        setSize(450,350);
         //this.setColor(BLUE);
         this.setLayout(new BorderLayout());
-        Font fuente = new Font("Serif", 0, 15);
-        Font fuente2 = new Font("Serif", 0, 12);
-        Font fuente3 = new Font("Serif", 0, 18);
+	Font fuente = new Font("Serif", 0, 15);
+	Font fuente1 = new Font("Serif", 1, 18);
+	Font fuente2 = new Font("Serif", 0, 12);
+	Font fuente3 = new Font("Serif", 0, 30);
 
 //GRÁFICO
         //NORTE
 
         JPanel pnlNorte = new JPanel();
-        pnlNorte.setPreferredSize(new Dimension(350, 100));
+        //pnlNorte.setPreferredSize(new Dimension(350, 100));
+	pnlNorte.setBackground(new Color(112,157,119));
         JLabel lblTitulo = new JLabel("Login");
         lblTitulo.setFont(fuente3);
+	lblTitulo.setForeground(Color.white);
         pnlNorte.setAlignmentX(lblTitulo.CENTER_ALIGNMENT);
         pnlNorte.add(lblTitulo);
         //pnlNorte.setBorder(BorderFactory.createEtchedBorder());
@@ -119,14 +122,17 @@ public class JLogin extends JFrame
         //SUR
 
         JPanel pnlSur = new JPanel();
-        pnlSur.setPreferredSize(new Dimension(350, 100));
+        pnlSur.setPreferredSize(new Dimension(80, 60));
         JButton btnLogin = new JButton("Login");
-        btnLogin.setForeground(Color.BLUE);  //new Color(254, 155, 32)
-        //pnlSur.add(new JLabel( "prueba",JLabel.CENTER ),BorderLayout.CENTER );
-
+        btnLogin.setForeground(new Color(17,90,29));  //new Color(254, 155, 32)	
+	btnLogin.setFont(fuente1);
+	btnLogin.setPreferredSize(new Dimension(90, 40));
         pnlSur.add(btnLogin);
         //pnlSur.setBorder(BorderFactory.createEtchedBorder());
+	JPanel pnlEste = new JPanel();
 
+		JPanel pnlOeste = new JPanel();
+		pnlOeste.setPreferredSize(new Dimension(60, 60));
 
 //FUNCIONES
         btnRegister.addActionListener(new ActionListener()
