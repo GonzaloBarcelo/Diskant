@@ -32,13 +32,15 @@ public class JInicio extends JFrame
 		pnlNorte.setBackground(new Color(255,255,255));
 		pnlNorte.setLayout(new GridLayout(1,3));
 		JLabel l5 = new JLabel();
-		ImageIcon imagen1 = new ImageIcon("main/java/isw21/media/LogoDiskAnt.jpeg");
+		ImageIcon imagen1 = new ImageIcon("src/main/java/isw21/media/LogoDiskAnt.jpeg");
 		l5.setIcon(new ImageIcon(imagen1.getImage().getScaledInstance(150, 60, Image.SCALE_SMOOTH)));
-		JLabel l6 = new JLabel("Mis descuentos");
+		JLabel l6 = new JLabel("MIS DESCUENTOS");
+		l6.setFont(fuente1);
 
 		JButton btnCrearDescuento = new JButton("Agregar descuento");
 		btnCrearDescuento.setFont(fuente1);
 		btnCrearDescuento.setForeground(new Color(17,90,29));
+		//btnCrearDescuento.setMaximumSize(new Dimension(300,30));
 		//btnCrearDescuento.setBackground(new Color(160,160,160));
 		pnlNorte.setPreferredSize(new Dimension(600, 50));
 		
@@ -46,16 +48,22 @@ public class JInicio extends JFrame
 		pnlNorte.add(l6);
 		pnlNorte.add(btnCrearDescuento);
 
-        plDescuentos= getDescuentos(customer);
+        plDescuentos = getDescuentos(customer);
+        plDescuentos.remove(0);
 
 
 	//CENTRO
 		JPanel pnlCentro = new JPanel();
 		pnlCentro.setBackground(new Color(174,200,178));
 		int l=plDescuentos.size();
-		pnlCentro.setLayout(new GridLayout(l/2+1, 2));
+		//Esto habrá que cambiarlo, pero de momento con 16 está nice
+		pnlCentro.setLayout(new GridLayout(4, 4));
+
         if(plDescuentos == null || l == 0){
-		    System.out.println("No tienes descuentos, Añade alguno");
+			JLabel lno = new JLabel("En este momento no tienes descuentos");
+			lno.setFont(fuente1);
+			pnlCentro.add(lno);
+			pnlCentro.add(btnCrearDescuento);
 		    //Quitar el descuento inicial de bienvenida
         }
 		else {
@@ -75,7 +83,7 @@ public class JInicio extends JFrame
 
 		JButton btnMiPerfil= new JButton();
 		btnMiPerfil.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		ImageIcon imagen = new ImageIcon("main/java/isw21/media/Perfil.png");
+		ImageIcon imagen = new ImageIcon("src/main/java/isw21/media/Perfil.png");
 		btnMiPerfil.setIcon(new ImageIcon(imagen.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
 	
 		JLabel l1 = new JLabel();
@@ -136,13 +144,15 @@ public class JInicio extends JFrame
 	}
 
     private void mostrarDescuento(Descuento i ,JPanel pnlCentro) {
+		String[] tipos = {"Porcentaje", "Cantidad", "Cupon"};
         JPanel pnlDescuento = new JPanel();
-        pnlDescuento.setLayout(new GridLayout(4, 1));
+        pnlDescuento.setLayout(new GridLayout(5, 1));
 
         JLabel lblComercio = new JLabel(i.getComercio(), JLabel.CENTER);
         JLabel lblValor = new JLabel("Valor: " + i.getValor(), JLabel.CENTER);
-        JLabel lblTipo = new JLabel("Tipo: " + i.getTipo(), JLabel.CENTER);
+        JLabel lblTipo = new JLabel("Tipo: " + tipos[i.getTipo()], JLabel.CENTER);
         JLabel lblCodigo = new JLabel("Codigo: " + i.getCodigo(), JLabel.CENTER);
+        JLabel lblFechaFin = new JLabel("Caduca: " + i.getFechaFin(),JLabel.CENTER);
 
         lblComercio.setBorder(BorderFactory.createEtchedBorder());
         //new JLabel( "prueba",JLabel.CENTER
@@ -151,11 +161,13 @@ public class JInicio extends JFrame
         pnlDescuento.add(lblValor);
         pnlDescuento.add(lblTipo);
         pnlDescuento.add(lblCodigo);
+        pnlDescuento.add(lblFechaFin);
 
         pnlDescuento.setAlignmentX(lblComercio.CENTER_ALIGNMENT);
         pnlDescuento.setAlignmentX(lblValor.CENTER_ALIGNMENT);
         pnlDescuento.setAlignmentX(lblTipo.CENTER_ALIGNMENT);
         pnlDescuento.setAlignmentX(lblCodigo.CENTER_ALIGNMENT);
+		pnlDescuento.setAlignmentX(lblFechaFin.CENTER_ALIGNMENT);
 
         pnlDescuento.setBorder(BorderFactory.createEtchedBorder());
 

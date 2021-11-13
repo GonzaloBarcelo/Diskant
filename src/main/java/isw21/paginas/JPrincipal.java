@@ -66,19 +66,19 @@ public class JPrincipal extends JFrame
 	//SUR
 		JPanel pnlSur = new JPanel();
         JLabel lblLogo= new JLabel();
-		ImageIcon imagen = new ImageIcon("main/java/isw21/media/LogoDiskAnt.jpeg");
+		ImageIcon imagen = new ImageIcon("src/main/java/isw21/media/LogoDiskAnt.jpeg");
 		lblLogo.setIcon(new ImageIcon(imagen.getImage().getScaledInstance(150, 60, Image.SCALE_SMOOTH)));
 
         pnlSur.setBackground(new Color(112,157,119));
         pnlSur.add(lblLogo);
 	
 	//FUNCIONES
-
 		btnLogin.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
 				JLogin login = new JLogin();
+				setVisible(false);
 			};
 		});
 		btnRegister.addActionListener(new ActionListener()
@@ -86,6 +86,7 @@ public class JPrincipal extends JFrame
 			public void actionPerformed(ActionEvent e)
 			{
 				JRegister register = new JRegister();
+				setVisible(false);
 			}
 		});
 		

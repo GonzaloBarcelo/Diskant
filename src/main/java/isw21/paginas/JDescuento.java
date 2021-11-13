@@ -54,10 +54,37 @@ public class JDescuento extends JFrame
 		JLabel lblEntidad = new JLabel("Entidad: ");
 		JTextField txtEntidad = new JTextField();
 
+		JPanel pnlFechaIni = new JPanel();
+		pnlFechaIni.setLayout(new GridLayout(1,3));
+
+		String[] dias = new String[31];
+		for (int i = 0; i < 31; i++) dias[i] = String.valueOf(i + 1);
+		String[] meses = new String[12];
+		for (int i = 0; i < 12; i++) meses[i] = String.valueOf(i + 1);
+		String[] años = new String[40];
+		for (int i = 0; i < 40; i++) años[i] = String.valueOf(i + 2010);
+
 		JLabel lblInicio = new JLabel("Fecha inicio: ");
-		JTextField txtInicio = new JTextField();
+		//JTextField txtInicio = new JTextField();
+		JComboBox<String> cbxDiaIni = new JComboBox<String>(dias);
+		JComboBox<String> cbxMesIni = new JComboBox<String>(meses);
+		JComboBox<String> cbxAñoIni = new JComboBox<String>(años);
+		pnlFechaIni.add(cbxDiaIni);
+		pnlFechaIni.add(cbxMesIni);
+		pnlFechaIni.add(cbxAñoIni);
+
+		JPanel pnlFechaFin = new JPanel();
+		pnlFechaFin.setLayout(new GridLayout(1,3));
+
 		JLabel lblFin = new JLabel("Fecha fin: ");
-		JTextField txtFin = new JTextField();
+		//JTextField txtFin = new JTextField();
+		JComboBox<String> cbxDiaFin = new JComboBox<String>(dias);
+		JComboBox<String> cbxMesFin = new JComboBox<String>(meses);
+		JComboBox<String> cbxAñoFin = new JComboBox<String>(años);
+
+		pnlFechaFin.add(cbxDiaFin);
+		pnlFechaFin.add(cbxMesFin);
+		pnlFechaFin.add(cbxAñoFin);
 
 		JLabel lblTipo = new JLabel("Tipo: ");
 		String[] tipos = {"Porcentaje", "Cantidad", "Cupon"};
@@ -80,7 +107,11 @@ public class JDescuento extends JFrame
             {
                 cliente.setContext("/addDescuento");
                 HashMap<String,Object> session= new HashMap<String,Object>();
-                Descuento descuento = new Descuento(txtEntidad.getText(),txtInicio.getText(),txtFin.getText(),cbxTipo.getSelectedIndex(),Integer.parseInt(txtValor.getText()),txtCodigo.getText());
+				//Aquí creamos las fechas en función de lo introducido por el usuario, separando la información por barras
+				//Formato dd/mm/aaaa
+				String fechaIni = cbxDiaIni.getSelectedIndex() + "/" + cbxMesIni.getSelectedIndex() + "/" + cbxAñoIni.getSelectedIndex();
+				String fechaFin = cbxDiaFin.getSelectedIndex() + "/" + cbxMesFin.getSelectedIndex() + "/" + cbxAñoFin.getSelectedIndex();
+				Descuento descuento = new Descuento(txtEntidad.getText(), fechaIni,fechaFin,cbxTipo.getSelectedIndex(),Integer.parseInt(txtValor.getText()),txtCodigo.getText());
                 descuentos.add(descuento);
                 session.put("Descuento",descuento);
                 session.put("Customer",customer);
@@ -108,12 +139,13 @@ public class JDescuento extends JFrame
 			public void keyPressed(KeyEvent e)
 			{
 				if(e.getKeyCode()==KeyEvent.VK_ENTER) //valor de key: enter
-					txtInicio.requestFocus();
+					cbxDiaIni.requestFocus();
+					//txtInicio.requestFocus();
 				
 			}
 		});
 
-		txtInicio.addKeyListener(new KeyAdapter()
+		/*txtInicio.addKeyListener(new KeyAdapter()
 		{
 			@Override
 			public void keyPressed(KeyEvent e)
@@ -132,7 +164,7 @@ public class JDescuento extends JFrame
 					cbxTipo.requestFocus();
 				
 			}
-		});
+		});*/
 
 		txtValor.addKeyListener(new KeyAdapter()
 		{
@@ -158,9 +190,9 @@ public class JDescuento extends JFrame
 		pnlCentro.add(lblEntidad);
 		pnlCentro.add(txtEntidad);
 		pnlCentro.add(lblInicio);
-		pnlCentro.add(txtInicio);
+		pnlCentro.add(pnlFechaIni);
 		pnlCentro.add(lblFin);
-		pnlCentro.add(txtFin);
+		pnlCentro.add(pnlFechaFin);
 		pnlCentro.add(lblTipo);
 		pnlCentro.add(cbxTipo);
 		pnlCentro.add(lblValor);

@@ -158,6 +158,7 @@ public class JLogin extends JFrame
                     System.out.println("Se ha logeado");
                     JInicio inicio= new JInicio(customer,cliente);
                     setVisible(false);
+
                 }
                 else{
                     setVisible(true);
@@ -237,6 +238,13 @@ public class JLogin extends JFrame
 
         this.pack();
         //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                JPrincipal jprinc = new JPrincipal();
+
+            }
+        });
         this.setVisible(true);
         this.setLocation(480, 200);
 

@@ -116,25 +116,12 @@ public class JRegister extends JFrame
                 cliente.run(cliente);
                 if (cliente.getIdentification()){
                     System.out.println("Se ha añadido el usuario a la base de datos");
+                    JPrincipal jp = new JPrincipal();
                     setVisible(false);
                 }
 
             };
         });
-        btnRegister.addKeyListener(new java.awt.event.KeyAdapter() 
-		{
-            public void keyPressed(java.awt.event.KeyEvent e) 
-            {
-                cliente.setContext("/addNewUser");
-                cliente.setNombre(txtPassword.getText());
-                cliente.setId(txtUser.getText());
-                cliente.run(cliente);
-                if (cliente.getIdentification()){
-                    System.out.println("Se ha añadido el usuario a la base de datos");
-                    setVisible(false);
-                }
-            }
-         });
 
         txtUser.addMouseListener(new MouseAdapter()
         {
@@ -202,6 +189,13 @@ public class JRegister extends JFrame
 
         //this.pack();
         //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                JPrincipal jprinc = new JPrincipal();
+
+            }
+        });
         this.setVisible(true);
         this.setLocation(480, 200);
 
