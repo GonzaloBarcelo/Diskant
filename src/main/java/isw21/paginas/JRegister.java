@@ -24,21 +24,23 @@ public class JRegister extends JFrame
         int port = Integer.parseInt(PropertiesISW.getInstance().getProperty("port"));
         Logger.getRootLogger().info("Host: "+host+" port"+port);
         Client cliente=new Client(host, port);
-        //setSize(450,350);
-        //this.setColor(BLUE);
+        
+	setSize(450,200);
         this.setLayout(new BorderLayout());
-        Font fuente = new Font("Serif", 0, 15);
-        Font fuente2 = new Font("Serif", 0, 12);
+	Font fuente = new Font("Serif", 0, 15);
+	Font fuente1 = new Font("Serif", 1, 18);
+	Font fuente3 = new Font("Serif", 0, 30);
 
 //GRÁFICO
         //NORTE
 
         JPanel pnlNorte = new JPanel();
-        pnlNorte.setPreferredSize(new Dimension(350, 100));
+	pnlNorte.setBackground(new Color(112,157,119));
         JLabel lblTitulo = new JLabel("Register");
-        lblTitulo.setFont(fuente);
-        pnlNorte.setAlignmentX(lblTitulo.CENTER_ALIGNMENT);
-        pnlNorte.add(lblTitulo);
+	lblTitulo.setForeground(Color.white);
+	lblTitulo.setFont(fuente3);
+	pnlNorte.setAlignmentX(lblTitulo.CENTER_ALIGNMENT);
+	pnlNorte.add(lblTitulo);
         //pnlNorte.setBorder(BorderFactory.createEtchedBorder());
 
 
@@ -72,12 +74,6 @@ public class JRegister extends JFrame
         txtMail.setFont(fuente);
         txtMail.setForeground(new Color(148, 148, 148));
 
-
-
-
-
-
-
         pnlCentro.add(lblUser);
         pnlCentro.add(txtUser);
         pnlCentro.add(lblMail);
@@ -95,13 +91,18 @@ public class JRegister extends JFrame
         //SUR
 
         JPanel pnlSur = new JPanel();
-        pnlSur.setPreferredSize(new Dimension(350, 100));
+        pnlSur.setPreferredSize(new Dimension(80, 60));
         JButton btnRegister = new JButton("Register");
-        btnRegister.setForeground(Color.BLUE);  //new Color(254, 155, 32)
-        //pnlSur.add(new JLabel( "prueba",JLabel.CENTER ),BorderLayout.CENTER );
-
+        btnRegister.setForeground(new Color(17,90,29));
+        btnRegister.setPreferredSize(new Dimension(90, 40));
         pnlSur.add(btnRegister);
         //pnlSur.setBorder(BorderFactory.createEtchedBorder());
+	
+	//LADOS
+	JPanel pnlEste = new JPanel();
+
+	JPanel pnlOeste = new JPanel();
+	pnlOeste.setPreferredSize(new Dimension(40, 60));
 
 
 //FUNCIONES
@@ -195,12 +196,14 @@ public class JRegister extends JFrame
         this.add(pnlNorte, BorderLayout.NORTH);
         this.add(pnlCentro, BorderLayout.CENTER);
         this.add(pnlSur, BorderLayout.SOUTH);
+	this.add(pnlEste, BorderLayout.EAST);
+	this.add(pnlOeste, BorderLayout.WEST);
 
 
-        this.pack();
+        //this.pack();
         //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
-        this.setLocation(500, 100);
+        this.setLocation(480, 200);
 
     }
 }
