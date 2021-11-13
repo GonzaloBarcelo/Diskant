@@ -93,7 +93,7 @@ public class JInicio extends JFrame
 
 		JButton btnMiPerfil= new JButton();
 		btnMiPerfil.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		ImageIcon imagen = new ImageIcon("Perfil.png");
+		ImageIcon imagen = new ImageIcon("main/java/isw21/media/Perfil.png");
 		btnMiPerfil.setIcon(new ImageIcon(imagen.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
 	
 		JLabel l1 = new JLabel();
