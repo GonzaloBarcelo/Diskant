@@ -45,44 +45,26 @@ public class JInicio extends JFrame
 		pnlNorte.add(l5);
 		pnlNorte.add(l6);
 		pnlNorte.add(btnCrearDescuento);
-		
-		
+
+        plDescuentos= getDescuentos(customer);
 
 
 	//CENTRO
 		JPanel pnlCentro = new JPanel();
 		pnlCentro.setBackground(new Color(174,200,178));
-		int l=App.importDescuentos().size();
+		int l=plDescuentos.size();
 		pnlCentro.setLayout(new GridLayout(l/2+1, 2));
-		for(Descuento i:App.importDescuentos())  
-			{
+        if(plDescuentos == null || l == 0){
+		    System.out.println("No tienes descuentos, Añade alguno");
+		    //Quitar el descuento inicial de bienvenida
+        }
+		else {
+            for (Descuento i : plDescuentos) {
+                mostrarDescuento(i,pnlCentro);
 
-				JPanel pnlDescuento = new JPanel();
-				pnlDescuento.setLayout(new GridLayout(4,1));
 
-				JLabel lblComercio = new JLabel( i.getComercio(), JLabel.CENTER);
-				JLabel lblValor = new JLabel("Valor: "+i.getValor(), JLabel.CENTER);
-				JLabel lblTipo = new JLabel("Tipo: "+i.getTipo(), JLabel.CENTER);
-				JLabel lblCodigo = new JLabel("Codigo: "+i.getCodigo(), JLabel.CENTER);
-
-				lblComercio.setBorder(BorderFactory.createEtchedBorder());
-				//new JLabel( "prueba",JLabel.CENTER 
-				
-				pnlDescuento.add(lblComercio);
-				pnlDescuento.add(lblValor);
-				pnlDescuento.add(lblTipo);
-				pnlDescuento.add(lblCodigo);
-
-				pnlDescuento.setAlignmentX(lblComercio.CENTER_ALIGNMENT);
-				pnlDescuento.setAlignmentX(lblValor.CENTER_ALIGNMENT);
-				pnlDescuento.setAlignmentX(lblTipo.CENTER_ALIGNMENT);
-				pnlDescuento.setAlignmentX(lblCodigo.CENTER_ALIGNMENT);
-
-				pnlDescuento.setBorder(BorderFactory.createEtchedBorder());
-
-				pnlCentro.add(pnlDescuento);
-	
-			}
+            }
+        }
 
 		
 
@@ -129,15 +111,17 @@ public class JInicio extends JFrame
 			public void actionPerformed(ActionEvent e)
 			{
 				JDescuento descuento = new JDescuento(customer,cliente,plDescuentos);
+				setVisible(false);
+				//mostrarDescuento(plDescuentos.get(plDescuentos.size()-1),pnlCentro);
+
 			}
 		});
 
-		plDescuentos= getDescuentos(customer);
 
-        timer = new Timer(1000,e ->{
+        /*timer = new Timer(1000,e ->{
             mostrarDescuentos();
         });
-        timer.start();
+        timer.start();*/
 		
 	
 		this.add(pnlNorte, BorderLayout.NORTH);
@@ -151,7 +135,34 @@ public class JInicio extends JFrame
 		this.setLocation(250, 100);
 	}
 
-	public ArrayList<Descuento> getDescuentos(Customer customer)
+    private void mostrarDescuento(Descuento i ,JPanel pnlCentro) {
+        JPanel pnlDescuento = new JPanel();
+        pnlDescuento.setLayout(new GridLayout(4, 1));
+
+        JLabel lblComercio = new JLabel(i.getComercio(), JLabel.CENTER);
+        JLabel lblValor = new JLabel("Valor: " + i.getValor(), JLabel.CENTER);
+        JLabel lblTipo = new JLabel("Tipo: " + i.getTipo(), JLabel.CENTER);
+        JLabel lblCodigo = new JLabel("Codigo: " + i.getCodigo(), JLabel.CENTER);
+
+        lblComercio.setBorder(BorderFactory.createEtchedBorder());
+        //new JLabel( "prueba",JLabel.CENTER
+
+        pnlDescuento.add(lblComercio);
+        pnlDescuento.add(lblValor);
+        pnlDescuento.add(lblTipo);
+        pnlDescuento.add(lblCodigo);
+
+        pnlDescuento.setAlignmentX(lblComercio.CENTER_ALIGNMENT);
+        pnlDescuento.setAlignmentX(lblValor.CENTER_ALIGNMENT);
+        pnlDescuento.setAlignmentX(lblTipo.CENTER_ALIGNMENT);
+        pnlDescuento.setAlignmentX(lblCodigo.CENTER_ALIGNMENT);
+
+        pnlDescuento.setBorder(BorderFactory.createEtchedBorder());
+
+        pnlCentro.add(pnlDescuento);
+    }
+
+    public ArrayList<Descuento> getDescuentos(Customer customer)
 	{
         cliente.setContext("/getDescuentos");
         HashMap<String,Object> session= new HashMap<String,Object>();
@@ -164,7 +175,7 @@ public class JInicio extends JFrame
         return cliente.getDescuentos();
     }
 
-    public void mostrarDescuentos()
+    /*public void mostrarDescuentos()
     {
         if(plDescuentos == null || plDescuentos.size() == 0)
         {
@@ -175,5 +186,6 @@ public class JInicio extends JFrame
                 System.out.println(d.getCodigo());
             }
         }
-    }
+    }*/
+
 }

@@ -87,6 +87,8 @@ public class JDescuento extends JFrame
                 cliente.setSession(session);
                 cliente.run(cliente);
                 setVisible(false);
+                // Al añadir el descuento, se abre la de inicio
+                JInicio ini = new JInicio(customer, cliente);
             }
 
 		});
@@ -172,6 +174,15 @@ public class JDescuento extends JFrame
 		this.add(pnlSur, BorderLayout.SOUTH);
 		this.add(pnlEste, BorderLayout.EAST);
 		this.add(pnlOeste, BorderLayout.WEST);
+
+		//Al cerrar la ventana, se abre la de inicio anterior
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				JInicio ini = new JInicio(customer, cliente);
+
+			}
+		});
 		//this.pack();
 		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		this.setVisible(true); 
