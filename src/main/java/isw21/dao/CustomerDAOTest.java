@@ -16,7 +16,7 @@ public class CustomerDAOTest extends TestCase {
 
     public void testGetClientes() {
         clientes.add(primerUsr);
-        assertEquals(clientes,CustomerDAO.getClientes(clientesVac).get(0));
+        assertEquals(clientes.get(0),CustomerDAO.getClientes(clientesVac).get(0));
     }
 
     public void testAddCliente() {
