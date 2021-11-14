@@ -32,12 +32,12 @@ public class SocketServerTest extends TestCase {
     // Prueba del método addDescuento
     /*public void testAddDescuento() {
         //Introducimos un descuento y nos devuelve el mismo si el método funciona correctamente
-        assertEquals(new Descuento("ComercioTest","test","test",1,1,"test"),sS.addDescuento(customer,new Descuento("ComercioTest","test","test",1,1,"test")));
+        // assertEquals(new Descuento("ComercioTest","test","test",1,1,"test"),sS.addDescuento(customer,new Descuento("ComercioTest","test","test",1,1,"test")));
     }*/
 
    /* public void testGetDescuentos() {
         // Comprobamos que la lista de los descuentos asociados al usuario test coincida con la esperada
         lista.add(new Descuento("ComercioTest","test","test",1,1,"test"));
-        assertEquals(lista,sS.getDescuentos(lista,customer));
+        //assertEquals(lista,sS.getDescuentos(lista,customer));
     }*/
 }
