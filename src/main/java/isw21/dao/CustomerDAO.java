@@ -11,8 +11,6 @@ import main.java.isw21.dao.ConnectionDAO;
 // Clase encargada de ejecutar los metodos asociados a los customers, como getClientes
 public class CustomerDAO {
 
-
-
     public static void getClientes(ArrayList<Customer> lista) {
         Connection con=ConnectionDAO.getInstance().getConnection();
         try (PreparedStatement pst = con.prepareStatement("SELECT * FROM usuarios");

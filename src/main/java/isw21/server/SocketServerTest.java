@@ -3,7 +3,8 @@ package main.java.isw21.server;
 import junit.framework.TestCase;
 import main.java.isw21.descuentos.Descuento;
 import main.java.isw21.domain.Customer;
-
+import main.java.isw21.server.SocketServer;
+import java.net.ServerSocket;
 import java.util.ArrayList;
 
 public class SocketServerTest extends TestCase {
@@ -11,9 +12,11 @@ public class SocketServerTest extends TestCase {
     private ArrayList<Descuento> lista= new ArrayList<Descuento>();
 
     private static SocketServer sS= null;
-    @Override
+
     protected void setUp() throws Exception {
-        super.setUp();
+
+        ServerSocket server = new ServerSocket(8081);
+        new SocketServer(server.accept());
     }
     // Prueba del metodo IsInBase
     public void testIsInBase() {

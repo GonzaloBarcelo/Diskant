@@ -28,7 +28,7 @@ public class SocketServer extends Thread {
     protected Socket socket;
 
         // Entrada de cliente en el servidor
-    private SocketServer(Socket socket) {
+    public SocketServer(Socket socket) {
         this.socket = socket;
         System.out.println("New client connected from " + socket.getInetAddress().getHostAddress());
         start();
