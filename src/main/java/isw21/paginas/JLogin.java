@@ -75,13 +75,13 @@ public class JLogin extends JFrame
         //lblUser.setBorder(BorderFactory.createEtchedBorder());
 
 
-        JTextField txtUser = new JTextField("Type your username", 10);
+        JTextField txtUser = new JTextField( 10);
         txtUser.setFont(fuente);
         txtUser.setForeground(new Color(148, 148, 148));
 
         JLabel lblPassword = new JLabel("Password");
         lblPassword.setFont(fuente);
-        JTextField txtPassword = new JTextField("Type your password", 10);
+        JPasswordField txtPassword = new JPasswordField( 10);
         txtPassword.setFont(fuente);
         txtPassword.setForeground(new Color(148, 148, 148));
 
