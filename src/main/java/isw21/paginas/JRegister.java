@@ -48,7 +48,7 @@ public class JRegister extends JFrame
         //CENTRO
 
         JPanel pnlCentro = new JPanel();
-        pnlCentro.setLayout(new GridLayout(3,2));
+        pnlCentro.setLayout(new GridLayout(4,2));
 
 
 
@@ -67,6 +67,13 @@ public class JRegister extends JFrame
         JTextField txtPassword = new JTextField("Type your password", 10);
         txtPassword.setFont(fuente);
         txtPassword.setForeground(new Color(148, 148, 148));
+	
+	JLabel lblPassword2 = new JLabel("Confirm Password");
+	lblPassword2.setFont(fuente);
+	JTextField txtPassword2 = new JTextField("Type your password", 10);
+	txtPassword2.setFont(fuente);
+	txtPassword2.setForeground(new Color(148, 148, 148));
+
 
         JLabel lblMail = new JLabel("Email");
         lblMail.setFont(fuente);
@@ -80,6 +87,8 @@ public class JRegister extends JFrame
         pnlCentro.add(txtMail);
         pnlCentro.add(lblPassword);
         pnlCentro.add(txtPassword);
+	pnlCentro.add(lblPassword2);
+	pnlCentro.add(txtPassword2);
 
 
 
@@ -110,15 +119,29 @@ public class JRegister extends JFrame
         {
             public void actionPerformed(ActionEvent e)
             {
-                cliente.setContext("/addNewUser");
-                cliente.setNombre(txtPassword.getText());
-                cliente.setId(txtUser.getText());
-                cliente.run(cliente);
-                if (cliente.getIdentification()){
-                    System.out.println("Se ha añadido el usuario a la base de datos");
-                    JPrincipal jp = new JPrincipal();
-                    setVisible(false);
+	    	if(txtPassword.getText().equals(txtPassword2.getText()))
+                {
+			cliente.setContext("/addNewUser");
+			cliente.setNombre(txtPassword.getText());
+			cliente.setId(txtUser.getText());
+			cliente.run(cliente);
+			if (cliente.getIdentification()){
+			    System.out.println("Se ha añadido el usuario a la base de datos");
+			    JPrincipal jp = new JPrincipal();
+			    setVisible(false);
+			}
+                    
                 }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Passwords do not match. Retry");
+                    txtPassword.requestFocus();
+                    txtPassword.setText("");
+                    txtPassword2.setText("");
+                }
+                
+		
+		
 
             };
         });
@@ -127,16 +150,29 @@ public class JRegister extends JFrame
         {
            public void keyPressed(java.awt.event.KeyEvent e) 
             {
-                cliente.setContext("/addNewUser");
-                cliente.setNombre(txtPassword.getText());
-                cliente.setId(txtUser.getText());
-                cliente.run(cliente);
-                if (cliente.getIdentification()){
-                    System.out.println("Se ha añadido el usuario a la base de datos");
-                    JPrincipal jp = new JPrincipal();
-                    setVisible(false);
+                if(txtPassword.getText().equals(txtPassword2.getText()))
+                {
+                    	cliente.setContext("/addNewUser");
+			cliente.setNombre(txtPassword.getText());
+			cliente.setId(txtUser.getText());
+			cliente.run(cliente);
+			if (cliente.getIdentification()){
+			    System.out.println("Se ha añadido el usuario a la base de datos");
+			    JPrincipal jp = new JPrincipal();
+			    setVisible(false);
+			}
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Passwords do not match. Retry");
+                    txtPassword.requestFocus();
+                    txtPassword.setText("");
+                    txtPassword2.setText("");
                 }
 
+		
+		
+		
             };
         });
 
@@ -180,22 +216,39 @@ public class JRegister extends JFrame
         });
 
         txtPassword.addMouseListener(new MouseAdapter()
-        {
-            //@Override
-            public void mouseClicked(MouseEvent e)
-            {
-                txtPassword.setText("");
-            }
-        });
-        txtPassword.addKeyListener(new KeyAdapter()
-        {
-            @Override
-            public void keyPressed(KeyEvent e)
-            {
-                if(e.getKeyCode()==KeyEvent.VK_ENTER) //valor de key: enter
-                    btnRegister.requestFocus();
-            }
-        });
+	{
+		//@Override
+		public void mouseClicked(MouseEvent e)
+		{
+			txtPassword.setText("");
+		}
+	});
+	txtPassword.addKeyListener(new KeyAdapter()
+	{
+		@Override
+		public void keyPressed(KeyEvent e)
+		{
+			if(e.getKeyCode()==KeyEvent.VK_ENTER) //valor de key: enter
+				txtPassword2.requestFocus();
+		}
+	});
+	txtPassword2.addMouseListener(new MouseAdapter()
+	{
+		//@Override
+		public void mouseClicked(MouseEvent e)
+		{
+			txtPassword2.setText("");
+		}
+	});
+	txtPassword2.addKeyListener(new KeyAdapter()
+	{
+		@Override
+		public void keyPressed(KeyEvent e)
+		{
+			if(e.getKeyCode()==KeyEvent.VK_ENTER) //valor de key: enter
+				btnRegister.requestFocus();
+		}
+	});
 
         this.add(pnlNorte, BorderLayout.NORTH);
         this.add(pnlCentro, BorderLayout.CENTER);
