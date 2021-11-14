@@ -18,6 +18,7 @@ import java.util.HashMap;
 
 import main.java.isw21.controler.CustomerControler;
 import main.java.isw21.dao.ConnectionDAO;
+import main.java.isw21.dao.DescuentoDAO;
 import main.java.isw21.descuentos.Descuento;
 import main.java.isw21.domain.Customer;
 import main.java.isw21.message.Message;
@@ -125,7 +126,7 @@ public class SocketServer extends Thread {
                     Customer customer =(Customer) mensajeIn.getSession().get("Customer");
                     Descuento descuento= (Descuento) mensajeIn.getSession().get("Descuento");
                     //Ejectuamos la funcion de añadir descuento a la base de datos
-                    this.addDescuento(customer,descuento);
+                    DescuentoDAO.addDescuento(customer,descuento);
                     //Finalizamos el mensaje de salida y lo mandamos
                     session=new HashMap<String, Object>();
                     //Mandaremos como salida el descuento añadido
@@ -145,7 +146,7 @@ public class SocketServer extends Thread {
                     //Extraemos tambien los descuentos
                     ArrayList<Descuento> descuentos = (ArrayList<Descuento>) mensajeIn.getSession().get("Descuentos");
                     //Llamamos al metodo getDescuentos, el cual actualiza la lista de los descuentos del customer pasado como parámetro
-                    this.getDescuentos(descuentos,customer);
+                    DescuentoDAO.getDescuentos(descuentos,customer);
                     //Construimos la respuesta
                     session=new HashMap<String, Object>();
                     session.put("Descuentos",descuentos);
@@ -262,7 +263,7 @@ public class SocketServer extends Thread {
     }
 
     //Codigo que inserta en la base de datos los descuentos de cada cliente
-    public Descuento addDescuento(Customer customer,Descuento descuento) {
+    /*public Descuento addDescuento(Customer customer,Descuento descuento) {
         // iniciamos la conexion con la base de datos
         Connection con = ConnectionDAO.getInstance().getConnection();
         try {
@@ -298,7 +299,7 @@ public class SocketServer extends Thread {
             System.out.println(ex.getMessage());
         }
         return lista;
-    }
+    }*/
 
 
     //public ArrayList<Descuento> getDescuentos (){

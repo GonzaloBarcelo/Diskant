@@ -119,8 +119,8 @@ public class JDescuento extends JFrame
                 HashMap<String,Object> session= new HashMap<String,Object>();
 				//Aquí creamos las fechas en función de lo introducido por el usuario, separando la información por barras
 				//Formato dd/mm/aaaa
-				String fechaIni = cbxDiaIni.getSelectedIndex() + "/" + cbxMesIni.getSelectedIndex() + "/" + cbxAñoIni.getSelectedIndex();
-				String fechaFin = cbxDiaFin.getSelectedIndex() + "/" + cbxMesFin.getSelectedIndex() + "/" + cbxAñoFin.getSelectedIndex();
+				String fechaIni = cbxDiaIni.getSelectedItem().toString() + "/" + cbxMesIni.getSelectedItem().toString() + "/" + cbxAñoIni.getSelectedItem().toString();
+				String fechaFin = cbxDiaFin.getSelectedItem().toString() + "/" + cbxMesFin.getSelectedItem().toString() + "/" + cbxAñoFin.getSelectedItem().toString();
 				//Creamos el descuento a añadir en función de los parámetros introducidos por el usuario en la pantalla.
 				Descuento descuento = new Descuento(txtEntidad.getText(), fechaIni,fechaFin,cbxTipo.getSelectedIndex(),Integer.parseInt(txtValor.getText()),txtCodigo.getText());
                 // una vez creado el descuento, lo añadismo a los descuentos asociados al cliente
