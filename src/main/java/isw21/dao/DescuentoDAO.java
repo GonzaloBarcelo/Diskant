@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class DescuentoDAO {
-    public Descuento addDescuento(Customer customer,Descuento descuento) {
+    public static Descuento addDescuento(Customer customer, Descuento descuento) {
         // iniciamos la conexion con la base de datos
         Connection con = ConnectionDAO.getInstance().getConnection();
         try {
@@ -25,7 +25,7 @@ public class DescuentoDAO {
         }
     }
 
-    public ArrayList<Descuento> getDescuentos(ArrayList<Descuento> lista, Customer customer){
+    public static ArrayList<Descuento> getDescuentos(ArrayList<Descuento> lista, Customer customer){
         //Como debemos extraer descuentos, necesitamos conexion a la base de datos, por lo que tenemos que gnerar una conexion
         Connection con = ConnectionDAO.getInstance().getConnection();
         //Si la lista que debemos actualizar no existe o si su tamaño es cero, la volvemos a crear
