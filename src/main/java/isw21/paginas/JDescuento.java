@@ -138,6 +138,39 @@ public class JDescuento extends JFrame
             }
 
 		});
+		
+		
+		btnCrear.addKeyListener(new java.awt.event.KeyAdapter() 
+        	{
+		    // Método añadir descuento:
+		    public void keyPressed(java.awt.event.KeyEvent e)
+            {
+                // Como debemos hacer un a conexión con el servidor para añadir el descuento
+                // comenzamos a crear el mensaje de envio.
+                // Establevcemos el contexto : añadir descuento
+                cliente.setContext("/addDescuento");
+                HashMap<String,Object> session= new HashMap<String,Object>();
+                //Aquí creamos las fechas en función de lo introducido por el usuario, separando la información por barras
+                //Formato dd/mm/aaaa
+                String fechaIni = cbxDiaIni.getSelectedIndex() + "/" + cbxMesIni.getSelectedIndex() + "/" + cbxAñoIni.getSelectedIndex();
+                String fechaFin = cbxDiaFin.getSelectedIndex() + "/" + cbxMesFin.getSelectedIndex() + "/" + cbxAñoFin.getSelectedIndex();
+                //Creamos el descuento a añadir en función de los parámetros introducidos por el usuario en la pantalla.
+                Descuento descuento = new Descuento(txtEntidad.getText(), fechaIni,fechaFin,cbxTipo.getSelectedIndex(),Integer.parseInt(txtValor.getText()),txtCodigo.getText());
+                // una vez creado el descuento, lo añadismo a los descuentos asociados al cliente
+                descuentos.add(descuento);
+                // Añadimos al mensaje del cliente el descuento a añadir y el dueño del descuento.
+                session.put("Descuento",descuento);
+                session.put("Customer",customer);
+                cliente.setSession(session);
+                // Y finalmente hacemos la comunicacion con el servidor para el añadido del descuento.
+                // Una vez finalizado, se cierra el entorno gráfico y se abre la pantalla de inicio donde están todos los descuentos asociados a ese cliente.
+                cliente.run(cliente);
+                setVisible(false);
+                // Al añadir el descuento, se abre la de inicio
+                JInicio ini = new JInicio(customer, cliente);
+            }
+
+        });
 		pnlSur.add(btnCrear);
 
 	//LADOS
