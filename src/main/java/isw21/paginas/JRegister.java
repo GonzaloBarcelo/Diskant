@@ -122,6 +122,23 @@ public class JRegister extends JFrame
 
             };
         });
+	
+	btnRegister.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+           public void keyPressed(java.awt.event.KeyEvent e) 
+            {
+                cliente.setContext("/addNewUser");
+                cliente.setNombre(txtPassword.getText());
+                cliente.setId(txtUser.getText());
+                cliente.run(cliente);
+                if (cliente.getIdentification()){
+                    System.out.println("Se ha añadido el usuario a la base de datos");
+                    JPrincipal jp = new JPrincipal();
+                    setVisible(false);
+                }
+
+            };
+        });
 
         txtUser.addMouseListener(new MouseAdapter()
         {
