@@ -1,3 +1,4 @@
+// Descripicion del entorno grafico de la pestaña de registrar
 package main.java.isw21.paginas;
 
 import javax.swing.*;
@@ -18,8 +19,10 @@ public class JRegister extends JFrame
     {
         new JRegister();
     }
+
     public JRegister()
     {
+        // La ventana de register debe tener conectividad con la base de datos para podr añadir los usuarios
         String host = PropertiesISW.getInstance().getProperty("host");
         int port = Integer.parseInt(PropertiesISW.getInstance().getProperty("port"));
         Logger.getRootLogger().info("Host: "+host+" port"+port);
@@ -119,14 +122,21 @@ public class JRegister extends JFrame
         {
             public void actionPerformed(ActionEvent e)
             {
+                //Utilizamos la verificacion de contraseña y si coinciden, se manda el el usuario a añadir a la base de datos
+                // guardando los parametros introducidos por usuario.
 	    	if(txtPassword.getText().equals(txtPassword2.getText()))
                 {
+                    //Envio del mensaje a la base de datos en el contexto de añadir user
 			cliente.setContext("/addNewUser");
 			cliente.setNombre(txtPassword.getText());
 			cliente.setId(txtUser.getText());
+            // Con este contexto, como se puede ver en el servidor, solo es encesario saber el nombre y la contraseña. En un futuro se añadiran otros campos.
+                    // Como por ejemplo numero de telefono o email.
 			cliente.run(cliente);
+            //Si el servidor, en su mensaje de vuelta, nos devuelve true, indicará que que el usuario se ha añadido correctamente a la base de datos
 			if (cliente.getIdentification()){
 			    System.out.println("Se ha añadido el usuario a la base de datos");
+                // Una vez introducido en la base de datos, tendrá que volver a la pantalla principal e iniciar sesion
 			    JPrincipal jp = new JPrincipal();
 			    setVisible(false);
 			}
