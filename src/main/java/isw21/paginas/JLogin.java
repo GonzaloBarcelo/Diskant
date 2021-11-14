@@ -27,6 +27,8 @@ public class JLogin extends JFrame
     public JLogin()
     {
 
+        //Creamos la conexion con el servidor
+
         String host = PropertiesISW.getInstance().getProperty("host");
         int port = Integer.parseInt(PropertiesISW.getInstance().getProperty("port"));
         Logger.getRootLogger().info("Host: "+host+" port"+port);
@@ -148,12 +150,20 @@ public class JLogin extends JFrame
 	{
             public void keyPressed(java.awt.event.KeyEvent e) 
             {
-                 cliente.setContext("/getAccess");
+
+                // Para identificarse de manera correcta, se debe introducir correctamente el nombre y la contraseña de un usuario
+                //El servidor será el encargado de hacer la comprobación con la base de datos. Po lo tanto deberemos comunicarnos con el
+                // Para la comunicacion, utilizaremos el contexto de getAcces. En el mensaje tambien se especificará con que nombre y que contraseña
+                // se esta intentando acceder
+                cliente.setContext("/getAccess");
                 cliente.setNombre(txtPassword.getText());
                 cliente.setId(txtUser.getText());
+                //Mandamos la comunicacion al servidor
                 cliente.run(cliente);
+                //Si la comuncacion es corrcta
                 if (cliente.getIdentification()){
                     logCorrect=true;
+                    //Iniciamos sesion con el customer introducido por el usuario y pasamos a la pestaña de inicio
                     customer= new Customer(txtUser.getText(),txtPassword.getText());
                     System.out.println("Se ha logeado");
                     JInicio inicio= new JInicio(customer,cliente);
@@ -171,6 +181,7 @@ public class JLogin extends JFrame
         {
             public void actionPerformed(ActionEvent e)
             {
+                //Misma funcionalidad que en el caso previo
                 cliente.setContext("/getAccess");
                 cliente.setNombre(txtPassword.getText());
                 cliente.setId(txtUser.getText());
@@ -190,7 +201,7 @@ public class JLogin extends JFrame
         });
 
         
-
+        //Funciones de accesibilidad en la pestaña
         txtUser.addMouseListener(new MouseAdapter()
         {
             //@Override
@@ -236,17 +247,17 @@ public class JLogin extends JFrame
 	this.add(pnlOeste, BorderLayout.WEST);
 
 
-        this.pack();
-        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                JPrincipal jprinc = new JPrincipal();
+    this.pack();
+    //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    this.addWindowListener(new WindowAdapter() {
+        @Override
+        public void windowClosing(WindowEvent e) {
+            JPrincipal jprinc = new JPrincipal();
 
-            }
-        });
-        this.setVisible(true);
-        this.setLocation(480, 200);
+        }
+    });
+    this.setVisible(true);
+    this.setLocation(480, 200);
 
     }
 
