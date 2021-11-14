@@ -240,7 +240,7 @@ public class SocketServer extends Thread {
         }
     }
     //Metodo de añadir clientes
-    public void addCliente(Customer customer){
+    public Customer addCliente(Customer customer){
         //Deberemos comprobar que el cliente a añadir no se encuentra en la base de datos
         if (this.isInBase(customer)==null){
             //Sabiendo que no figura en la base, ejecutamos la QUERY necesaria para añadir el usuario a la tabla de usuarios
@@ -253,14 +253,16 @@ public class SocketServer extends Thread {
             catch (SQLException ex){
                 System.out.println(ex.getMessage());
             }
+            return customer;
         }
         else{
             System.out.println("El usuario ya se encuentra dentro de la base de datos.");
+            return null;
         }
     }
 
     //Codigo que inserta en la base de datos los descuentos de cada cliente
-    public void addDescuento(Customer customer,Descuento descuento) {
+    public Descuento addDescuento(Customer customer,Descuento descuento) {
         // iniciamos la conexion con la base de datos
         Connection con = ConnectionDAO.getInstance().getConnection();
         try {
@@ -269,12 +271,14 @@ public class SocketServer extends Thread {
             PreparedStatement pst = con.prepareStatement("INSERT INTO descuentos VALUES ('" + customer.getId() +"','"+descuento.getComercio() + "','" + descuento.getFechaIn() +"','"
                     +descuento.getFechaFin()+"','"+ descuento.getTipo()+"','"+descuento.getValor()+"','"+descuento.getCodigo()+"');");
             ResultSet rs = pst.executeQuery();
+            return descuento;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
+            return null;
         }
     }
     // Metodo para extraccion de los descuentos de un customer.
-    public void getDescuentos(ArrayList<Descuento> lista, Customer customer){
+    public ArrayList<Descuento> getDescuentos(ArrayList<Descuento> lista, Customer customer){
         //Como debemos extraer descuentos, necesitamos conexion a la base de datos, por lo que tenemos que gnerar una conexion
         Connection con = ConnectionDAO.getInstance().getConnection();
         //Si la lista que debemos actualizar no existe o si su tamaño es cero, la volvemos a crear
@@ -293,6 +297,7 @@ public class SocketServer extends Thread {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+        return lista;
     }
 
 
