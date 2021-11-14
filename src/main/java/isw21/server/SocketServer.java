@@ -18,6 +18,7 @@ import java.util.HashMap;
 
 import main.java.isw21.controler.CustomerControler;
 import main.java.isw21.dao.ConnectionDAO;
+import main.java.isw21.dao.CustomerDAO;
 import main.java.isw21.dao.DescuentoDAO;
 import main.java.isw21.descuentos.Descuento;
 import main.java.isw21.domain.Customer;
@@ -79,7 +80,7 @@ public class SocketServer extends Thread {
 
                     session=new HashMap<>();
                     session.put("Customer",false);
-                    if (isInBase(customerIN)!=null){
+                    if (CustomerDAO.isInBase(customerIN)!=null){
                         // Si figura en la base, se modificará la salida y se pondrá a true. Cabe destacar que esta salida será la que determine si la
                         // autentificacion ha sido correcta
                         session.put("Customer",true);
@@ -101,16 +102,16 @@ public class SocketServer extends Thread {
                     session=new HashMap<>();
                     //Marcamos como false el mensaje de vuelta
                     session.put("Customer",false);
-                    if (this.isInBase(customerIN)!=null){
+                    if (CustomerDAO.isInBase(customerIN)!=null){
                         // Si el customer ya se encuntra en la base de datos, no modifcamos el valor
                         session.put("Customer",false);
                     }
                     else{
                         //En caso contrario, ejecutamos el método de añadido del usuario
-                        this.addCliente(customerIN);
+                        CustomerDAO.addCliente(customerIN);
                         //Tras haber ejecutado el añadido, comprobamos si realmente se ha añadido, en ese caso
                         // se modifica a true en el mensaje de vuelta.
-                        if (this.isInBase(customerIN)!=null){
+                        if (CustomerDAO.isInBase(customerIN)!=null){
                             session.put("Customer",true);
                         }
                     }
@@ -203,7 +204,7 @@ public class SocketServer extends Thread {
         }
     }
     //Metodo el cual sirve para saber si algún customer ya esta en la base de datos, si es asi, lo devuelve si no, devuelve null
-    public Customer isInBase(Customer customerIN){
+    /*public Customer isInBase(Customer customerIN){
         CustomerControler customerControler=new CustomerControler();
         ArrayList<Customer> listaCust=new ArrayList<Customer>();
         //extraemos la lista de customers y vemos si el introducido figura en ella
@@ -214,7 +215,7 @@ public class SocketServer extends Thread {
             }
         }
         return null;
-    }
+    }*/
 
     public static void main(String[] args) {
         System.out.println("SocketServer Example");
@@ -241,7 +242,7 @@ public class SocketServer extends Thread {
         }
     }
     //Metodo de añadir clientes
-    public Customer addCliente(Customer customer){
+    /*public Customer addCliente(Customer customer){
         //Deberemos comprobar que el cliente a añadir no se encuentra en la base de datos
         if (this.isInBase(customer)==null){
             //Sabiendo que no figura en la base, ejecutamos la QUERY necesaria para añadir el usuario a la tabla de usuarios
@@ -260,7 +261,7 @@ public class SocketServer extends Thread {
             System.out.println("El usuario ya se encuentra dentro de la base de datos.");
             return null;
         }
-    }
+    }*/
 
     //Codigo que inserta en la base de datos los descuentos de cada cliente
     /*public Descuento addDescuento(Customer customer,Descuento descuento) {

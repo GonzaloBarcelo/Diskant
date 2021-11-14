@@ -15,13 +15,15 @@ public class DescuentoDAOTest extends TestCase {
 
     }
 
+    //probamos que el código detecta que hay duplicados en la tabla de descuentos
     public void testAddDescuento() {
-        assertEquals(new Descuento("ComercioTest","test","test",1,1,"test"),DescuentoDAO.addDescuento(customer,new Descuento("ComercioTest","test","test",1,1,"test")));
+        assertEquals(null,DescuentoDAO.addDescuento(customer,new Descuento("ComercioTest","15/07/2010","15/08/2022",1,1,"test3")));
+        //new Descuento("ComercioTest","15/07/2010","15/08/2022",1,1,"test3")
     }
 
     public void testGetDescuentos() {
         // Comprobamos que la lista de los descuentos asociados al usuario test coincida con la esperada
-        lista.add(new Descuento("ComercioTest","test","test",1,1,"test"));
+        lista.add(new Descuento("ComercioTest","15/07/2010","15/08/2022",1,1,"test"));
         assertEquals(lista,DescuentoDAO.getDescuentos(lista,customer));
     }
 }

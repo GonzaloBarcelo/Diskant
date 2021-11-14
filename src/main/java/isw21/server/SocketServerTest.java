@@ -19,7 +19,7 @@ public class SocketServerTest extends TestCase {
         new SocketServer(server.accept());
     }
     // Prueba del metodo IsInBase
-    public void testIsInBase() {
+    /*public void testIsInBase() {
         // Introducimos un usuario existente en la base de datos y nos devuelve el mismo si funciona correctamente
         assertEquals(new Customer("test","test") , sS.isInBase(new Customer("test","test")));
     }
@@ -28,16 +28,16 @@ public class SocketServerTest extends TestCase {
         //Prueba erronea para ver comportamiento correcto
         // Introducimos un usuario ya existente en la base de datos, por lo que no nos deberia dejar y su respuesta debe ser null
         assertEquals(null,sS.addCliente(new Customer("test","test")));
-    }
+    }*/
     // Prueba del método addDescuento
-    public void testAddDescuento() {
+    /*public void testAddDescuento() {
         //Introducimos un descuento y nos devuelve el mismo si el método funciona correctamente
         assertEquals(new Descuento("ComercioTest","test","test",1,1,"test"),sS.addDescuento(customer,new Descuento("ComercioTest","test","test",1,1,"test")));
-    }
+    }*/
 
-    public void testGetDescuentos() {
+   /* public void testGetDescuentos() {
         // Comprobamos que la lista de los descuentos asociados al usuario test coincida con la esperada
         lista.add(new Descuento("ComercioTest","test","test",1,1,"test"));
         assertEquals(lista,sS.getDescuentos(lista,customer));
-    }
+    }*/
 }
