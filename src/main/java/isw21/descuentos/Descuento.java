@@ -1,11 +1,17 @@
+//Descripcion de la clase Descuento
+
 package main.java.isw21.descuentos;
 import main.java.isw21.comercio.Comercio;
 
 import java.io.Serializable;
 import java.util.Date;
 
+
 public class Descuento implements Serializable {
 
+    // para definir un descuento, será necesario conocer diversos parametros:
+    // Fecha de inicio, Fecha de fin, tipo --> porcentaje, descuento, dinero, cupon,... , valor --> valor total del descuento
+    // Codigo unico del descuento para el comercio, y el comercio dueño del descuento
     public String fechaIn;
     public String fechaFin;
     public int tipo;
@@ -70,3 +76,5 @@ public class Descuento implements Serializable {
         return codigo;
     }
 }
+
+

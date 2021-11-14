@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
-
+//Codigo de conexion a la base de datos utilizado por el servidor
 public class PropertiesISW extends Properties{
 
     /**
