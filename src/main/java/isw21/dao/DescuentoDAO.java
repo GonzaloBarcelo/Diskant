@@ -1,6 +1,7 @@
 package main.java.isw21.dao;
 import main.java.isw21.descuentos.Descuento;
 import main.java.isw21.domain.Customer;
+import main.java.isw21.paginas.JDescuento;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -45,6 +46,18 @@ public class DescuentoDAO {
             System.out.println(ex.getMessage());
         }
         return lista;
+    }
+
+    public static void eliminarDescuento(Descuento descuento){
+        Connection con = ConnectionDAO.getInstance().getConnection();
+        try {
+            // Añadimos el descuento a la tabla de descuentos con el formato previamente establecido.
+            // El primer valor será el ID del dueño del descuento seguido por el descuento.
+            PreparedStatement pst = con.prepareStatement("DELETE FROM descuentos WHERE codigo = '" + descuento.getCodigo() + "';");
+            ResultSet rs = pst.executeQuery();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
 

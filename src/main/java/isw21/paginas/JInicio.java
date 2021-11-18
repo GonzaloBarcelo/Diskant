@@ -6,6 +6,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import main.java.isw21.dao.DescuentoDAO;
 import main.java.isw21.descuentos.Descuento;
 import main.java.isw21.domain.Customer;
 import main.java.isw21.client.Client;
@@ -164,13 +165,14 @@ public class JInicio extends JFrame
     private void mostrarDescuento(Descuento i ,JPanel pnlCentro) {
 		String[] tipos = {"Porcentaje", "Cantidad", "Cupon"};
         JPanel pnlDescuento = new JPanel();
-        pnlDescuento.setLayout(new GridLayout(5, 1));
+        pnlDescuento.setLayout(new GridLayout(6, 1));
 
         JLabel lblComercio = new JLabel(i.getComercio(), JLabel.CENTER);
         JLabel lblValor = new JLabel("Valor: " + i.getValor(), JLabel.CENTER);
         JLabel lblTipo = new JLabel("Tipo: " + tipos[i.getTipo()], JLabel.CENTER);
         JLabel lblCodigo = new JLabel("Codigo: " + i.getCodigo(), JLabel.CENTER);
         JLabel lblFechaFin = new JLabel("Caduca: " + i.getFechaFin(),JLabel.CENTER);
+        JButton btnEliminar = new JButton("Eliminar descuento");
 
         lblComercio.setBorder(BorderFactory.createEtchedBorder());
         //new JLabel( "prueba",JLabel.CENTER
@@ -180,6 +182,21 @@ public class JInicio extends JFrame
         pnlDescuento.add(lblTipo);
         pnlDescuento.add(lblCodigo);
         pnlDescuento.add(lblFechaFin);
+        pnlDescuento.add(btnEliminar);
+
+		btnEliminar.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				// Si seleccionamos la opcion de crer descuento, abrimos el entorno gráfico necesario y
+				// le introducimos como parámetros, el dueño, la conexion con el servidor y los descuentos asociados al dueño.
+				DescuentoDAO.eliminarDescuento(i);
+				System.out.println("Descuento eliminado");
+				pnlDescuento.setVisible(false);
+				//mostrarDescuento(plDescuentos.get(plDescuentos.size()-1),pnlCentro);
+
+			}
+		});
 
         pnlDescuento.setAlignmentX(lblComercio.CENTER_ALIGNMENT);
         pnlDescuento.setAlignmentX(lblValor.CENTER_ALIGNMENT);
