@@ -124,12 +124,13 @@ public class JRegister extends JFrame
             {
                 //Utilizamos la verificacion de contraseña y si coinciden, se manda el el usuario a añadir a la base de datos
                 // guardando los parametros introducidos por usuario.
-	    	if(txtPassword.getText().equals(txtPassword2.getText()))
+	    	if(txtPassword.getText().equals(txtPassword2.getText()) && txtMail.getText().contains("@"))
                 {
                     //Envio del mensaje a la base de datos en el contexto de añadir user
 			cliente.setContext("/addNewUser");
 			cliente.setNombre(txtPassword.getText());
 			cliente.setId(txtUser.getText());
+            cliente.setEmail(txtMail.getText());
             // Con este contexto, como se puede ver en el servidor, solo es encesario saber el nombre y la contraseña. En un futuro se añadiran otros campos.
                     // Como por ejemplo numero de telefono o email.
 			cliente.run(cliente);
@@ -144,10 +145,17 @@ public class JRegister extends JFrame
                 }
                 else
                 {
+                if(txtPassword.getText().equals(txtPassword2.getText())!= true){
                     JOptionPane.showMessageDialog(null, "Passwords do not match. Retry");
                     txtPassword.requestFocus();
                     txtPassword.setText("");
                     txtPassword2.setText("");
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Debe introducir un email válido.");
+                    txtMail.requestFocus();
+                    txtMail.setText("");
+                }
                 }
                 
 		
@@ -158,32 +166,48 @@ public class JRegister extends JFrame
 	
 	btnRegister.addKeyListener(new java.awt.event.KeyAdapter()
         {
-           public void keyPressed(java.awt.event.KeyEvent e) 
-            {
-                if(txtPassword.getText().equals(txtPassword2.getText()))
-                {
-                    	cliente.setContext("/addNewUser");
-			cliente.setNombre(txtPassword.getText());
-			cliente.setId(txtUser.getText());
-			cliente.run(cliente);
-			if (cliente.getIdentification()){
-			    System.out.println("Se ha añadido el usuario a la base de datos");
-			    JPrincipal jp = new JPrincipal();
-			    setVisible(false);
-			}
-                }
-                else
-                {
-                    JOptionPane.showMessageDialog(null, "Passwords do not match. Retry");
-                    txtPassword.requestFocus();
-                    txtPassword.setText("");
-                    txtPassword2.setText("");
-                }
+           public void keyPressed(java.awt.event.KeyEvent e)
+           {
+               //Utilizamos la verificacion de contraseña y si coinciden, se manda el el usuario a añadir a la base de datos
+               // guardando los parametros introducidos por usuario.
+               if(txtPassword.getText().equals(txtPassword2.getText()) && txtMail.getText().contains("@"))
+               {
+                   //Envio del mensaje a la base de datos en el contexto de añadir user
+                   cliente.setContext("/addNewUser");
+                   cliente.setNombre(txtPassword.getText());
+                   cliente.setId(txtUser.getText());
+                   cliente.setEmail(txtMail.getText());
+                   // Con este contexto, como se puede ver en el servidor, solo es encesario saber el nombre y la contraseña. En un futuro se añadiran otros campos.
+                   // Como por ejemplo numero de telefono o email.
+                   cliente.run(cliente);
+                   //Si el servidor, en su mensaje de vuelta, nos devuelve true, indicará que que el usuario se ha añadido correctamente a la base de datos
+                   if (cliente.getIdentification()){
+                       System.out.println("Se ha añadido el usuario a la base de datos");
+                       // Una vez introducido en la base de datos, tendrá que volver a la pantalla principal e iniciar sesion
+                       JPrincipal jp = new JPrincipal();
+                       setVisible(false);
+                   }
 
-		
-		
-		
-            };
+               }
+               else
+               {
+                   if(txtPassword.getText().equals(txtPassword2.getText())!= true){
+                       JOptionPane.showMessageDialog(null, "Passwords do not match. Retry");
+                       txtPassword.requestFocus();
+                       txtPassword.setText("");
+                       txtPassword2.setText("");
+                   }
+                   else{
+                       JOptionPane.showMessageDialog(null, "Debe introducir un email válido.");
+                       txtMail.requestFocus();
+                       txtMail.setText("");
+                   }
+               }
+
+
+
+
+           };
         });
 
         txtUser.addMouseListener(new MouseAdapter()
@@ -277,6 +301,7 @@ public class JRegister extends JFrame
             }
         });
         this.setVisible(true);
+        this.setSize(400,300);
         this.setLocation(480, 200);
 
     }

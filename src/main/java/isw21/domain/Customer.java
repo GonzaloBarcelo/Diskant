@@ -13,6 +13,7 @@ public class Customer implements Serializable{
     private static final long serialVersionUID = 1L;
     private String id;
     private String name;
+    private String email;
 
     public Customer() {
         this.setId(new String());
@@ -59,4 +60,11 @@ public class Customer implements Serializable{
         }
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
 }

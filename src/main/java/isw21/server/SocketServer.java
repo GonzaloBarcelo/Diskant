@@ -107,6 +107,7 @@ public class SocketServer extends Thread {
                         session.put("Customer",false);
                     }
                     else{
+                        System.out.println("El email del servidor a guardar es:"+customerIN.getEmail());
                         //En caso contrario, ejecutamos el método de añadido del usuario
                         CustomerDAO.addCliente(customerIN);
                         //Tras haber ejecutado el añadido, comprobamos si realmente se ha añadido, en ese caso

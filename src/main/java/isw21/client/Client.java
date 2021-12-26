@@ -27,6 +27,7 @@ public class Client {
     private final int port;
     static String nombre;
     static String context;
+    static String email;
     static String id;
     static Boolean identification=false;
     final static Logger logger = Logger.getLogger(Client.class);
@@ -51,6 +52,8 @@ public class Client {
         //Creamos los mensajes de salida y de entrada del cliente.
         //Prueba para id de customer
         Customer customer2= new Customer(id, nombre);
+        System.out.println("El email es:"+email);
+        customer2.setEmail(email);
         mensajeEnvio.setCustomer(customer2);
         mensajeEnvio.setSession(session);
         cliente.sent(mensajeEnvio,mensajeVuelta);
@@ -208,5 +211,13 @@ public class Client {
 
     public ArrayList<Descuento> getDescuentos() {
         return descuentos;
+    }
+
+    public static String getEmail() {
+        return email;
+    }
+
+    public static void setEmail(String email) {
+        Client.email = email;
     }
 }

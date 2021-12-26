@@ -35,7 +35,7 @@ public class CustomerDAO {
             Connection con= ConnectionDAO.getInstance().getConnection();
             try{
                 //La query introducira el nuevo usuario y su contraseña
-                PreparedStatement pst = con.prepareStatement("INSERT INTO usuarios VALUES ('"+customer.getId()+"','"+customer.getName()+"');");
+                PreparedStatement pst = con.prepareStatement("INSERT INTO usuarios VALUES ('"+customer.getId()+"','"+customer.getName()+"','"+customer.getEmail()+"');");
                 ResultSet rs = pst.executeQuery();
             }
             catch (SQLException ex){

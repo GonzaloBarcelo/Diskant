@@ -17,6 +17,7 @@ public class JInicio extends JFrame
     Client cliente;
 	ArrayList<Descuento> plDescuentos;
 	private Timer timer;
+	public JFrame parent= new JFrame();
 
 	Customer customer;
 	// Cada pantalla de inicio irá asociada a un solo costumer. Además como queremos mostrar los descuentos asociados a este nada más entrar,
@@ -83,7 +84,7 @@ public class JInicio extends JFrame
 		else {
             for (Descuento i : plDescuentos) {
 				//Para cada descuento que tenga el usuario, se llamará a la funcion mastrar. La cual organiza los descuentos y los muestra al usuario
-                mostrarDescuento(i,pnlCentro);
+                mostrarDescuento(i,pnlCentro,btnCrearDescuento,fuente1);
 
 
             }
@@ -162,7 +163,7 @@ public class JInicio extends JFrame
 
 	// Metodo de visualización de descuentos
 	// Se ejecutará para los descuentos que tenga el usuario
-    private void mostrarDescuento(Descuento i ,JPanel pnlCentro) {
+    private void mostrarDescuento(Descuento i ,JPanel pnlCentro,JButton btnCrearDescuento, Font fuente1) {
 		String[] tipos = {"Porcentaje", "Cantidad", "Cupon"};
         JPanel pnlDescuento = new JPanel();
         pnlDescuento.setLayout(new GridLayout(6, 1));
@@ -190,9 +191,39 @@ public class JInicio extends JFrame
 			{
 				// Si seleccionamos la opcion de crer descuento, abrimos el entorno gráfico necesario y
 				// le introducimos como parámetros, el dueño, la conexion con el servidor y los descuentos asociados al dueño.
+				String eliminado= i.getComercio();
 				DescuentoDAO.eliminarDescuento(i);
 				System.out.println("Descuento eliminado");
-				pnlDescuento.setVisible(false);
+				pnlCentro.removeAll();
+				pnlCentro.setVisible(false);
+				plDescuentos = getDescuentos(customer);
+				plDescuentos.remove(0);
+				int l=plDescuentos.size();
+				//Esto habrá que cambiarlo, pero de momento con 16 está nice
+				pnlCentro.setLayout(new GridLayout(4, 4));
+
+				// Al iniciar la pestaña, se mostrarán los descuentos asociados a la cuenta
+
+				//Si no hay, se mostrará un mensaje: "En este momento no tienes descuentos".
+				if(plDescuentos == null || l == 0	){
+						JLabel lno = new JLabel("En este momento no tienes descuentos");
+						lno.setFont(fuente1);
+						pnlCentro.add(lno);
+						pnlCentro.add(btnCrearDescuento);
+						//Quitar el descuento inicial de bienvenida
+					}
+				//En caso contrario visualizarán en el centro de la pestaña
+				else {
+					for (Descuento i : plDescuentos) {
+						//Para cada descuento que tenga el usuario, se llamará a la funcion mastrar. La cual organiza los descuentos y los muestra al usuario
+						mostrarDescuento(i,pnlCentro,btnCrearDescuento,fuente1);
+
+
+					}
+				}
+				pnlCentro.setVisible(true);
+				JOptionPane.showMessageDialog(parent,"Se ha eiliminado el descuento de "+eliminado+".");
+
 				//mostrarDescuento(plDescuentos.get(plDescuentos.size()-1),pnlCentro);
 
 			}
@@ -228,17 +259,5 @@ public class JInicio extends JFrame
         return cliente.getDescuentos();
     }
 
-    /*public void mostrarDescuentos()
-    {
-        if(plDescuentos == null || plDescuentos.size() == 0)
-        {
-            System.out.println("No hay descuentos. Añade con el código los que tengas");
-        }
-        else {
-            for (Descuento d : plDescuentos) {
-                System.out.println(d.getCodigo());
-            }
-        }
-    }*/
 
 }
