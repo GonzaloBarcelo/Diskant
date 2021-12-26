@@ -8,14 +8,16 @@ import main.java.isw21.domain.Customer;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.*;
 
 import main.java.isw21.domain.Customer;
 import org.apache.log4j.Logger;
 import main.java.isw21.client.Client;
 import main.java.isw21.descuentos.Descuento;
-
 
 public class JDescuento extends JFrame
 {
@@ -29,6 +31,10 @@ public class JDescuento extends JFrame
 	// Por lo tanto, siempre que queramos añadir un descuento, deberemos introducir el cliente (conexión con servidor) y los descuentos
 	public JDescuento(Customer customer, Client cliente, ArrayList<Descuento> descuentos)
 	{
+		Calendar cal= Calendar.getInstance();
+		cal.setTime(new Date());
+		cal.add(Calendar.DATE,50);
+
 		this.customer=customer;
         this.cliente=cliente;
         
@@ -70,24 +76,35 @@ public class JDescuento extends JFrame
 		String[] años = new String[40];
 		for (int i = 0; i < 40; i++) años[i] = String.valueOf(i + 2010);
 
+		String date = new SimpleDateFormat("dd/MM/YYYY").format(new Date());
+		String str[]=date.split("/");
+
 		JLabel lblInicio = new JLabel("Fecha inicio: ");
 		//JTextField txtInicio = new JTextField();
 		JComboBox<String> cbxDiaIni = new JComboBox<String>(dias);
+		cbxDiaIni.setSelectedItem(str[0]);
 		JComboBox<String> cbxMesIni = new JComboBox<String>(meses);
+		cbxMesIni.setSelectedItem(str[1]);
 		JComboBox<String> cbxAñoIni = new JComboBox<String>(años);
 		pnlFechaIni.add(cbxDiaIni);
+		cbxAñoIni.setSelectedItem(str[2]);
 		pnlFechaIni.add(cbxMesIni);
 		pnlFechaIni.add(cbxAñoIni);
 
 		JPanel pnlFechaFin = new JPanel();
 		pnlFechaFin.setLayout(new GridLayout(1,3));
 
+
+		date = new SimpleDateFormat("dd/MM/YYYY").format(cal.getTime());
+		String str1[]=date.split("/");
 		JLabel lblFin = new JLabel("Fecha fin: ");
 		//JTextField txtFin = new JTextField();
 		JComboBox<String> cbxDiaFin = new JComboBox<String>(dias);
+		cbxDiaFin.setSelectedItem(str1[0]);
 		JComboBox<String> cbxMesFin = new JComboBox<String>(meses);
+		cbxMesFin.setSelectedItem(str1[1]);
 		JComboBox<String> cbxAñoFin = new JComboBox<String>(años);
-
+		cbxAñoFin.setSelectedItem(str1[2]);
 		pnlFechaFin.add(cbxDiaFin);
 		pnlFechaFin.add(cbxMesFin);
 		pnlFechaFin.add(cbxAñoFin);

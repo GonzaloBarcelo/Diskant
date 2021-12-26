@@ -140,6 +140,7 @@ public class JRegister extends JFrame
                 // Una vez introducido en la base de datos, tendrá que volver a la pantalla principal e iniciar sesion
 			    JPrincipal jp = new JPrincipal();
 			    setVisible(false);
+                JOptionPane.showMessageDialog(null,"Se ha añadido el usuario.");
 			}
                     
                 }
