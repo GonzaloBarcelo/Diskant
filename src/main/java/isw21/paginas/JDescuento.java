@@ -128,10 +128,10 @@ public class JDescuento extends JFrame
 			// Método añadir descuento:
 			public void actionPerformed(ActionEvent e)
             {
-				String fechaIni = cbxDiaIni.getSelectedIndex() + "/" + cbxMesIni.getSelectedIndex() + "/" + cbxAñoIni.getSelectedIndex();
-				String fechaFin = cbxDiaFin.getSelectedIndex() + "/" + cbxMesFin.getSelectedIndex() + "/" + cbxAñoFin.getSelectedIndex();
-				Date dateIni = new Date();
-				Date dateFin = new Date();
+				String fechaIni = cbxDiaIni.getSelectedItem() + "/" + cbxMesIni.getSelectedItem() + "/" + cbxAñoIni.getSelectedItem();
+				String fechaFin = cbxDiaFin.getSelectedItem() + "/" + cbxMesFin.getSelectedItem() + "/" + cbxAñoFin.getSelectedItem();
+				Date dateIni;
+				Date dateFin;
 				try{
 					dateIni = new SimpleDateFormat("dd/MM/yyyy").parse(fechaIni);
 					dateFin = new SimpleDateFormat("dd/MM/yyyy").parse(fechaFin);
@@ -168,8 +168,8 @@ public class JDescuento extends JFrame
 					HashMap<String,Object> session= new HashMap<String,Object>();
 					//Aquí creamos las fechas en función de lo introducido por el usuario, separando la información por barras
 					//Formato dd/mm/aaaa
-					fechaIni = cbxDiaIni.getSelectedIndex() + "/" + cbxMesIni.getSelectedIndex() + "/" + cbxAñoIni.getSelectedIndex();
-					fechaFin = cbxDiaFin.getSelectedIndex() + "/" + cbxMesFin.getSelectedIndex() + "/" + cbxAñoFin.getSelectedIndex();
+					//fechaIni = cbxDiaIni.getSelectedIndex() + "/" + cbxMesIni.getSelectedIndex() + "/" + cbxAñoIni.getSelectedIndex();
+					//fechaFin = cbxDiaFin.getSelectedIndex() + "/" + cbxMesFin.getSelectedIndex() + "/" + cbxAñoFin.getSelectedIndex();
 					//Creamos el descuento a añadir en función de los parámetros introducidos por el usuario en la pantalla.
 					//Oferta oferta = new Oferta(txtEntidad.getText(), fechaIni,fechaFin,Integer.parseInt(txtValor.getText()),txtCodigo.getText());
 					Oferta oferta = factoria.getOferta(txtEntidad.getText(), fechaIni,fechaFin,Integer.parseInt(txtValor.getText()),txtCodigo.getText(),cbxTipo.getSelectedIndex(),0);
@@ -197,9 +197,9 @@ public class JDescuento extends JFrame
 		    // Método añadir descuento:
 		    public void keyPressed(java.awt.event.KeyEvent e)
             {
-				String fechaIni = cbxDiaIni.getSelectedIndex() + "/" + cbxMesIni.getSelectedIndex() + "/" + cbxAñoIni.getSelectedIndex();
-				String fechaFin = cbxDiaFin.getSelectedIndex() + "/" + cbxMesFin.getSelectedIndex() + "/" + cbxAñoFin.getSelectedIndex();
-				Date dateIni = new Date();
+				String fechaIni = cbxDiaIni.getSelectedItem() + "/" + cbxMesIni.getSelectedItem() + "/" + cbxAñoIni.getSelectedItem();
+				String fechaFin = cbxDiaFin.getSelectedItem() + "/" + cbxMesFin.getSelectedItem() + "/" + cbxAñoFin.getSelectedItem();
+				Date dateIni;
 				Date dateFin = new Date();
 				try{
 					dateIni = new SimpleDateFormat("dd/MM/yyyy").parse(fechaIni);
@@ -233,8 +233,8 @@ public class JDescuento extends JFrame
 					HashMap<String,Object> session= new HashMap<String,Object>();
 					//Aquí creamos las fechas en función de lo introducido por el usuario, separando la información por barras
 					//Formato dd/mm/aaaa
-					fechaIni = cbxDiaIni.getSelectedIndex() + "/" + cbxMesIni.getSelectedIndex() + "/" + cbxAñoIni.getSelectedIndex();
-					fechaFin = cbxDiaFin.getSelectedIndex() + "/" + cbxMesFin.getSelectedIndex() + "/" + cbxAñoFin.getSelectedIndex();
+					//fechaIni = cbxDiaIni.getSelectedIndex() + "/" + cbxMesIni.getSelectedIndex() + "/" + cbxAñoIni.getSelectedIndex();
+					//fechaFin = cbxDiaFin.getSelectedIndex() + "/" + cbxMesFin.getSelectedIndex() + "/" + cbxAñoFin.getSelectedIndex();
 					//Creamos el descuento a añadir en función de los parámetros introducidos por el usuario en la pantalla.
 					Oferta oferta = factoria.getOferta(txtEntidad.getText(), fechaIni,fechaFin,Integer.parseInt(txtValor.getText()),txtCodigo.getText(),cbxTipo.getSelectedIndex(),0);
 					// una vez creado el descuento, lo añadismo a los descuentos asociados al cliente

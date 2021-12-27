@@ -1,3 +1,5 @@
+package main.java.isw21.paginas;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -6,7 +8,7 @@ import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-package main.java.isw21.paginas;
+//package main.java.isw21.paginas;
 
 import main.java.isw21.client.Client;
 import main.java.isw21.descuentos.OfertaFactory;
@@ -28,12 +30,8 @@ import main.java.isw21.descuentos.Oferta;
 
 public class JAgregar extends JFrame
 {
-    public static void main(String args[])
-    {
-        new JAgregar();
-        	Customer customer;
-            Client cliente;
-    }
+    Customer customer;
+    Client cliente;
 
     public JAgregar(Customer customer, Client cliente, ArrayList<Oferta> ofertas)
     {   
@@ -151,7 +149,9 @@ public class JAgregar extends JFrame
     {
       public void actionPerformed(ActionEvent e)
       {
-        JDescuento descuento = new JDescuento(customer,cliente, plOfertas);
+
+        JDescuento descuento = new JDescuento(customer,cliente, ofertas);
+        setVisible(false);
       }
     });
     
@@ -159,7 +159,8 @@ public class JAgregar extends JFrame
     {
       public void actionPerformed(ActionEvent e)
       {
-        JInicio inicio = new JInicio();
+        JInicio inicio = new JInicio(customer, cliente);
+        setVisible(false);
       }
     });
 

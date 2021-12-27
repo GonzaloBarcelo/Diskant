@@ -75,14 +75,14 @@ public class JInicio extends JFrame
 			JLabel lno = new JLabel("En este momento no tienes descuentos");
 			lno.setFont(fuente1);
 			pnlCentro.add(lno);
-			pnlCentro.add(btnCrearDescuento);
+			//pnlCentro.add(btnCrearDescuento);
 		    //Quitar el descuento inicial de bienvenida
         }
 		//En caso contrario visualizarán en el centro de la pestaña
 		else {
             for (Oferta i : plOfertas) {
 				//Para cada descuento que tenga el usuario, se llamará a la funcion mastrar. La cual organiza los descuentos y los muestra al usuario
-                mostrarDescuento(i,pnlCentro,btnCrearDescuento,fuente1);
+                mostrarDescuento(i,pnlCentro,fuente1);
 
 
             }
@@ -174,7 +174,7 @@ public class JInicio extends JFrame
 
 	// Metodo de visualización de descuentos
 	// Se ejecutará para los descuentos que tenga el usuario
-    private void mostrarDescuento(Oferta i , JPanel pnlCentro, JButton btnCrearDescuento, Font fuente1) {
+    private void mostrarDescuento(Oferta i , JPanel pnlCentro, Font fuente1) {
 		String tipo = comprobarTipo(i);
         JPanel pnlDescuento = new JPanel();
 		pnlDescuento.setLayout(new GridLayout(6, 1));
@@ -246,14 +246,14 @@ public class JInicio extends JFrame
 						JLabel lno = new JLabel("En este momento no tienes descuentos");
 						lno.setFont(fuente1);
 						pnlCentro.add(lno);
-						pnlCentro.add(btnCrearDescuento);
+						//pnlCentro.add(btnCrearDescuento);
 						//Quitar el descuento inicial de bienvenida
 					}
 				//En caso contrario visualizarán en el centro de la pestaña
 				else {
 					for (Oferta i : plOfertas) {
 						//Para cada descuento que tenga el usuario, se llamará a la funcion mastrar. La cual organiza los descuentos y los muestra al usuario
-						mostrarDescuento(i,pnlCentro,btnCrearDescuento,fuente1);
+						mostrarDescuento(i,pnlCentro,fuente1);
 
 
 					}
