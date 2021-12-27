@@ -100,15 +100,17 @@ public class JInicio extends JFrame
 		ImageIcon imagen = new ImageIcon("src/main/java/isw21/media/Perfil.png");
 		btnMiPerfil.setIcon(new ImageIcon(imagen.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
 
-		JLabel l1 = new JLabel();
-		l1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		JButton btnMas = new JButton();
+      		btnMas.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+      		ImageIcon imagenMas = new ImageIcon("src/main/java/isw21/media/Mas.png");
+      		btnMas.setIcon(new ImageIcon(imagenMas.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
 		JLabel l2 = new JLabel();
 		l2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		JLabel l3 = new JLabel();
 		l3.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		JLabel l4 = new JLabel();
 		l4.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		pnlSur.add(l1);
+		pnlSur.add(btnMas);
 		pnlSur.add(l2);
 		pnlSur.add(l3);
 		pnlSur.add(l4);
@@ -128,13 +130,15 @@ public class JInicio extends JFrame
 
 
 //FUNCIONES
-		btnCrearDescuento.addActionListener(new ActionListener()
+		btnMas.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
 				// Si seleccionamos la opcion de crer descuento, abrimos el entorno gráfico necesario y
 				// le introducimos como parámetros, el dueño, la conexion con el servidor y los descuentos asociados al dueño.
-				JDescuento descuento = new JDescuento(customer,cliente, plOfertas);
+				//JDescuento descuento = new JDescuento(customer,cliente, plOfertas);
+				JAgregar agregar = new JAgregar(customer,cliente, plOfertas);
+				
 				setVisible(false);
 				//mostrarDescuento(plDescuentos.get(plDescuentos.size()-1),pnlCentro);
 
