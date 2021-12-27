@@ -52,7 +52,7 @@ public class Client {
         //Creamos los mensajes de salida y de entrada del cliente.
         //Prueba para id de customer
         Customer customer2= new Customer(id, nombre);
-        System.out.println("El email es:"+email);
+        //System.out.println("El email es:"+email);
         customer2.setEmail(email);
         mensajeEnvio.setCustomer(customer2);
         mensajeEnvio.setSession(session);
@@ -89,7 +89,7 @@ public class Client {
             case "/getCustomerResponse":
                 ArrayList<Customer> customerList=(ArrayList<Customer>)(mensajeVuelta.getSession().get("Customer"));
                 for (Customer customer : customerList) {
-                    System.out.println("He leído el id: "+customer.getId()+" con nombre: "+customer.getName());
+                    System.out.println("He leído el usuario: "+customer.getUsuario()+" con contraseña: "+customer.getContraseña());
                 }
                 break;
 

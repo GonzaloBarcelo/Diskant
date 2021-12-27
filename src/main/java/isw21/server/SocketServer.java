@@ -84,12 +84,12 @@ public class SocketServer extends Thread {
                         // Si figura en la base, se modificará la salida y se pondrá a true. Cabe destacar que esta salida será la que determine si la
                         // autentificacion ha sido correcta
                         session.put("Customer",true);
-                        System.out.println("Se ha autenticado el usuario: "+customerIN.getId());
+                        System.out.println("Se ha autenticado el usuario: "+customerIN.getUsuario());
                     }
                     else{
                         // En caso contrario será false
                         session.put("Customer",false);
-                        System.out.println("Se ha introducido mal la contraseña para el ID"+customerIN.getId());
+                        System.out.println("Se ha introducido mal la contraseña para el ID"+customerIN.getUsuario());
                     }
                     mensajeOut.setSession(session);
                     objectOutputStream.writeObject(mensajeOut);

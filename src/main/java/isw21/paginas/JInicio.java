@@ -209,7 +209,7 @@ public class JInicio extends JFrame
 				// Si seleccionamos la opcion de crer descuento, abrimos el entorno gráfico necesario y
 				// le introducimos como parámetros, el dueño, la conexion con el servidor y los descuentos asociados al dueño.
 				String eliminado= i.getComercio();
-				DescuentoDAO.eliminarDescuento(i);
+				DescuentoDAO.eliminarDescuento(customer,i);
 				System.out.println("Descuento eliminado");
 				pnlCentro.removeAll();
 				pnlCentro.setVisible(false);

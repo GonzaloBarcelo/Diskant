@@ -2,6 +2,7 @@
 
 package main.java.isw21.descuentos;
 import main.java.isw21.comercio.Comercio;
+import main.java.isw21.domain.Customer;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -74,6 +75,22 @@ public class Descuento implements Serializable {
 
     public String getCodigo() {
         return codigo;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if (o instanceof Descuento){
+            Descuento descuentoIN=(Descuento)o;
+            if (descuentoIN.getCodigo().equals(this.codigo)){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
     }
 }
 

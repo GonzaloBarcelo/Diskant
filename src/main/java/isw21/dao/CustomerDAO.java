@@ -16,7 +16,6 @@ public class CustomerDAO {
         Connection con=ConnectionDAO.getInstance().getConnection();
         try (PreparedStatement pst = con.prepareStatement("SELECT * FROM usuarios");
              ResultSet rs = pst.executeQuery()) {
-
             while (rs.next()) {
                 lista.add(new Customer(rs.getString(1),rs.getString(2)));
             }
@@ -35,7 +34,7 @@ public class CustomerDAO {
             Connection con= ConnectionDAO.getInstance().getConnection();
             try{
                 //La query introducira el nuevo usuario y su contraseña
-                PreparedStatement pst = con.prepareStatement("INSERT INTO usuarios VALUES ('"+customer.getId()+"','"+customer.getName()+"','"+customer.getEmail()+"');");
+                PreparedStatement pst = con.prepareStatement("INSERT INTO usuarios VALUES ('"+customer.getUsuario()+"','"+customer.getContraseña()+"','"+customer.getEmail()+"');");
                 ResultSet rs = pst.executeQuery();
             }
             catch (SQLException ex){
@@ -85,7 +84,7 @@ public class CustomerDAO {
 
 
         for (Customer customer : lista) {
-            System.out.println("He leído el id: "+customer.getId()+" con nombre: "+customer.getName());
+            System.out.println("He leído el usuario: "+customer.getUsuario()+" con contraseña: "+customer.getContraseña());
         }
 
 

@@ -11,34 +11,34 @@ public class Customer implements Serializable{
     // como por ejemplo mail, numero de telefono y grupos a los que pertenece.
 
     private static final long serialVersionUID = 1L;
-    private String id;
-    private String name;
+    private String usuario;
+    private String contraseña;
     private String email;
 
     public Customer() {
-        this.setId(new String());
-        this.setName(new String());
+        this.setUsuario(new String());
+        this.setContraseña(new String());
     }
 
-    public Customer(String id, String name) {
-        this.setName(name);
-        this.setId(id);
+    public Customer(String user, String pass) {
+        this.setUsuario(user);
+        this.setContraseña(pass);
     }
 
-    public String getId() {
-        return id;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUsuario(String id) {
+        this.usuario = id;
     }
 
-    public String getName() {
-        return name;
+    public String getContraseña() {
+        return contraseña;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setContraseña(String name) {
+        this.contraseña = name;
     }
 
     //Metodo equals --> Establecemos que para que un usuario sea igual a otro debe tener el nombre y la contraseña igual
@@ -48,7 +48,7 @@ public class Customer implements Serializable{
     public boolean equals(Object o){
         if (o instanceof Customer){
             Customer customerIN=(Customer)o;
-            if (customerIN.getId().equals(this.id) && customerIN.getName().equals(this.name)){
+            if (customerIN.getUsuario().equals(this.usuario)){
                 return true;
             }
             else{
