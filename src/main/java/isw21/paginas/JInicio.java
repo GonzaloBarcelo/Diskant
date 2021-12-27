@@ -47,17 +47,12 @@ public class JInicio extends JFrame
 		l5.setIcon(new ImageIcon(imagen1.getImage().getScaledInstance(150, 60, Image.SCALE_SMOOTH)));
 		JLabel l6 = new JLabel("MIS DESCUENTOS");
 		l6.setFont(fuente1);
+      		JLabel l7 = new JLabel();
+	     	pnlNorte.setPreferredSize(new Dimension(600, 50));
 
-		JButton btnCrearDescuento = new JButton("Agregar descuento");
-		btnCrearDescuento.setFont(fuente1);
-		btnCrearDescuento.setForeground(new Color(17,90,29));
-		//btnCrearDescuento.setMaximumSize(new Dimension(300,30));
-		//btnCrearDescuento.setBackground(new Color(160,160,160));
-		pnlNorte.setPreferredSize(new Dimension(600, 50));
-
-		pnlNorte.add(l5);
-		pnlNorte.add(l6);
-		pnlNorte.add(btnCrearDescuento);
+	      	pnlNorte.add(l5);
+	      	pnlNorte.add(l6);
+	      	pnlNorte.add(l7);
 
 		// getDescuentos devuelve todos los descuentos del que el cliente es el dueño
         plOfertas = getDescuentos(customer);
