@@ -1,30 +1,27 @@
 //Descripcion de la clase Descuento
 
 package main.java.isw21.descuentos;
-import main.java.isw21.comercio.Comercio;
-import main.java.isw21.domain.Customer;
 
 import java.io.Serializable;
-import java.util.Date;
 
 
-public class Descuento implements Serializable {
+public abstract class Oferta implements Serializable {
 
     // para definir un descuento, será necesario conocer diversos parametros:
     // Fecha de inicio, Fecha de fin, tipo --> porcentaje, descuento, dinero, cupon,... , valor --> valor total del descuento
     // Codigo unico del descuento para el comercio, y el comercio dueño del descuento
     public String fechaIn;
     public String fechaFin;
-    public int tipo;
+    //public int tipo;
     public int valor;
     public String codigo;
     public String comercio;
 
-    public Descuento(String comercio,String fechaIn, String fechaFin, int tipo,int valor, String codigo){
+    public Oferta(String comercio, String fechaIn, String fechaFin,int valor, String codigo){
         this.fechaIn=fechaIn;
         this.fechaFin=fechaFin;
         this.valor=valor;
-        this.tipo=tipo;
+        //this.tipo=tipo;
         this.comercio=comercio;
         this.codigo=codigo;
     }
@@ -53,13 +50,13 @@ public class Descuento implements Serializable {
         this.comercio = comercio;
     }
 
-    public int getTipo() {
+    /*public int getTipo() {
         return tipo;
     }
 
     public void setTipo(int tipo) {
         this.tipo = tipo;
-    }
+    }*/
 
     public int getValor() {
         return valor;
@@ -79,9 +76,9 @@ public class Descuento implements Serializable {
 
     @Override
     public boolean equals(Object o){
-        if (o instanceof Descuento){
-            Descuento descuentoIN=(Descuento)o;
-            if (descuentoIN.getCodigo().equals(this.codigo)){
+        if (o instanceof Oferta){
+            Oferta ofertaIN =(Oferta)o;
+            if (ofertaIN.getCodigo().equals(this.codigo)){
                 return true;
             }
             else{

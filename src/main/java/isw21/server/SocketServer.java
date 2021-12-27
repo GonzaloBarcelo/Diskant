@@ -9,18 +9,13 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import main.java.isw21.controler.CustomerControler;
-import main.java.isw21.dao.ConnectionDAO;
 import main.java.isw21.dao.CustomerDAO;
-import main.java.isw21.dao.DescuentoDAO;
-import main.java.isw21.descuentos.Descuento;
+import main.java.isw21.dao.OfertaDAO;
+import main.java.isw21.descuentos.Oferta;
 import main.java.isw21.domain.Customer;
 import main.java.isw21.message.Message;
 
@@ -126,13 +121,14 @@ public class SocketServer extends Thread {
                     mensajeOut.setContext("/addDescuentoResponse");
                     // Extraemos los valores necesarios para el añadido de descuentos: el dueño (custgomer) y el descuento a añadir en la base de datos
                     Customer customer =(Customer) mensajeIn.getSession().get("Customer");
-                    Descuento descuento= (Descuento) mensajeIn.getSession().get("Descuento");
+                    Oferta oferta = (Oferta) mensajeIn.getSession().get("Descuento");
+                    int tipo = (Integer) mensajeIn.getSession().get("Tipo");
                     //Ejectuamos la funcion de añadir descuento a la base de datos
-                    DescuentoDAO.addDescuento(customer,descuento);
+                    OfertaDAO.addDescuento(customer, oferta, tipo);
                     //Finalizamos el mensaje de salida y lo mandamos
                     session=new HashMap<String, Object>();
                     //Mandaremos como salida el descuento añadido
-                    session.put("Descuento",descuento);
+                    session.put("Descuento", oferta);
                     mensajeOut.setSession(session);
                     //Lo mandamos de vuelta
                     objectOutputStream.writeObject(mensajeOut);
@@ -146,12 +142,12 @@ public class SocketServer extends Thread {
                     //Extraemos del mensaje entrante, proveniente del cliente, el usuario del que queremos obtener los descuentos
                     customer =(Customer) mensajeIn.getSession().get("Customer");
                     //Extraemos tambien los descuentos
-                    ArrayList<Descuento> descuentos = (ArrayList<Descuento>) mensajeIn.getSession().get("Descuentos");
+                    ArrayList<Oferta> ofertas = (ArrayList<Oferta>) mensajeIn.getSession().get("Descuentos");
                     //Llamamos al metodo getDescuentos, el cual actualiza la lista de los descuentos del customer pasado como parámetro
-                    DescuentoDAO.getDescuentos(descuentos,customer);
+                    OfertaDAO.getDescuentos(ofertas,customer);
                     //Construimos la respuesta
                     session=new HashMap<String, Object>();
-                    session.put("Descuentos",descuentos);
+                    session.put("Descuentos", ofertas);
                     mensajeOut.setSession(session);
                     //Una vez actualizada la lista y construida la respuesta, enviamos el mensaje de vuelta
                     objectOutputStream.writeObject(mensajeOut);

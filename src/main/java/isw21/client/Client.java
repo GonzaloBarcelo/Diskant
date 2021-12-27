@@ -12,10 +12,9 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import main.java.isw21.descuentos.Descuento;
+import main.java.isw21.descuentos.Oferta;
 import org.apache.log4j.Logger;
 
-import main.java.isw21.configuration.PropertiesISW;
 import main.java.isw21.domain.Customer;
 import main.java.isw21.message.Message;
 
@@ -32,7 +31,7 @@ public class Client {
     static Boolean identification=false;
     final static Logger logger = Logger.getLogger(Client.class);
     public HashMap<String,Object> session=new HashMap<String, Object>();
-    public ArrayList<Descuento> descuentos;
+    public ArrayList<Oferta> ofertas;
 
     //Para iniciar el cliete, primero debemos haberlo creado, para ello debemos especificar en que puerto y se aloja
     // y su host.
@@ -63,12 +62,12 @@ public class Client {
             //La respuesta al añadido de un descuento será el descuento añadido. Si este ya figura en la base de datos este será nulo.
 
             case "/addDescuentoResponse":
-                Descuento descuento=(Descuento) (mensajeVuelta.getSession().get("Descuento"));
+                Oferta oferta =(Oferta) (mensajeVuelta.getSession().get("Descuento"));
                 break;
             // Obtencion de los decuentos: estableceremos los descuentos del cliente como la respuesta del servidor. Asi ya tendremos el arrayList de todos los descuentos asociados
 
             case "/getDescuentosResponse":
-                descuentos= (ArrayList<Descuento>) (mensajeVuelta.getSession().get("Descuentos"));
+                ofertas = (ArrayList<Oferta>) (mensajeVuelta.getSession().get("Descuentos"));
                 break;
             // En caso de la devolucion del mensaje de añadio de un usuario, estableceremos como correcta (true) la identificacion del customer en el cliente. Si este no se ha identificado correctamente, no podrá acceder a los descuentos
 
@@ -205,12 +204,12 @@ public class Client {
         return session;
     }
 
-    public void setDescuentos(ArrayList<Descuento> descuentos) {
-        this.descuentos = descuentos;
+    public void setDescuentos(ArrayList<Oferta> ofertas) {
+        this.ofertas = ofertas;
     }
 
-    public ArrayList<Descuento> getDescuentos() {
-        return descuentos;
+    public ArrayList<Oferta> getDescuentos() {
+        return ofertas;
     }
 
     public static String getEmail() {

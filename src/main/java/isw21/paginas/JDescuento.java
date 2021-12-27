@@ -2,7 +2,7 @@
 package main.java.isw21.paginas;
 
 import main.java.isw21.client.Client;
-import main.java.isw21.configuration.PropertiesISW;
+import main.java.isw21.descuentos.OfertaFactory;
 import main.java.isw21.domain.Customer;
 
 import javax.swing.*;
@@ -14,11 +14,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.*;
 
-import main.java.isw21.domain.Customer;
 import main.java.isw21.tools.Checker;
-import org.apache.log4j.Logger;
-import main.java.isw21.client.Client;
-import main.java.isw21.descuentos.Descuento;
+import main.java.isw21.descuentos.Oferta;
 
 public class JDescuento extends JFrame
 {
@@ -30,7 +27,7 @@ public class JDescuento extends JFrame
 	//Tambien es necesario conocer los descuentos asociados a la cuenta.
 
 	// Por lo tanto, siempre que queramos añadir un descuento, deberemos introducir el cliente (conexión con servidor) y los descuentos
-	public JDescuento(Customer customer, Client cliente, ArrayList<Descuento> descuentos)
+	public JDescuento(Customer customer, Client cliente, ArrayList<Oferta> ofertas)
 	{
 		Calendar cal= Calendar.getInstance();
 		cal.setTime(new Date());
@@ -38,6 +35,7 @@ public class JDescuento extends JFrame
 
 		this.customer=customer;
         this.cliente=cliente;
+        OfertaFactory factoria = new OfertaFactory();
         
 		setSize(450,300);
 
@@ -111,7 +109,7 @@ public class JDescuento extends JFrame
 		pnlFechaFin.add(cbxAñoFin);
 
 		JLabel lblTipo = new JLabel("Tipo: ");
-		String[] tipos = {"Porcentaje", "Cantidad", "Cupon"};
+		String[] tipos = {"Descuento", "Porcentaje", "ChequeRegalo"};
 		JComboBox<String> cbxTipo = new JComboBox<String>(tipos);
 
 		JLabel lblValor = new JLabel("Valor: ");
@@ -173,11 +171,13 @@ public class JDescuento extends JFrame
 					fechaIni = cbxDiaIni.getSelectedIndex() + "/" + cbxMesIni.getSelectedIndex() + "/" + cbxAñoIni.getSelectedIndex();
 					fechaFin = cbxDiaFin.getSelectedIndex() + "/" + cbxMesFin.getSelectedIndex() + "/" + cbxAñoFin.getSelectedIndex();
 					//Creamos el descuento a añadir en función de los parámetros introducidos por el usuario en la pantalla.
-					Descuento descuento = new Descuento(txtEntidad.getText(), fechaIni,fechaFin,cbxTipo.getSelectedIndex(),Integer.parseInt(txtValor.getText()),txtCodigo.getText());
+					//Oferta oferta = new Oferta(txtEntidad.getText(), fechaIni,fechaFin,Integer.parseInt(txtValor.getText()),txtCodigo.getText());
+					Oferta oferta = factoria.getOferta(txtEntidad.getText(), fechaIni,fechaFin,Integer.parseInt(txtValor.getText()),txtCodigo.getText(),cbxTipo.getSelectedIndex(),0);
 					// una vez creado el descuento, lo añadismo a los descuentos asociados al cliente
-					descuentos.add(descuento);
+					ofertas.add(oferta);
 					// Añadimos al mensaje del cliente el descuento a añadir y el dueño del descuento.
-					session.put("Descuento",descuento);
+					session.put("Descuento", oferta);
+					session.put("Tipo",cbxTipo.getSelectedIndex());
 					session.put("Customer",customer);
 					cliente.setSession(session);
 					// Y finalmente hacemos la comunicacion con el servidor para el añadido del descuento.
@@ -236,11 +236,12 @@ public class JDescuento extends JFrame
 					fechaIni = cbxDiaIni.getSelectedIndex() + "/" + cbxMesIni.getSelectedIndex() + "/" + cbxAñoIni.getSelectedIndex();
 					fechaFin = cbxDiaFin.getSelectedIndex() + "/" + cbxMesFin.getSelectedIndex() + "/" + cbxAñoFin.getSelectedIndex();
 					//Creamos el descuento a añadir en función de los parámetros introducidos por el usuario en la pantalla.
-					Descuento descuento = new Descuento(txtEntidad.getText(), fechaIni,fechaFin,cbxTipo.getSelectedIndex(),Integer.parseInt(txtValor.getText()),txtCodigo.getText());
+					Oferta oferta = factoria.getOferta(txtEntidad.getText(), fechaIni,fechaFin,Integer.parseInt(txtValor.getText()),txtCodigo.getText(),cbxTipo.getSelectedIndex(),0);
 					// una vez creado el descuento, lo añadismo a los descuentos asociados al cliente
-					descuentos.add(descuento);
+					ofertas.add(oferta);
 					// Añadimos al mensaje del cliente el descuento a añadir y el dueño del descuento.
-					session.put("Descuento",descuento);
+					session.put("Descuento", oferta);
+					session.put("Tipo",cbxTipo.getSelectedIndex());
 					session.put("Customer",customer);
 					cliente.setSession(session);
 					// Y finalmente hacemos la comunicacion con el servidor para el añadido del descuento.

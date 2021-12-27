@@ -6,17 +6,19 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import main.java.isw21.dao.DescuentoDAO;
+import main.java.isw21.dao.OfertaDAO;
+import main.java.isw21.descuentos.ChequeRegalo;
 import main.java.isw21.descuentos.Descuento;
+import main.java.isw21.descuentos.Oferta;
+import main.java.isw21.descuentos.Porcentaje;
 import main.java.isw21.domain.Customer;
 import main.java.isw21.client.Client;
-import org.apache.log4j.Layout;
 
 
 public class JInicio extends JFrame
 {
     Client cliente;
-	ArrayList<Descuento> plDescuentos;
+	ArrayList<Oferta> plOfertas;
 	private Timer timer;
 	public JFrame parent= new JFrame();
 
@@ -58,23 +60,23 @@ public class JInicio extends JFrame
 		pnlNorte.add(btnCrearDescuento);
 
 		// getDescuentos devuelve todos los descuentos del que el cliente es el dueño
-        plDescuentos = getDescuentos(customer);
+        plOfertas = getDescuentos(customer);
 		//eliminamos el primero ya que siempre nos devuelve en la primera posicion un descuento generico.
-        plDescuentos.remove(0);
+        plOfertas.remove(0);
 
 
 	//CENTRO
 		//Establecemos el entorno gráfico dependiendo de los descuentos que tenga asociados un cliente
 		JPanel pnlCentro = new JPanel();
 		pnlCentro.setBackground(new Color(174,200,178));
-		int l=plDescuentos.size();
+		int l= plOfertas.size();
 		//Esto habrá que cambiarlo, pero de momento con 16 está nice
 		pnlCentro.setLayout(new GridLayout(4, 4));
 
 		// Al iniciar la pestaña, se mostrarán los descuentos asociados a la cuenta
 
 		//Si no hay, se mostrará un mensaje: "En este momento no tienes descuentos".
-        if(plDescuentos == null || l == 0){
+        if(plOfertas == null || l == 0){
 			JLabel lno = new JLabel("En este momento no tienes descuentos");
 			lno.setFont(fuente1);
 			pnlCentro.add(lno);
@@ -83,7 +85,7 @@ public class JInicio extends JFrame
         }
 		//En caso contrario visualizarán en el centro de la pestaña
 		else {
-            for (Descuento i : plDescuentos) {
+            for (Oferta i : plOfertas) {
 				//Para cada descuento que tenga el usuario, se llamará a la funcion mastrar. La cual organiza los descuentos y los muestra al usuario
                 mostrarDescuento(i,pnlCentro,btnCrearDescuento,fuente1);
 
@@ -137,7 +139,7 @@ public class JInicio extends JFrame
 			{
 				// Si seleccionamos la opcion de crer descuento, abrimos el entorno gráfico necesario y
 				// le introducimos como parámetros, el dueño, la conexion con el servidor y los descuentos asociados al dueño.
-				JDescuento descuento = new JDescuento(customer,cliente,plDescuentos);
+				JDescuento descuento = new JDescuento(customer,cliente, plOfertas);
 				setVisible(false);
 				//mostrarDescuento(plDescuentos.get(plDescuentos.size()-1),pnlCentro);
 
@@ -164,14 +166,18 @@ public class JInicio extends JFrame
 
 	// Metodo de visualización de descuentos
 	// Se ejecutará para los descuentos que tenga el usuario
-    private void mostrarDescuento(Descuento i ,JPanel pnlCentro,JButton btnCrearDescuento, Font fuente1) {
-		String[] tipos = {"Porcentaje", "Cantidad", "Cupon"};
+    private void mostrarDescuento(Oferta i , JPanel pnlCentro, JButton btnCrearDescuento, Font fuente1) {
+		String tipo = comprobarTipo(i);
         JPanel pnlDescuento = new JPanel();
-        pnlDescuento.setLayout(new GridLayout(6, 1));
-
+		pnlDescuento.setLayout(new GridLayout(6, 1));
+        if (i instanceof ChequeRegalo) {
+			pnlDescuento.setLayout(new GridLayout(7, 1));
+			ChequeRegalo cheque = (ChequeRegalo) i;
+			JLabel lblGastado = new JLabel("Gastado: " + cheque.getGastado(), JLabel.CENTER);
+		}
         JLabel lblComercio = new JLabel(i.getComercio(), JLabel.CENTER);
         JLabel lblValor = new JLabel("Valor: " + i.getValor(), JLabel.CENTER);
-        JLabel lblTipo = new JLabel("Tipo: " + tipos[i.getTipo()], JLabel.CENTER);
+        JLabel lblTipo = new JLabel("Tipo: " + tipo, JLabel.CENTER);
         JLabel lblCodigo = new JLabel("Codigo: " + i.getCodigo(), JLabel.CENTER);
         JLabel lblFechaFin = new JLabel("Caduca: " + i.getFechaFin(),JLabel.CENTER);
 		JButton btnInfo = new JButton("Info del decuento");
@@ -185,6 +191,12 @@ public class JInicio extends JFrame
 
         pnlDescuento.add(lblComercio);
         pnlDescuento.add(lblValor);
+		if (i instanceof ChequeRegalo) {
+			pnlDescuento.setLayout(new GridLayout(7, 1));
+			ChequeRegalo cheque = (ChequeRegalo) i;
+			JLabel lblGastado = new JLabel("Gastado: " + cheque.getGastado(), JLabel.CENTER);
+			pnlDescuento.add(lblGastado);
+		}
         pnlDescuento.add(lblTipo);
         pnlDescuento.add(lblCodigo);
         pnlDescuento.add(lblFechaFin);
@@ -209,20 +221,20 @@ public class JInicio extends JFrame
 				// Si seleccionamos la opcion de crer descuento, abrimos el entorno gráfico necesario y
 				// le introducimos como parámetros, el dueño, la conexion con el servidor y los descuentos asociados al dueño.
 				String eliminado= i.getComercio();
-				DescuentoDAO.eliminarDescuento(customer,i);
+				OfertaDAO.eliminarDescuento(customer,i);
 				System.out.println("Descuento eliminado");
 				pnlCentro.removeAll();
 				pnlCentro.setVisible(false);
-				plDescuentos = getDescuentos(customer);
-				plDescuentos.remove(0);
-				int l=plDescuentos.size();
+				plOfertas = getDescuentos(customer);
+				plOfertas.remove(0);
+				int l= plOfertas.size();
 				//Esto habrá que cambiarlo, pero de momento con 16 está nice
 				pnlCentro.setLayout(new GridLayout(4, 4));
 
 				// Al iniciar la pestaña, se mostrarán los descuentos asociados a la cuenta
 
 				//Si no hay, se mostrará un mensaje: "En este momento no tienes descuentos".
-				if(plDescuentos == null || l == 0	){
+				if(plOfertas == null || l == 0	){
 						JLabel lno = new JLabel("En este momento no tienes descuentos");
 						lno.setFont(fuente1);
 						pnlCentro.add(lno);
@@ -231,7 +243,7 @@ public class JInicio extends JFrame
 					}
 				//En caso contrario visualizarán en el centro de la pestaña
 				else {
-					for (Descuento i : plDescuentos) {
+					for (Oferta i : plOfertas) {
 						//Para cada descuento que tenga el usuario, se llamará a la funcion mastrar. La cual organiza los descuentos y los muestra al usuario
 						mostrarDescuento(i,pnlCentro,btnCrearDescuento,fuente1);
 
@@ -256,8 +268,21 @@ public class JInicio extends JFrame
 
         pnlCentro.add(pnlDescuento);
     }
+
+	private String comprobarTipo(Oferta i) {
+		if (i instanceof Descuento){
+			return "Descuento";
+		}else if (i instanceof Porcentaje){
+			return "Porcentaje";
+		}else if (i instanceof ChequeRegalo){
+			return "ChequeRegalo";
+		}else{
+			return "Oferta";
+		}
+	}
+
 	// Metodo que obtiene los descuentos de cada cliente.
-    public ArrayList<Descuento> getDescuentos(Customer customer)
+    public ArrayList<Oferta> getDescuentos(Customer customer)
 	{
 		//Hacemos la solicitud a la base de datos medainte un mensaje con contexto de getDescuentos.
         cliente.setContext("/getDescuentos");
@@ -266,9 +291,9 @@ public class JInicio extends JFrame
 		// Y un arraylist donde queremos que se guarden los descuentos. Para el correcto funcionamiento, pondremos
 		// dentro del arraylist un descuento generico para no tener problemas con la lista vacia
         session.put("Customer",customer);
-        ArrayList<Descuento> descuentos= new ArrayList<Descuento>();
-        descuentos.add(new Descuento("Diskant (Bienvenida)","Hoy","Nunca",1,50,"DISKANTMOLA"));
-        session.put("Descuentos",descuentos);
+        ArrayList<Oferta> ofertas = new ArrayList<Oferta>();
+        ofertas.add(new Descuento("Diskant (Bienvenida)","Hoy","Nunca",50,"DISKANTMOLA"));
+        session.put("Descuentos", ofertas);
         cliente.setSession(session);
 		//Mandamos la comunicacion al servidor
         cliente.run(cliente);
