@@ -171,6 +171,10 @@ public class JLogin extends JFrame
 
                 }
                 else{
+                    JOptionPane.showMessageDialog(null, "El usuario y/o la contraseña introducidos son incorrectos.");
+                    txtPassword.setText("");
+                    txtUser.setText("");
+                    txtUser.requestFocus();
                     setVisible(true);
                 }
             };
