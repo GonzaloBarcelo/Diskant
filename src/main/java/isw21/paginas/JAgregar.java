@@ -35,7 +35,7 @@ public class JAgregar extends JFrame
             Client cliente;
     }
 
-    public JAgregar(Customer customer, Client cliente)
+    public JAgregar(Customer customer, Client cliente, ArrayList<Oferta> ofertas)
     {   
       	this.customer=customer;
         this.cliente=cliente;
@@ -142,7 +142,7 @@ public class JAgregar extends JFrame
     {
       public void actionPerformed(ActionEvent e)
       {
-        JDescuento descuento = new JDescuento();
+        JDescuento descuento = new JDescuento(customer,cliente, plOfertas);
       }
     });
 
