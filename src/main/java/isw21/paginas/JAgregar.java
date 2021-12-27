@@ -6,6 +6,24 @@ import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+package main.java.isw21.paginas;
+
+import main.java.isw21.client.Client;
+import main.java.isw21.descuentos.OfertaFactory;
+import main.java.isw21.domain.Customer;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.*;
+
+import main.java.isw21.tools.Checker;
+import main.java.isw21.descuentos.Oferta;
+
 
 
 public class JAgregar extends JFrame
@@ -13,10 +31,15 @@ public class JAgregar extends JFrame
     public static void main(String args[])
     {
         new JAgregar();
+        	Customer customer;
+            Client cliente;
     }
 
-    public JAgregar()
+    public JAgregar(Customer customer, Client cliente)
     {   
+      	this.customer=customer;
+        this.cliente=cliente;
+        
       setSize(600,600);
       this.setLayout(new BorderLayout());
       Font fuente = new Font("Serif", 0, 15);
