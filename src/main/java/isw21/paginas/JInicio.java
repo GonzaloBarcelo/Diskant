@@ -138,7 +138,6 @@ public class JInicio extends JFrame
 				// le introducimos como parámetros, el dueño, la conexion con el servidor y los descuentos asociados al dueño.
 				//JDescuento descuento = new JDescuento(customer,cliente, plOfertas);
 				JAgregar agregar = new JAgregar(customer,cliente, plOfertas);
-				
 				setVisible(false);
 				//mostrarDescuento(plDescuentos.get(plDescuentos.size()-1),pnlCentro);
 
