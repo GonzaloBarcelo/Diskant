@@ -193,6 +193,15 @@ public class JInicio extends JFrame
 		pnlBotones.add(btnEliminar);
         pnlDescuento.add(pnlBotones);
 
+		btnInfo.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null,"Entidad del descuento: "+
+						i.getComercio()+"\n Fecha de finalizacion del descuento: " + i.getFechaFin()+
+						"\n Valor del descuento: "+i.getValor() + "\n Código del descuento: "+ i.getCodigo());
+			}
+		});
+
 		btnEliminar.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
