@@ -10,6 +10,7 @@ import main.java.isw21.dao.DescuentoDAO;
 import main.java.isw21.descuentos.Descuento;
 import main.java.isw21.domain.Customer;
 import main.java.isw21.client.Client;
+import org.apache.log4j.Layout;
 
 
 public class JInicio extends JFrame
@@ -173,17 +174,24 @@ public class JInicio extends JFrame
         JLabel lblTipo = new JLabel("Tipo: " + tipos[i.getTipo()], JLabel.CENTER);
         JLabel lblCodigo = new JLabel("Codigo: " + i.getCodigo(), JLabel.CENTER);
         JLabel lblFechaFin = new JLabel("Caduca: " + i.getFechaFin(),JLabel.CENTER);
+		JButton btnInfo = new JButton("Info del decuento");
+		JButton btnUsar = new JButton("Usar descuento");
         JButton btnEliminar = new JButton("Eliminar descuento");
 
         lblComercio.setBorder(BorderFactory.createEtchedBorder());
         //new JLabel( "prueba",JLabel.CENTER
+		JPanel pnlBotones = new JPanel(new GridLayout(1,3));
+
 
         pnlDescuento.add(lblComercio);
         pnlDescuento.add(lblValor);
         pnlDescuento.add(lblTipo);
         pnlDescuento.add(lblCodigo);
         pnlDescuento.add(lblFechaFin);
-        pnlDescuento.add(btnEliminar);
+		pnlBotones.add(btnInfo);
+		pnlBotones.add(btnUsar);
+		pnlBotones.add(btnEliminar);
+        pnlDescuento.add(pnlBotones);
 
 		btnEliminar.addActionListener(new ActionListener()
 		{
@@ -222,7 +230,7 @@ public class JInicio extends JFrame
 					}
 				}
 				pnlCentro.setVisible(true);
-				JOptionPane.showMessageDialog(parent,"Se ha eiliminado el descuento de "+eliminado+".");
+				JOptionPane.showMessageDialog(parent,"Se ha eiliminado el descuento de "+eliminado+" y todos los descuentos duplicados.");
 
 				//mostrarDescuento(plDescuentos.get(plDescuentos.size()-1),pnlCentro);
 

@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.*;
 
 import main.java.isw21.domain.Customer;
+import main.java.isw21.tools.Checker;
 import org.apache.log4j.Logger;
 import main.java.isw21.client.Client;
 import main.java.isw21.descuentos.Descuento;
@@ -129,29 +130,63 @@ public class JDescuento extends JFrame
 			// Método añadir descuento:
 			public void actionPerformed(ActionEvent e)
             {
-				// Como debemos hacer un a conexión con el servidor para añadir el descuento
-				// comenzamos a crear el mensaje de envio.
-				// Establevcemos el contexto : añadir descuento
-                cliente.setContext("/addDescuento");
-                HashMap<String,Object> session= new HashMap<String,Object>();
-				//Aquí creamos las fechas en función de lo introducido por el usuario, separando la información por barras
-				//Formato dd/mm/aaaa
-				String fechaIni = cbxDiaIni.getSelectedItem().toString() + "/" + cbxMesIni.getSelectedItem().toString() + "/" + cbxAñoIni.getSelectedItem().toString();
-				String fechaFin = cbxDiaFin.getSelectedItem().toString() + "/" + cbxMesFin.getSelectedItem().toString() + "/" + cbxAñoFin.getSelectedItem().toString();
-				//Creamos el descuento a añadir en función de los parámetros introducidos por el usuario en la pantalla.
-				Descuento descuento = new Descuento(txtEntidad.getText(), fechaIni,fechaFin,cbxTipo.getSelectedIndex(),Integer.parseInt(txtValor.getText()),txtCodigo.getText());
-                // una vez creado el descuento, lo añadismo a los descuentos asociados al cliente
-				descuentos.add(descuento);
-				// Añadimos al mensaje del cliente el descuento a añadir y el dueño del descuento.
-                session.put("Descuento",descuento);
-                session.put("Customer",customer);
-                cliente.setSession(session);
-				// Y finalmente hacemos la comunicacion con el servidor para el añadido del descuento.
-				// Una vez finalizado, se cierra el entorno gráfico y se abre la pantalla de inicio donde están todos los descuentos asociados a ese cliente.
-                cliente.run(cliente);
-                setVisible(false);
-                // Al añadir el descuento, se abre la de inicio
-                JInicio ini = new JInicio(customer, cliente);
+				String fechaIni = cbxDiaIni.getSelectedIndex() + "/" + cbxMesIni.getSelectedIndex() + "/" + cbxAñoIni.getSelectedIndex();
+				String fechaFin = cbxDiaFin.getSelectedIndex() + "/" + cbxMesFin.getSelectedIndex() + "/" + cbxAñoFin.getSelectedIndex();
+				Date dateIni = new Date();
+				Date dateFin = new Date();
+				try{
+					dateIni = new SimpleDateFormat("dd/MM/yyyy").parse(fechaIni);
+					dateFin = new SimpleDateFormat("dd/MM/yyyy").parse(fechaFin);
+				}
+				catch(Exception exception){
+					dateIni = new Date();
+					dateFin = new Date();
+				}
+				if(txtCodigo.getText().equals("") || txtEntidad.getText().equals("") || txtValor.getText().equals("")){
+					JOptionPane.showMessageDialog(null,"Introduce todos los campos");
+					if(txtCodigo.getText().equals("")){
+						txtCodigo.requestFocus();
+					}
+					else if(txtEntidad.getText().equals("")){
+						txtEntidad.requestFocus();
+					}
+					else{
+						txtValor.requestFocus();
+					}
+				}
+				else if(dateIni.compareTo(dateFin) > 0 ){
+					JOptionPane.showMessageDialog(null,"Introduce una fecha de inicio y una fecha de fin correctas");
+					cbxDiaIni.requestFocus();
+				}
+				else if(Checker.onlyDigits(txtValor.getText(),txtValor.getText().length())!=true){
+					JOptionPane.showMessageDialog(null,"El valor debe ser un numero entero.");
+					txtValor.requestFocus();
+				}
+				else{
+					// Como debemos hacer un a conexión con el servidor para añadir el descuento
+					// comenzamos a crear el mensaje de envio.
+					// Establevcemos el contexto : añadir descuento
+					cliente.setContext("/addDescuento");
+					HashMap<String,Object> session= new HashMap<String,Object>();
+					//Aquí creamos las fechas en función de lo introducido por el usuario, separando la información por barras
+					//Formato dd/mm/aaaa
+					fechaIni = cbxDiaIni.getSelectedIndex() + "/" + cbxMesIni.getSelectedIndex() + "/" + cbxAñoIni.getSelectedIndex();
+					fechaFin = cbxDiaFin.getSelectedIndex() + "/" + cbxMesFin.getSelectedIndex() + "/" + cbxAñoFin.getSelectedIndex();
+					//Creamos el descuento a añadir en función de los parámetros introducidos por el usuario en la pantalla.
+					Descuento descuento = new Descuento(txtEntidad.getText(), fechaIni,fechaFin,cbxTipo.getSelectedIndex(),Integer.parseInt(txtValor.getText()),txtCodigo.getText());
+					// una vez creado el descuento, lo añadismo a los descuentos asociados al cliente
+					descuentos.add(descuento);
+					// Añadimos al mensaje del cliente el descuento a añadir y el dueño del descuento.
+					session.put("Descuento",descuento);
+					session.put("Customer",customer);
+					cliente.setSession(session);
+					// Y finalmente hacemos la comunicacion con el servidor para el añadido del descuento.
+					// Una vez finalizado, se cierra el entorno gráfico y se abre la pantalla de inicio donde están todos los descuentos asociados a ese cliente.
+					cliente.run(cliente);
+					setVisible(false);
+					// Al añadir el descuento, se abre la de inicio
+					JInicio ini = new JInicio(customer, cliente);
+				}
             }
 
 		});
@@ -162,29 +197,59 @@ public class JDescuento extends JFrame
 		    // Método añadir descuento:
 		    public void keyPressed(java.awt.event.KeyEvent e)
             {
-                // Como debemos hacer un a conexión con el servidor para añadir el descuento
-                // comenzamos a crear el mensaje de envio.
-                // Establevcemos el contexto : añadir descuento
-                cliente.setContext("/addDescuento");
-                HashMap<String,Object> session= new HashMap<String,Object>();
-                //Aquí creamos las fechas en función de lo introducido por el usuario, separando la información por barras
-                //Formato dd/mm/aaaa
-                String fechaIni = cbxDiaIni.getSelectedIndex() + "/" + cbxMesIni.getSelectedIndex() + "/" + cbxAñoIni.getSelectedIndex();
-                String fechaFin = cbxDiaFin.getSelectedIndex() + "/" + cbxMesFin.getSelectedIndex() + "/" + cbxAñoFin.getSelectedIndex();
-                //Creamos el descuento a añadir en función de los parámetros introducidos por el usuario en la pantalla.
-                Descuento descuento = new Descuento(txtEntidad.getText(), fechaIni,fechaFin,cbxTipo.getSelectedIndex(),Integer.parseInt(txtValor.getText()),txtCodigo.getText());
-                // una vez creado el descuento, lo añadismo a los descuentos asociados al cliente
-                descuentos.add(descuento);
-                // Añadimos al mensaje del cliente el descuento a añadir y el dueño del descuento.
-                session.put("Descuento",descuento);
-                session.put("Customer",customer);
-                cliente.setSession(session);
-                // Y finalmente hacemos la comunicacion con el servidor para el añadido del descuento.
-                // Una vez finalizado, se cierra el entorno gráfico y se abre la pantalla de inicio donde están todos los descuentos asociados a ese cliente.
-                cliente.run(cliente);
-                setVisible(false);
-                // Al añadir el descuento, se abre la de inicio
-                JInicio ini = new JInicio(customer, cliente);
+				String fechaIni = cbxDiaIni.getSelectedIndex() + "/" + cbxMesIni.getSelectedIndex() + "/" + cbxAñoIni.getSelectedIndex();
+				String fechaFin = cbxDiaFin.getSelectedIndex() + "/" + cbxMesFin.getSelectedIndex() + "/" + cbxAñoFin.getSelectedIndex();
+				Date dateIni = new Date();
+				Date dateFin = new Date();
+				try{
+					dateIni = new SimpleDateFormat("dd/MM/yyyy").parse(fechaIni);
+					dateFin = new SimpleDateFormat("dd/MM/yyyy").parse(fechaFin);
+				}
+				catch(Exception exception){
+					dateIni = new Date();
+					dateFin = new Date();
+				}
+				if(txtCodigo.getText().equals("") || txtEntidad.getText().equals("") || txtValor.getText().equals("")){
+					JOptionPane.showMessageDialog(null,"Introduce todos los campos");
+					if(txtCodigo.getText().equals("")){
+						txtCodigo.requestFocus();
+					}
+					else if(txtEntidad.getText().equals("")){
+						txtEntidad.requestFocus();
+					}
+					else{
+						txtValor.requestFocus();
+					}
+				}
+				else if(dateIni.compareTo(dateFin) > 0 ){
+					JOptionPane.showMessageDialog(null,"Introduce una fecha de inicio y una fecha de fin correctas");
+					cbxDiaIni.requestFocus();
+				}
+				else{
+					// Como debemos hacer un a conexión con el servidor para añadir el descuento
+					// comenzamos a crear el mensaje de envio.
+					// Establevcemos el contexto : añadir descuento
+					cliente.setContext("/addDescuento");
+					HashMap<String,Object> session= new HashMap<String,Object>();
+					//Aquí creamos las fechas en función de lo introducido por el usuario, separando la información por barras
+					//Formato dd/mm/aaaa
+					fechaIni = cbxDiaIni.getSelectedIndex() + "/" + cbxMesIni.getSelectedIndex() + "/" + cbxAñoIni.getSelectedIndex();
+					fechaFin = cbxDiaFin.getSelectedIndex() + "/" + cbxMesFin.getSelectedIndex() + "/" + cbxAñoFin.getSelectedIndex();
+					//Creamos el descuento a añadir en función de los parámetros introducidos por el usuario en la pantalla.
+					Descuento descuento = new Descuento(txtEntidad.getText(), fechaIni,fechaFin,cbxTipo.getSelectedIndex(),Integer.parseInt(txtValor.getText()),txtCodigo.getText());
+					// una vez creado el descuento, lo añadismo a los descuentos asociados al cliente
+					descuentos.add(descuento);
+					// Añadimos al mensaje del cliente el descuento a añadir y el dueño del descuento.
+					session.put("Descuento",descuento);
+					session.put("Customer",customer);
+					cliente.setSession(session);
+					// Y finalmente hacemos la comunicacion con el servidor para el añadido del descuento.
+					// Una vez finalizado, se cierra el entorno gráfico y se abre la pantalla de inicio donde están todos los descuentos asociados a ese cliente.
+					cliente.run(cliente);
+					setVisible(false);
+					// Al añadir el descuento, se abre la de inicio
+					JInicio ini = new JInicio(customer, cliente);
+				}
             }
 
         });
