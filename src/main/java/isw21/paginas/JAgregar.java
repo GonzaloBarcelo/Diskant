@@ -73,7 +73,7 @@ public class JAgregar extends JFrame
         pnlCentroCentro.setBackground(new Color(174,200,178));
         JButton btnLapiz = new JButton();
         btnLapiz.setPreferredSize(new Dimension(200, 130));
-        ImageIcon imagenLapiz = new ImageIcon("Lapiz.png");
+        ImageIcon imagenLapiz = new ImageIcon("src/main/java/isw21/media/Lapiz.png");
         btnLapiz.setIcon(new ImageIcon(imagenLapiz.getImage().getScaledInstance(110, 110, Image.SCALE_SMOOTH)));
 
 
@@ -81,7 +81,7 @@ public class JAgregar extends JFrame
         lblEspacio.setPreferredSize(new Dimension(40, 130));
         JButton btnCamara = new JButton();
         btnCamara.setPreferredSize(new Dimension(200, 130));
-        ImageIcon imagenCamara = new ImageIcon("Camara.png");
+        ImageIcon imagenCamara = new ImageIcon("src/main/java/isw21/media/Camara.png");
         btnCamara.setIcon(new ImageIcon(imagenCamara.getImage().getScaledInstance(110, 110, Image.SCALE_SMOOTH)));
 
 
@@ -103,12 +103,12 @@ public class JAgregar extends JFrame
 
       JButton btnMiPerfil= new JButton();
       btnMiPerfil.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-      ImageIcon imagen = new ImageIcon("Perfil.png");
+      ImageIcon imagen = new ImageIcon("src/main/java/isw21/media/Perfil.png");
       btnMiPerfil.setIcon(new ImageIcon(imagen.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
     
       JButton btnMas = new JButton();
       btnMas.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-      ImageIcon imagenMas = new ImageIcon("Mas.png");
+      ImageIcon imagenMas = new ImageIcon("src/main/java/isw21/media/Mas.png");
       btnMas.setIcon(new ImageIcon(imagenMas.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
     
       JLabel l2 = new JLabel();
