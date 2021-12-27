@@ -154,6 +154,14 @@ public class JAgregar extends JFrame
         JDescuento descuento = new JDescuento(customer,cliente, plOfertas);
       }
     });
+    
+     btnHome.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        JInicio inicio = new JInicio();
+      }
+    });
 
         //this.pack();
         //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
