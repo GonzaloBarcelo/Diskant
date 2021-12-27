@@ -54,7 +54,7 @@ public class JAgregar extends JFrame
       JLabel l5 = new JLabel();
       ImageIcon imagen1 = new ImageIcon("LogoDiskAnt.jpeg");
       l5.setIcon(new ImageIcon(imagen1.getImage().getScaledInstance(150, 60, Image.SCALE_SMOOTH)));
-      JLabel l6 = new JLabel("Mis descuentos");
+      JLabel l6 = new JLabel("Agregar descuento");
       JLabel l7 = new JLabel();
       pnlNorte.setPreferredSize(new Dimension(600, 50));
       
