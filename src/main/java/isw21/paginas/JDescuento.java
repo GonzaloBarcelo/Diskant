@@ -348,6 +348,7 @@ public class JDescuento extends JFrame
 		});
 		//this.pack();
 		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+		this.setResizable(false);
 		this.setVisible(true); 
 		this.setLocation(550, 250);
 	}
