@@ -144,36 +144,25 @@ public class JMiPerfil extends JFrame
         JPanel pnlSur = new JPanel();
         pnlSur.setLayout(new GridLayout(1, 5));
 
-        JButton btnMas = new JButton();
-        btnMas.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        ImageIcon imagenMas = new ImageIcon("src/main/java/isw21/media/Mas.png");
-        btnMas.setIcon(new ImageIcon(imagenMas.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
-
-        JButton btnLupa = new JButton();
-        btnLupa.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        ImageIcon imagenLupa = new ImageIcon("src/main/java/isw21/media/Lupa.png");
-        btnLupa.setIcon(new ImageIcon(imagenLupa.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
-
+        JLabel lblMas = new JLabel();
+        
+        JLabel lblLupa = new JLabel();
+        
         JButton btnHome = new JButton();
         btnHome.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         ImageIcon imagenHome = new ImageIcon("src/main/java/isw21/media/Home.png");
         btnHome.setIcon(new ImageIcon(imagenHome.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
 
-        JButton btnCorazon = new JButton();
-        btnCorazon.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        ImageIcon imagenCorazon = new ImageIcon("src/main/java/isw21/media/Corazon.png");
-        btnCorazon.setIcon(new ImageIcon(imagenCorazon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
-
-        JButton btnMiPerfil= new JButton();
-        btnMiPerfil.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        ImageIcon imagen = new ImageIcon("src/main/java/isw21/media/Perfil.png");
-        btnMiPerfil.setIcon(new ImageIcon(imagen.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
-
-        pnlSur.add(btnMas);
-        pnlSur.add(btnLupa);
+        JLabel lblCorazon = new JLabel();
+        
+        JLabel lblMiPerfil= new JLabel();
+        
+        pnlSur.add(lblMas);
+        pnlSur.add(lblLupa);
         pnlSur.add(btnHome);
-        pnlSur.add(btnCorazon);
-        pnlSur.add(btnMiPerfil);
+        pnlSur.add(lblCorazon);
+        pnlSur.add(lblMiPerfil);
+        
         //LADOS
         JPanel pnlEste = new JPanel();
         pnlEste.setPreferredSize(new Dimension(40, 60));
@@ -206,7 +195,6 @@ public class JMiPerfil extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 JAgregar agregar = new JAgregar(customer, cliente, ofertas);
-                //JAgregar agregar = new JAgregar();
                 setVisible(false);
             }
         });
