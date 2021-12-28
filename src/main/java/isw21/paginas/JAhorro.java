@@ -182,6 +182,7 @@ public class JAhorro extends JFrame {
             }
         });*/
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setResizable(false);
         this.setVisible(true);
         this.setLocation(250, 100);
 
