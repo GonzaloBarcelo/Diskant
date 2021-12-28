@@ -203,10 +203,15 @@ public class JMiPerfil extends JFrame
                 setVisible(false);
             }
         });
-
-
-
         
+        btnOpinion.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                JOpinon opinon = new JOpinion();
+            }
+        });
+
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
