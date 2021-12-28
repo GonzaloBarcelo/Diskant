@@ -155,6 +155,14 @@ public class JInicio extends JFrame
 
 			}
 		});
+		btnMiPerfil.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				JMiPerfil perfil = new JMiPerfil();
+				setVisible(false);
+			}
+		});
 
 
         /*timer = new Timer(1000,e ->{
