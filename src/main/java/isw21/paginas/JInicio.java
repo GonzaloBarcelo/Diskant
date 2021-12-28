@@ -197,6 +197,7 @@ public class JInicio extends JFrame
 		this.add(pnlOeste, BorderLayout.WEST);
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setResizable(false);
 		this.setVisible(true);
 		this.setLocation(250, 100);
 	}
