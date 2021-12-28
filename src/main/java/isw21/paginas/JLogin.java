@@ -260,6 +260,7 @@ public class JLogin extends JFrame
 
         }
     });
+    this.setResizable(false);
     this.setVisible(true);
     this.setLocation(480, 200);
 
