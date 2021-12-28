@@ -161,7 +161,7 @@ public class JLogin extends JFrame
                 //Mandamos la comunicacion al servidor
                 cliente.run(cliente);
                 //Si la comuncacion es corrcta
-                if (cliente.getIdentification()){
+                if (cliente.getIdentification()!=null){
                     logCorrect=true;
                     //Iniciamos sesion con el customer introducido por el usuario y pasamos a la pestaña de inicio
                     customer= new Customer(txtUser.getText(),txtPassword.getText());
@@ -190,9 +190,9 @@ public class JLogin extends JFrame
                 cliente.setNombre(txtPassword.getText());
                 cliente.setId(txtUser.getText());
                 cliente.run(cliente);
-                if (cliente.getIdentification()){
+                if (cliente.getIdentification()!=null){
                     logCorrect=true;
-                    customer= new Customer(txtUser.getText(),txtPassword.getText());
+                    customer= cliente.getIdentification();
                     System.out.println("Se ha logeado");
                     JInicio inicio= new JInicio(customer,cliente);
                     setVisible(false);

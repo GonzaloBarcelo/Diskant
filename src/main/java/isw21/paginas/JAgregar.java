@@ -50,9 +50,10 @@ public class JAgregar extends JFrame
       pnlNorte.setBackground(new Color(255,255,255));
       pnlNorte.setLayout(new GridLayout(1,3));
       JLabel l5 = new JLabel();
-      ImageIcon imagen1 = new ImageIcon("LogoDiskAnt.jpeg");
+      ImageIcon imagen1 = new ImageIcon("src/main/java/isw21/media/LogoDiskAnt.jpeg");
       l5.setIcon(new ImageIcon(imagen1.getImage().getScaledInstance(150, 60, Image.SCALE_SMOOTH)));
-      JLabel l6 = new JLabel("Agregar descuento");
+      JLabel l6 = new JLabel("AGREGAR DESCUENTO");
+      l6.setFont(fuente1);
       JLabel l7 = new JLabel();
       pnlNorte.setPreferredSize(new Dimension(600, 50));
       
@@ -163,14 +164,14 @@ public class JAgregar extends JFrame
         setVisible(false);
       }
     });
-    btnMiPerfil.addActionListener(new ActionListener()
+    /*btnMiPerfil.addActionListener(new ActionListener()
     {
       public void actionPerformed(ActionEvent e)
       {
         JMiPerfil perfil = new JMiPerfil(customer,cliente, ofertas);
         setVisible(false);
       }
-    });
+    });*/
 
         //this.pack();
         //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -2,9 +2,9 @@ package main.java.isw21.descuentos;
 
 public class ChequeRegalo extends Oferta {
     int valor;
-    int gastado;
+    double gastado;
 
-    public ChequeRegalo(String comercio, String fechaIn, String fechaFin, int valor, String codigo, int gastado) {
+    public ChequeRegalo(String comercio, String fechaIn, String fechaFin, int valor, String codigo, double gastado) {
         super(comercio, fechaIn, fechaFin,valor, codigo);
         this.valor = valor;
         this.gastado = gastado; //Cuando pongamos qué cantidad ha utilizado
@@ -18,5 +18,7 @@ public class ChequeRegalo extends Oferta {
         this.valor = valor;
     }
 
-    public int getGastado(){ return gastado;}
+    public double getGastado(){ return gastado;}
+
+    public void setGastado(double gastado){this.gastado = gastado;}
 }

@@ -17,7 +17,7 @@ public class CustomerDAO {
         try (PreparedStatement pst = con.prepareStatement("SELECT * FROM usuarios");
              ResultSet rs = pst.executeQuery()) {
             while (rs.next()) {
-                lista.add(new Customer(rs.getString(1),rs.getString(2)));
+                lista.add(new Customer(rs.getString(1),rs.getString(2),rs.getString(3),rs.getDouble(4),rs.getDouble(5),rs.getDouble(6),rs.getInt(7)));
             }
 
         } catch (SQLException ex) {
@@ -34,7 +34,7 @@ public class CustomerDAO {
             Connection con= ConnectionDAO.getInstance().getConnection();
             try{
                 //La query introducira el nuevo usuario y su contraseña
-                PreparedStatement pst = con.prepareStatement("INSERT INTO usuarios VALUES ('"+customer.getUsuario()+"','"+customer.getContraseña()+"','"+customer.getEmail()+"');");
+                PreparedStatement pst = con.prepareStatement("INSERT INTO usuarios VALUES ('"+customer.getUsuario()+"','"+customer.getContraseña()+"','"+customer.getEmail()+"','"+0+"','"+0+"','"+0+"','"+0+"');");
                 ResultSet rs = pst.executeQuery();
             }
             catch (SQLException ex){
@@ -59,6 +59,19 @@ public class CustomerDAO {
             }
         }
         return null;
+    }
+
+    public static void updateDescuento(Customer customer, double valor){
+        Connection con=ConnectionDAO.getInstance().getConnection();
+        try (PreparedStatement pst = con.prepareStatement("UPDATE usuarios SET descuento = " + valor + " WHERE usuario = '" + customer.getUsuario()  + "';");
+             ResultSet rs = pst.executeQuery()) {
+
+        } catch (SQLException ex) {
+
+            System.out.println(ex.getMessage());
+        }
+
+
     }
 
     /*public static void getDatosCLiente(ArrayList<Customer> lista, Customer customer) {
@@ -90,4 +103,25 @@ public class CustomerDAO {
 
     }
 
+    public static void updateCheque(Customer customer, double valorCheque) {
+        Connection con=ConnectionDAO.getInstance().getConnection();
+        try (PreparedStatement pst = con.prepareStatement("UPDATE usuarios SET regalo = " + valorCheque + " WHERE usuario = '" + customer.getUsuario()  + "';");
+             ResultSet rs = pst.executeQuery()) {
+
+        } catch (SQLException ex) {
+
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public static void updatePorcentaje(Customer customer, double valorPorcentaje, int numPorcentajes) {
+        Connection con=ConnectionDAO.getInstance().getConnection();
+        try (PreparedStatement pst = con.prepareStatement("UPDATE usuarios SET porcentaje = " + valorPorcentaje + ", numperc = " + numPorcentajes +" WHERE usuario = '" + customer.getUsuario()  + "';");
+             ResultSet rs = pst.executeQuery()) {
+
+        } catch (SQLException ex) {
+
+            System.out.println(ex.getMessage());
+        }
+    }
 }

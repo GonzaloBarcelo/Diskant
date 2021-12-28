@@ -1,6 +1,8 @@
 // Descripcion de la calse sutomer
 package main.java.isw21.domain;
 
+import main.java.isw21.controler.CustomerControler;
+
 import java.io.Serializable;
 
 public class Customer implements Serializable{
@@ -14,6 +16,8 @@ public class Customer implements Serializable{
     private String usuario;
     private String contraseña;
     private String email;
+    private double ahorrado[] = new double[3];
+    private int numPorcentajes;
 
     public Customer() {
         this.setUsuario(new String());
@@ -23,6 +27,20 @@ public class Customer implements Serializable{
     public Customer(String user, String pass) {
         this.setUsuario(user);
         this.setContraseña(pass);
+        this.email = "fake@fake.com";
+        this.ahorrado[0] = 0;
+        this.ahorrado[1] = 0;
+        this.ahorrado[2] = 0;
+        this.numPorcentajes = 0;
+    }
+    public Customer(String user, String pass, String email, double descuento, double porcentaje, double regalo, int numPorcentajes) {
+        this.setUsuario(user);
+        this.setContraseña(pass);
+        this.email = email;
+        this.ahorrado[0] = descuento;
+        this.ahorrado[1] = porcentaje;
+        this.ahorrado[2] = regalo;
+        this.numPorcentajes = numPorcentajes;
     }
 
     public String getUsuario() {
@@ -66,5 +84,34 @@ public class Customer implements Serializable{
 
     public String getEmail() {
         return email;
+    }
+
+    public double[] getAhorrado() {
+        return ahorrado;
+    }
+
+    public void setAhorrado(String tipo, double valor){
+        CustomerControler controler = new CustomerControler();
+        if (tipo == "Descuento") {
+            double valorDescuento = this.ahorrado[0] + valor;
+            this.ahorrado[0] = valorDescuento;
+            controler.updateDescuento(this, valorDescuento);//Lo actualizamos también en la base de datos
+        }
+        if (tipo == "Porcentaje"){
+            double valorPorcentaje;
+            if (numPorcentajes == 0){
+                valorPorcentaje = valor;
+            } else{
+                numPorcentajes ++;
+                valorPorcentaje = (this.ahorrado[1] + valor)/numPorcentajes;
+            }
+            this.ahorrado[0] = valorPorcentaje;
+            controler.updatePorcentaje(this, valorPorcentaje, numPorcentajes);//Lo actualizamos también en la base de datos
+        }
+        if (tipo == "Cheque"){
+            double valorCheque = this.ahorrado[2] + valor;
+            this.ahorrado[2] = valorCheque;
+            controler.updateCheque(this,valorCheque);
+        }
     }
 }

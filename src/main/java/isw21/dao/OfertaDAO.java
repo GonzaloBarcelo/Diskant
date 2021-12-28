@@ -21,18 +21,16 @@ public class OfertaDAO {
                 // Añadimos el descuento a la tabla de descuentos con el formato previamente establecido.
                 // El primer valor será el ID del dueño del descuento seguido por el descuento.
                 PreparedStatement pst = con.prepareStatement("INSERT INTO descuentos VALUES ('" + oferta.getComercio() + "','" + oferta.getFechaIn() + "','"
-                        + oferta.getFechaFin() + "','" + tipo + "','" + oferta.getValor() + "','" + oferta.getCodigo() + "','" + gastado + "');");
+                        + oferta.getFechaFin() + "','" + tipo + "','" + oferta.getValor() + "','" + oferta.getCodigo() +  "');");
                 ResultSet rs = pst.executeQuery();
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
         }
-        System.out.println("Hola");
         try {
             // Añadimos el descuento a la tabla de descuentos con el formato previamente establecido.
             // El primer valor será el ID del dueño del descuento seguido por el descuento.
-            System.out.println("Aquí estoy");
-            PreparedStatement pst = con.prepareStatement("INSERT INTO usudescs VALUES ('" + customer.getUsuario() + "','" + oferta.getCodigo() + "');");
+            PreparedStatement pst = con.prepareStatement("INSERT INTO usudescs VALUES ('" + customer.getUsuario() + "','" + oferta.getCodigo() + "','" + gastado + "');");
             ResultSet rs = pst.executeQuery();
             return oferta;
         } catch (SQLException ex) {
@@ -51,17 +49,15 @@ public class OfertaDAO {
         }
         try (PreparedStatement pst = con.prepareStatement("SELECT * FROM usudescs WHERE usuario= '"+customer.getUsuario()+ "';");
              ResultSet rs = pst.executeQuery()) {
-
+            OfertaFactory factoria = new OfertaFactory();
             while (rs.next()) {
                 try (PreparedStatement pst1 = con.prepareStatement("SELECT * FROM descuentos WHERE codigo= '"+rs.getString(2)+ "';");
                      ResultSet rs1 = pst1.executeQuery()) {
 
-                    OfertaFactory factoria = new OfertaFactory();
-
                     while (rs1.next()) {
 
                         // Estos descuentos son añadidos a la lista que se ha pasado por parámetro.
-                        Oferta oferta = factoria.getOferta(rs1.getString(1),rs1.getString(2),rs1.getString(3),rs1.getInt(5),rs1.getString(6),rs1.getInt(4),rs1.getInt(7));
+                        Oferta oferta = factoria.getOferta(rs1.getString(1),rs1.getString(2),rs1.getString(3),rs1.getInt(5),rs1.getString(6),rs1.getInt(4),rs.getDouble(3));
                         lista.add(oferta);
                     }
                 } catch (SQLException ex) {
@@ -87,7 +83,7 @@ public class OfertaDAO {
             OfertaFactory factoria = new OfertaFactory();
             while (rs.next()) {
                 // Estos descuentos son añadidos a la lista que se ha pasado por parámetro.
-                Oferta oferta = factoria.getOferta(rs.getString(1),rs.getString(2),rs.getString(3),rs.getInt(5),rs.getString(6),rs.getInt(4),rs.getInt(7));
+                Oferta oferta = factoria.getOferta(rs.getString(1),rs.getString(2),rs.getString(3),rs.getInt(5),rs.getString(6),rs.getInt(4),0);
                 lista.add(oferta);
             }
         } catch (SQLException ex) {
@@ -118,6 +114,16 @@ public class OfertaDAO {
             }
         }
         return false;
+    }
+
+    public static void updateGastado(Customer customer,ChequeRegalo cheque){
+        Connection con = ConnectionDAO.getInstance().getConnection();
+        try (PreparedStatement pst = con.prepareStatement("UPDATE usudescs SET gastado = " + cheque.getGastado() + " WHERE usuario = '" + customer.getUsuario()  + "' AND descuento = '" + cheque.getCodigo() + "';");
+             ResultSet rs = pst.executeQuery()) {
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
 

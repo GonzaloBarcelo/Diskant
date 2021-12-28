@@ -74,16 +74,16 @@ public class SocketServer extends Thread {
                     mensajeOut.setContext("/getAccessResponse");
 
                     session=new HashMap<>();
-                    session.put("Customer",false);
+                    //session.put("Customer",null);
                     if (CustomerDAO.isInBase(customerIN)!=null){
                         // Si figura en la base, se modificará la salida y se pondrá a true. Cabe destacar que esta salida será la que determine si la
                         // autentificacion ha sido correcta
-                        session.put("Customer",true);
+                        session.put("Customer",CustomerDAO.isInBase(customerIN));
                         System.out.println("Se ha autenticado el usuario: "+customerIN.getUsuario());
                     }
                     else{
                         // En caso contrario será false
-                        session.put("Customer",false);
+                        session.put("Customer",null);
                         System.out.println("Se ha introducido mal la contraseña para el ID"+customerIN.getUsuario());
                     }
                     mensajeOut.setSession(session);
@@ -96,10 +96,10 @@ public class SocketServer extends Thread {
                     mensajeOut.setContext("/addNewUserResponse");
                     session=new HashMap<>();
                     //Marcamos como false el mensaje de vuelta
-                    session.put("Customer",false);
+                    session.put("Customer",null);
                     if (CustomerDAO.isInBase(customerIN)!=null){
                         // Si el customer ya se encuntra en la base de datos, no modifcamos el valor
-                        session.put("Customer",false);
+                        session.put("Customer",null);
                     }
                     else{
                         System.out.println("El email del servidor a guardar es:"+customerIN.getEmail());
@@ -108,7 +108,7 @@ public class SocketServer extends Thread {
                         //Tras haber ejecutado el añadido, comprobamos si realmente se ha añadido, en ese caso
                         // se modifica a true en el mensaje de vuelta.
                         if (CustomerDAO.isInBase(customerIN)!=null){
-                            session.put("Customer",true);
+                            session.put("Customer",CustomerDAO.isInBase(customerIN));
                         }
                     }
                     mensajeOut.setSession(session);

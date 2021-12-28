@@ -28,7 +28,7 @@ public class Client {
     static String context;
     static String email;
     static String id;
-    static Boolean identification=false;
+    static Customer identification;
     final static Logger logger = Logger.getLogger(Client.class);
     public HashMap<String,Object> session=new HashMap<String, Object>();
     public ArrayList<Oferta> ofertas;
@@ -73,12 +73,12 @@ public class Client {
 
             case "/addNewUserResponse":
                 // Iniciamos siempre partiendo de que la identificacion ha sido erronea
-                identification=false;
+                identification=null;
                 // Con el mensaje de vuelta vemos si el insertado del nuevo usuario se ha podido realizar
-                Boolean temp=(Boolean)(mensajeVuelta.getSession().get("Customer"));
-                if (temp){
+                Customer temp=(Customer)(mensajeVuelta.getSession().get("Customer"));
+                if (temp!=null){
                     System.out.println("El usuario se ha añadido a la base");
-                    identification=true;
+                    identification=temp;
                 }
                 else{
                     System.out.println("El usuario a añadir ya se encuentra en la base");
@@ -99,7 +99,7 @@ public class Client {
                 // dependiendo de si la identificación ha sido correcta o no.
                 // Si la respuesta del servidor es True, la identificacion ha sido correcta y desde ese momento
                 // El usuario podrá acceder a todo su contenido
-                identification = (Boolean)(mensajeVuelta.getSession().get("Customer"));
+                identification = (Customer)(mensajeVuelta.getSession().get("Customer"));
                 break;
 
             default:
@@ -180,11 +180,11 @@ public class Client {
         return id;
     }
 
-    public static Boolean getIdentification() {
+    public static Customer getIdentification() {
         return identification;
     }
 
-    public static void setIdentification(Boolean identification) {
+    public static void setIdentification(Customer identification) {
         Client.identification = identification;
     }
 

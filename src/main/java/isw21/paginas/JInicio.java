@@ -6,6 +6,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import main.java.isw21.controler.CustomerControler;
 import main.java.isw21.dao.OfertaDAO;
 import main.java.isw21.descuentos.ChequeRegalo;
 import main.java.isw21.descuentos.Descuento;
@@ -155,20 +156,27 @@ public class JInicio extends JFrame
 
 			}
 		});
-		btnMiPerfil.addActionListener(new ActionListener()
+		/*btnMiPerfil.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
 				JMiPerfil perfil = new JMiPerfil(customer,cliente, ofertas);
 				setVisible(false);
 			}
-		});
+		});*/
 
 
         /*timer = new Timer(1000,e ->{
             mostrarDescuentos();
         });
         timer.start();*/
+
+		btnCorazon.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JAhorro ahorro = new JAhorro(customer, cliente);
+				setVisible(false);
+			}
+		});
 
 
 		this.add(pnlNorte, BorderLayout.NORTH);
@@ -235,6 +243,48 @@ public class JInicio extends JFrame
 			}
 		});
 
+		btnUsar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (i instanceof ChequeRegalo){
+					ChequeRegalo cheque = (ChequeRegalo) i;
+					String seleccion = JOptionPane.showInputDialog(null,"Qué cantidad del cheque has gastado? (número)");
+					try{
+						double valorCheque = Double.parseDouble(seleccion);
+						if (valorCheque + cheque.getGastado() >= cheque.getValor()){
+							JOptionPane.showMessageDialog(null,"El cheque se ha agotado. Se eliminará de tus descuentos");
+							cheque.setGastado(cheque.getValor());
+							customer.setAhorrado("Cheque",cheque.getValor()-cheque.getGastado());
+							eliminarDescuento(i,pnlCentro,fuente1);
+						}else {
+							customer.setAhorrado("Cheque", valorCheque);
+							cheque.setGastado(valorCheque + cheque.getGastado());
+						}
+						OfertaDAO.updateGastado(customer,cheque);
+						setVisible(false);
+						new JInicio(customer,cliente);
+
+					}
+					catch (NumberFormatException num){
+						JOptionPane.showMessageDialog(parent,"El valor debe ser un número.");
+					}
+				}else{
+					double valor = i.getValor();
+					int confirmar = JOptionPane.showConfirmDialog(null,"¿Estas seguro de que quieres utilizar esta oferta? Se borrará y aparecerá en tu ahorro");
+					if (JOptionPane.OK_OPTION == confirmar){
+						//setVisible(false);
+						if (i instanceof Descuento) {
+							customer.setAhorrado("Descuento", valor);
+						}else if (i instanceof Porcentaje){
+							customer.setAhorrado("Porcentaje", valor);
+						}
+						eliminarDescuento(i,pnlCentro,fuente1);
+						//new JInicio(customer, cliente);
+					}
+				}
+			}
+		});
+
 
 		btnInfo.addActionListener(new ActionListener() {
 			@Override
@@ -253,38 +303,7 @@ public class JInicio extends JFrame
 				int dialogResult = JOptionPane.showConfirmDialog(null,"¿Desea borrar el descuento de "+i.getComercio()+"?");
 
 				if (dialogResult == JOptionPane.YES_OPTION){
-					String eliminado= i.getComercio();
-					OfertaDAO.eliminarDescuento(customer,i);
-					System.out.println("Descuento eliminado");
-					pnlCentro.removeAll();
-					pnlCentro.setVisible(false);
-					plOfertas = getDescuentos(customer);
-					plOfertas.remove(0);
-					int l= plOfertas.size();
-					//Esto habrá que cambiarlo, pero de momento con 16 está nice
-					pnlCentro.setLayout(new GridLayout(4, 4));
-
-					// Al iniciar la pestaña, se mostrarán los descuentos asociados a la cuenta
-
-					//Si no hay, se mostrará un mensaje: "En este momento no tienes descuentos".
-					if(plOfertas == null || l == 0	){
-						JLabel lno = new JLabel("En este momento no tienes descuentos");
-						lno.setFont(fuente1);
-						pnlCentro.add(lno);
-						//pnlCentro.add(btnCrearDescuento);
-						//Quitar el descuento inicial de bienvenida
-					}
-					//En caso contrario visualizarán en el centro de la pestaña
-					else {
-						for (Oferta i : plOfertas) {
-							//Para cada descuento que tenga el usuario, se llamará a la funcion mastrar. La cual organiza los descuentos y los muestra al usuario
-							mostrarDescuento(i,pnlCentro,fuente1);
-
-
-						}
-					}
-					pnlCentro.setVisible(true);
-					JOptionPane.showMessageDialog(parent,"Se ha eiliminado el descuento de "+eliminado+" y todos los descuentos duplicados.");
+					eliminarDescuento(i,pnlCentro,fuente1);
 
 				}
 				// Si seleccionamos la opcion de crer descuento, abrimos el entorno gráfico necesario y
@@ -336,6 +355,41 @@ public class JInicio extends JFrame
 		cliente.run(cliente);
 		// Una vez hecha la conexion, el cliente ya tiene los descuentos del usuario
 		return cliente.getDescuentos();
+	}
+
+	private void eliminarDescuento(Oferta i, JPanel pnlCentro, Font fuente1){
+		String eliminado= i.getComercio();
+		OfertaDAO.eliminarDescuento(customer,i);
+		System.out.println("Descuento eliminado");
+		pnlCentro.removeAll();
+		pnlCentro.setVisible(false);
+		plOfertas = getDescuentos(customer);
+		plOfertas.remove(0);
+		int l= plOfertas.size();
+		//Esto habrá que cambiarlo, pero de momento con 16 está nice
+		pnlCentro.setLayout(new GridLayout(4, 4));
+
+		// Al iniciar la pestaña, se mostrarán los descuentos asociados a la cuenta
+
+		//Si no hay, se mostrará un mensaje: "En este momento no tienes descuentos".
+		if(plOfertas == null || l == 0	){
+			JLabel lno = new JLabel("En este momento no tienes descuentos");
+			lno.setFont(fuente1);
+			pnlCentro.add(lno);
+			//pnlCentro.add(btnCrearDescuento);
+			//Quitar el descuento inicial de bienvenida
+		}
+		//En caso contrario visualizarán en el centro de la pestaña
+		else {
+			for (Oferta of : plOfertas) {
+				//Para cada descuento que tenga el usuario, se llamará a la funcion mastrar. La cual organiza los descuentos y los muestra al usuario
+				mostrarDescuento(of,pnlCentro,fuente1);
+
+
+			}
+		}
+		pnlCentro.setVisible(true);
+		JOptionPane.showMessageDialog(parent,"Se ha eiliminado el descuento de "+eliminado+" y todos los descuentos duplicados.");
 	}
 
 

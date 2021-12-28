@@ -135,7 +135,7 @@ public class JRegister extends JFrame
                     // Como por ejemplo numero de telefono o email.
 			cliente.run(cliente);
             //Si el servidor, en su mensaje de vuelta, nos devuelve true, indicará que que el usuario se ha añadido correctamente a la base de datos
-			if (cliente.getIdentification()){
+			if (cliente.getIdentification()!=null){
 			    System.out.println("Se ha añadido el usuario a la base de datos");
                 // Una vez introducido en la base de datos, tendrá que volver a la pantalla principal e iniciar sesion
 			    JPrincipal jp = new JPrincipal();
@@ -182,7 +182,7 @@ public class JRegister extends JFrame
                    // Como por ejemplo numero de telefono o email.
                    cliente.run(cliente);
                    //Si el servidor, en su mensaje de vuelta, nos devuelve true, indicará que que el usuario se ha añadido correctamente a la base de datos
-                   if (cliente.getIdentification()){
+                   if (cliente.getIdentification()!=null){
                        System.out.println("Se ha añadido el usuario a la base de datos");
                        // Una vez introducido en la base de datos, tendrá que volver a la pantalla principal e iniciar sesion
                        JPrincipal jp = new JPrincipal();
