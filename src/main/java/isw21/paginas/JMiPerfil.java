@@ -200,15 +200,16 @@ public class JMiPerfil extends JFrame
 
 
 
-        //LO DE ABAJO VA EN EL CODIGO
-        /*this.addWindowListener(new WindowAdapter() {
+        
+        this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 JPrincipal jprinc = new JPrincipal();
 
             }
-        });*/
+        });
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setResizable(false);
         this.setVisible(true);
         this.setLocation(250, 100);
 
