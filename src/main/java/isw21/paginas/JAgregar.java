@@ -167,7 +167,7 @@ public class JAgregar extends JFrame
     {
       public void actionPerformed(ActionEvent e)
       {
-        JMiPerfil perfil = new JMiPerfil();
+        JMiPerfil perfil = new JMiPerfil(customer,cliente, ofertas);
         setVisible(false);
       }
     });
