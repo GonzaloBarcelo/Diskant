@@ -190,7 +190,7 @@ public class JMiPerfil extends JFrame
             }
         });
 
-        btnMas.addActionListener(new ActionListener()
+        /*btnMas.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
@@ -198,12 +198,12 @@ public class JMiPerfil extends JFrame
                 setVisible(false);
             }
         });
-        
+        */
         btnOpinion.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
-                JOpinon opinon = new JOpinion();
+                JOpinion opinon = new JOpinion();
             }
         });
         btnAyuda.addActionListener(new ActionListener()

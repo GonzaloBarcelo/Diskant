@@ -1,8 +1,3 @@
-/*package main.paginas;
-import main.descuentos.Descuento;
-//import main.io.App;
-import main.paginas.*;*/
-
 
 package main.java.isw21.paginas;
 import main.java.isw21.client.Client;

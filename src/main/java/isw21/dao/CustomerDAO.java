@@ -54,6 +54,7 @@ public class CustomerDAO {
         //extraemos la lista de customers y vemos si el introducido figura en ella
         customerControler.getCustomer(listaCust);
         for (Customer customer : listaCust) {
+            System.out.println("El usuario: "+customer.getUsuario()+" tiene una contraseña asociada: "+customer.getContraseña());
             if (customerIN.equals(customer)) {
                 return customer;
             }

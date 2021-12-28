@@ -200,7 +200,7 @@ public class JDescuento extends JFrame
 				String fechaIni = cbxDiaIni.getSelectedItem() + "/" + cbxMesIni.getSelectedItem() + "/" + cbxAñoIni.getSelectedItem();
 				String fechaFin = cbxDiaFin.getSelectedItem() + "/" + cbxMesFin.getSelectedItem() + "/" + cbxAñoFin.getSelectedItem();
 				Date dateIni;
-				Date dateFin = new Date();
+				Date dateFin;
 				try{
 					dateIni = new SimpleDateFormat("dd/MM/yyyy").parse(fechaIni);
 					dateFin = new SimpleDateFormat("dd/MM/yyyy").parse(fechaFin);
@@ -225,6 +225,10 @@ public class JDescuento extends JFrame
 					JOptionPane.showMessageDialog(null,"Introduce una fecha de inicio y una fecha de fin correctas");
 					cbxDiaIni.requestFocus();
 				}
+				else if(Checker.onlyDigits(txtValor.getText(),txtValor.getText().length())!=true){
+					JOptionPane.showMessageDialog(null,"El valor debe ser un numero entero.");
+					txtValor.requestFocus();
+				}
 				else{
 					// Como debemos hacer un a conexión con el servidor para añadir el descuento
 					// comenzamos a crear el mensaje de envio.
@@ -236,6 +240,7 @@ public class JDescuento extends JFrame
 					//fechaIni = cbxDiaIni.getSelectedIndex() + "/" + cbxMesIni.getSelectedIndex() + "/" + cbxAñoIni.getSelectedIndex();
 					//fechaFin = cbxDiaFin.getSelectedIndex() + "/" + cbxMesFin.getSelectedIndex() + "/" + cbxAñoFin.getSelectedIndex();
 					//Creamos el descuento a añadir en función de los parámetros introducidos por el usuario en la pantalla.
+					//Oferta oferta = new Oferta(txtEntidad.getText(), fechaIni,fechaFin,Integer.parseInt(txtValor.getText()),txtCodigo.getText());
 					Oferta oferta = factoria.getOferta(txtEntidad.getText(), fechaIni,fechaFin,Integer.parseInt(txtValor.getText()),txtCodigo.getText(),cbxTipo.getSelectedIndex(),0);
 					// una vez creado el descuento, lo añadismo a los descuentos asociados al cliente
 					ofertas.add(oferta);

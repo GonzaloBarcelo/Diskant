@@ -127,21 +127,28 @@ public class JRegister extends JFrame
 	    	if(txtPassword.getText().equals(txtPassword2.getText()) && txtMail.getText().contains("@"))
                 {
                     //Envio del mensaje a la base de datos en el contexto de añadir user
-			cliente.setContext("/addNewUser");
-			cliente.setNombre(txtPassword.getText());
-			cliente.setId(txtUser.getText());
-            cliente.setEmail(txtMail.getText());
-            // Con este contexto, como se puede ver en el servidor, solo es encesario saber el nombre y la contraseña. En un futuro se añadiran otros campos.
-                    // Como por ejemplo numero de telefono o email.
-			cliente.run(cliente);
-            //Si el servidor, en su mensaje de vuelta, nos devuelve true, indicará que que el usuario se ha añadido correctamente a la base de datos
-			if (cliente.getIdentification()!=null){
-			    System.out.println("Se ha añadido el usuario a la base de datos");
-                // Una vez introducido en la base de datos, tendrá que volver a la pantalla principal e iniciar sesion
-			    JPrincipal jp = new JPrincipal();
-			    setVisible(false);
-                JOptionPane.showMessageDialog(null,"Se ha añadido el usuario.");
-			}
+                cliente.setContext("/addNewUser");
+                cliente.setNombre(txtPassword.getText());
+                cliente.setId(txtUser.getText());
+                cliente.setEmail(txtMail.getText());
+                // Con este contexto, como se puede ver en el servidor, solo es encesario saber el nombre y la contraseña. En un futuro se añadiran otros campos.
+                        // Como por ejemplo numero de telefono o email.
+                    try{
+
+                        cliente.run(cliente);
+                        //Si el servidor, en su mensaje de vuelta, nos devuelve true, indicará que que el usuario se ha añadido correctamente a la base de datos
+                        if (cliente.getIdentification()!=null){
+                            System.out.println("Se ha añadido el usuario a la base de datos");
+                            // Una vez introducido en la base de datos, tendrá que volver a la pantalla principal e iniciar sesion
+                            JPrincipal jp = new JPrincipal();
+                            setVisible(false);
+                        }
+                    }
+                    catch (Exception exception){
+                        JOptionPane.showMessageDialog(null,"El usuario con esa contraseña ya figura en la base de datos");
+                        JPrincipal jp = new JPrincipal();
+                        setVisible(false);
+                    }
                     
                 }
                 else
@@ -180,11 +187,19 @@ public class JRegister extends JFrame
                    cliente.setEmail(txtMail.getText());
                    // Con este contexto, como se puede ver en el servidor, solo es encesario saber el nombre y la contraseña. En un futuro se añadiran otros campos.
                    // Como por ejemplo numero de telefono o email.
-                   cliente.run(cliente);
-                   //Si el servidor, en su mensaje de vuelta, nos devuelve true, indicará que que el usuario se ha añadido correctamente a la base de datos
-                   if (cliente.getIdentification()!=null){
-                       System.out.println("Se ha añadido el usuario a la base de datos");
-                       // Una vez introducido en la base de datos, tendrá que volver a la pantalla principal e iniciar sesion
+                   try{
+
+                       cliente.run(cliente);
+                       //Si el servidor, en su mensaje de vuelta, nos devuelve true, indicará que que el usuario se ha añadido correctamente a la base de datos
+                       if (cliente.getIdentification()!=null){
+                           System.out.println("Se ha añadido el usuario a la base de datos");
+                           // Una vez introducido en la base de datos, tendrá que volver a la pantalla principal e iniciar sesion
+                           JPrincipal jp = new JPrincipal();
+                           setVisible(false);
+                       }
+                   }
+                   catch (Exception exception){
+                       JOptionPane.showMessageDialog(null,"El usuario con esa contraseña ya figura en la base de datos");
                        JPrincipal jp = new JPrincipal();
                        setVisible(false);
                    }

@@ -70,10 +70,12 @@ public class SocketServer extends Thread {
                 case "/getAccess":
                     //Cuando el usuario quiera identificarse, el servidor recogerá el customer introducido por el usuario
                     // Y el servidor confirmará que el customer introducido es el mismo que el que figura en la base de datos
-                    Customer customerIN= mensajeIn.getCustomer();
+                    //Customer customerIN= mensajeIn.getCustomer();
                     mensajeOut.setContext("/getAccessResponse");
 
                     session=new HashMap<>();
+                    Customer customerIN =(Customer) mensajeIn.getSession().get("Customer");
+
                     //session.put("Customer",null);
                     if (CustomerDAO.isInBase(customerIN)!=null){
                         // Si figura en la base, se modificará la salida y se pondrá a true. Cabe destacar que esta salida será la que determine si la

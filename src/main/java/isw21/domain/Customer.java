@@ -66,7 +66,7 @@ public class Customer implements Serializable{
     public boolean equals(Object o){
         if (o instanceof Customer){
             Customer customerIN=(Customer)o;
-            if (customerIN.getUsuario().equals(this.usuario)){
+            if (customerIN.getUsuario().equals(this.usuario) && customerIN.getContraseña().equals(this.contraseña)){
                 return true;
             }
             else{
@@ -114,4 +114,5 @@ public class Customer implements Serializable{
             controler.updateCheque(this,valorCheque);
         }
     }
+
 }

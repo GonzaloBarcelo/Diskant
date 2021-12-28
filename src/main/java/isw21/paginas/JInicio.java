@@ -154,7 +154,7 @@ public class JInicio extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				String n= JOptionPane.showInputDialog("Introduzca el comercio del que quiera buscar la oferta:");
+				String n= (String) JOptionPane.showInputDialog("Introduzca el comercio del que quiera buscar la oferta:");
 				pnlCentro.removeAll();
 				pnlCentro.setVisible(false);
 				System.out.println(n);

@@ -55,6 +55,14 @@ public class Client {
         customer2.setEmail(email);
         mensajeEnvio.setCustomer(customer2);
         mensajeEnvio.setSession(session);
+
+        //
+        Customer cust = (Customer) session.get("Customer");
+        System.out.println("Se esta iniciando "+cust.getUsuario());
+        System.out.println("Contraseña: "+cust.getContraseña());
+
+        //
+
         cliente.sent(mensajeEnvio,mensajeVuelta);
 
         //En el switch case establecemos qué se debe realizar con el mensaje devuelto por el servidor.
