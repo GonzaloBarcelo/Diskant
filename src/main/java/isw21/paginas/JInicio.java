@@ -154,7 +154,7 @@ public class JInicio extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				String n= JOptionPane.showInputDialog("Introduzca el comercio del que quiera buscar la oferta:",42);
+				String n= JOptionPane.showInputDialog("Introduzca el comercio del que quiera buscar la oferta:");
 				pnlCentro.removeAll();
 				pnlCentro.setVisible(false);
 				System.out.println(n);
@@ -162,7 +162,7 @@ public class JInicio extends JFrame
 				plOfertas.remove(0);
 				ArrayList<Oferta> plOfertasFiltradas= new ArrayList<Oferta>();
 				for (Oferta of: plOfertas){
-					if (of.getComercio().equals(n)){
+					if (of.getComercio().equals(n) || n.equals("")){
 						plOfertasFiltradas.add(of);
 					}
 				}
