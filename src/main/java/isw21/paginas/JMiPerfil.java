@@ -206,6 +206,13 @@ public class JMiPerfil extends JFrame
                 JOpinon opinon = new JOpinion();
             }
         });
+        btnAyuda.addActionListener(new ActionListener()
+        {
+          public void actionPerformed(ActionEvent e)
+          {
+            JOptionPane.showMessageDialog(null, "Para cualquier pregunta, escribenos a diskant@gmail.com");
+          }
+        });
 
         this.addWindowListener(new WindowAdapter() {
             @Override
