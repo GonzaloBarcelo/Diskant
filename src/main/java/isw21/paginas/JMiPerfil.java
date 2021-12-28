@@ -1,6 +1,12 @@
+package main.java.isw21.paginas;
+import main.java.isw21.client.Client;
+import main.java.isw21.descuentos.Oferta;
+import main.java.isw21.domain.Customer;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
@@ -11,17 +17,17 @@ import javax.swing.border.TitledBorder;
 public class JMiPerfil extends JFrame
 {
     //Este corchete public static no se pone en github 
-    public static void main(String args[])
-    {
-        new JMiPerfil();
+    //public static void main(String args[])
+    //{
+    //    new JMiPerfil();
         
-    }
+    //}
   
     /*Customer customer;
     Client cliente;*/
 
-    public JMiPerfil()
-    //public JMiPerfil(Customer customer, Client cliente, ArrayList<Oferta> ofertas)
+    //public JMiPerfil()
+    public JMiPerfil(Customer customer, Client cliente, ArrayList<Oferta> ofertas)
     {   
       /*this.customer=customer;
       this.cliente=cliente;*/
@@ -179,8 +185,8 @@ public class JMiPerfil extends JFrame
     {
       public void actionPerformed(ActionEvent e)
       {
-        JInicio inicio = new JInicio();
-        //JInicio inicio = new JInicio(customer, cliente);
+        //JInicio inicio = new JInicio();
+        JInicio inicio = new JInicio(customer, cliente);
       }
     });
 
@@ -188,8 +194,8 @@ public class JMiPerfil extends JFrame
     {
       public void actionPerformed(ActionEvent e)
       {
-        //JAgregar agregar = new JAgregar(Customer customer, Client cliente, ArrayList<Oferta> ofertas);
-        JAgregar agregar = new JAgregar();
+        JAgregar agregar = new JAgregar(customer, cliente, ofertas);
+        //JAgregar agregar = new JAgregar();
         setVisible(false);
       }
     });
