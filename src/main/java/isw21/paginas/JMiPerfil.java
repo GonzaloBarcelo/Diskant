@@ -86,43 +86,43 @@ public class JMiPerfil extends JFrame
       JButton btnCuenta = new JButton("Mi cuenta");
       btnCuenta.setBorder(BorderFactory.createLineBorder(new Color(150,150,150)));
       btnCuenta.setPreferredSize(new Dimension(500, 30));
-      btnCuenta.setBackground(new Color(34,20,43));
+      btnCuenta.setBackground(new Color(37, 150, 190));
       btnCuenta.setForeground(new Color(150,150,150));
 
       JButton btnConfiguracion = new JButton("Configuracion");
       btnConfiguracion.setBorder(BorderFactory.createLineBorder(new Color(150,150,150)));
       btnConfiguracion.setPreferredSize(new Dimension(500, 30));
-      btnConfiguracion.setBackground(new Color(34,20,43));
+      btnConfiguracion.setBackground(new Color(37, 150, 190));
       btnConfiguracion.setForeground(new Color(150,150,150));
 
       JButton btnAyuda = new JButton("Ayuda");
       btnAyuda.setBorder(BorderFactory.createLineBorder(new Color(150,150,150)));
       btnAyuda.setPreferredSize(new Dimension(500, 30));
-      btnAyuda.setBackground(new Color(34,20,43));
+      btnAyuda.setBackground(new Color(37, 150, 190));
       btnAyuda.setForeground(new Color(150,150,150));
 
       JButton btnPrivacidad = new JButton("Privacidad");
       btnPrivacidad.setBorder(BorderFactory.createLineBorder(new Color(150,150,150)));
       btnPrivacidad.setPreferredSize(new Dimension(500, 30));
-      btnPrivacidad.setBackground(new Color(34,20,43));
+      btnPrivacidad.setBackground(new Color(37, 150, 190));
       btnPrivacidad.setForeground(new Color(150,150,150));
 
       JButton btnSesion = new JButton("Cerrar sesion");
       btnSesion.setBorder(BorderFactory.createLineBorder(new Color(150,150,150)));
       btnSesion.setPreferredSize(new Dimension(500, 30));
-      btnSesion.setBackground(new Color(34,20,43));
+      btnSesion.setBackground(new Color(37, 150, 190));
       btnSesion.setForeground(new Color(150,150,150));
 
       JButton btnInvitar = new JButton("Invitar");
       btnInvitar.setBorder(BorderFactory.createLineBorder(new Color(150,150,150)));
       btnInvitar.setPreferredSize(new Dimension(500, 30));
-      btnInvitar.setBackground(new Color(34,20,43));
+      btnInvitar.setBackground(new Color(37, 150, 190));
       btnInvitar.setForeground(new Color(150,150,150));
 
       JButton btnOpinion = new JButton("¡Danos tu opinion!");
       btnOpinion.setBorder(BorderFactory.createLineBorder(new Color(150,150,150)));
       btnOpinion.setPreferredSize(new Dimension(500, 30));
-      btnOpinion.setBackground(new Color(34,20,43));
+      btnOpinion.setBackground(new Color(37, 150, 190));
       btnOpinion.setForeground(new Color(150,150,150));
 
 
