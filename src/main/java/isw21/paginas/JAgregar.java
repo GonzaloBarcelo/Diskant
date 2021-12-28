@@ -101,14 +101,9 @@ public class JAgregar extends JFrame
         pnlSur.setLayout(new GridLayout(1, 5));
 
         JButton btnMas = new JButton();
-        btnMas.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        ImageIcon imagenMas = new ImageIcon("src/main/java/isw21/media/Mas.png");
-        btnMas.setIcon(new ImageIcon(imagenMas.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
-
+        
         JButton btnLupa = new JButton();
-        btnLupa.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        ImageIcon imagenLupa = new ImageIcon("src/main/java/isw21/media/Lupa.png");
-        btnLupa.setIcon(new ImageIcon(imagenLupa.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
+
 
         JButton btnHome = new JButton();
         btnHome.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -116,14 +111,9 @@ public class JAgregar extends JFrame
         btnHome.setIcon(new ImageIcon(imagenHome.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
 
         JButton btnCorazon = new JButton();
-        btnCorazon.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        ImageIcon imagenCorazon = new ImageIcon("src/main/java/isw21/media/Corazon.png");
-        btnCorazon.setIcon(new ImageIcon(imagenCorazon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
 
         JButton btnMiPerfil= new JButton();
-        btnMiPerfil.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        ImageIcon imagen = new ImageIcon("src/main/java/isw21/media/Perfil.png");
-        btnMiPerfil.setIcon(new ImageIcon(imagen.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH)));
+
 
         pnlSur.add(btnMas);
         pnlSur.add(btnLupa);
