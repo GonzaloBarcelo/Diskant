@@ -99,6 +99,7 @@ public class JPrincipal extends JFrame
 
 		//this.pack();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+		this.setResizable(false);
 		this.setVisible(true); 
 		this.setLocation(500, 100);
 	}
