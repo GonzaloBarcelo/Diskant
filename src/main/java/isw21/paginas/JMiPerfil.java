@@ -16,21 +16,16 @@ import javax.swing.border.TitledBorder;
 
 public class JMiPerfil extends JFrame
 {
-    //Este corchete public static no se pone en github 
-    //public static void main(String args[])
-    //{
-    //    new JMiPerfil();
-        
-    //}
-  
-    /*Customer customer;
-    Client cliente;*/
 
-    //public JMiPerfil()
+  
+    Customer customer;
+    Client cliente;
+
+
     public JMiPerfil(Customer customer, Client cliente, ArrayList<Oferta> ofertas)
     {   
-      /*this.customer=customer;
-      this.cliente=cliente;*/
+      this.customer=customer;
+      this.cliente=cliente;
 
       setSize(600,600);
       this.setLayout(new BorderLayout());
@@ -185,7 +180,7 @@ public class JMiPerfil extends JFrame
     {
       public void actionPerformed(ActionEvent e)
       {
-        //JInicio inicio = new JInicio();
+
         JInicio inicio = new JInicio(customer, cliente);
       }
     });
@@ -195,21 +190,19 @@ public class JMiPerfil extends JFrame
       public void actionPerformed(ActionEvent e)
       {
         JAgregar agregar = new JAgregar(customer, cliente, ofertas);
-        //JAgregar agregar = new JAgregar();
+        
         setVisible(false);
       }
     });
 
 
-        
-        //LO DE ABAJO VA EN EL CODIGO
-        /*this.addWindowListener(new WindowAdapter() {
+        this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 JPrincipal jprinc = new JPrincipal();
 
             }
-        });*/
+        });
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         this.setVisible(true);
         this.setLocation(250, 100);
