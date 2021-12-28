@@ -190,6 +190,7 @@ public class JMiPerfil extends JFrame
             {
                 //JInicio inicio = new JInicio();
                 JInicio inicio = new JInicio(customer, cliente);
+                setVisible(false);
             }
         });
 

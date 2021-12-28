@@ -141,8 +141,57 @@ public class JInicio extends JFrame
 		pnlOeste.setPreferredSize(new Dimension(60, 60));
 		pnlOeste.setBackground(new Color(174,200,178));
 
+		btnHome.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				JInicio inicio = new JInicio(customer, cliente);
+				setVisible(false);
+			}
+		});
+
+		btnLupa.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				String n= JOptionPane.showInputDialog("Introduzca el comercio del que quiera buscar la oferta:",42);
+				pnlCentro.removeAll();
+				pnlCentro.setVisible(false);
+				System.out.println(n);
+				plOfertas = getDescuentos(customer);
+				plOfertas.remove(0);
+				ArrayList<Oferta> plOfertasFiltradas= new ArrayList<Oferta>();
+				for (Oferta of: plOfertas){
+					if (of.getComercio().equals(n)){
+						plOfertasFiltradas.add(of);
+					}
+				}
+				int l= plOfertasFiltradas.size();
+				//Esto habrá que cambiarlo, pero de momento con 16 está nice
+				pnlCentro.setLayout(new GridLayout(4, 4));
+
+				// Al iniciar la pestaña, se mostrarán los descuentos asociados a la cuenta
+
+				//Si no hay, se mostrará un mensaje: "En este momento no tienes descuentos".
+				if(plOfertasFiltradas == null || l == 0	){
+					JLabel lno = new JLabel("En este momento no tienes descuentos de ese comercio");
+					lno.setFont(fuente1);
+					pnlCentro.add(lno);
+					//pnlCentro.add(btnCrearDescuento);
+					//Quitar el descuento inicial de bienvenida
+				}
+				//En caso contrario visualizarán en el centro de la pestaña
+				else {
+					for (Oferta of : plOfertasFiltradas) {
+						//Para cada descuento que tenga el usuario, se llamará a la funcion mastrar. La cual organiza los descuentos y los muestra al usuario
+						mostrarDescuento(of,pnlCentro,fuente1);
 
 
+					}
+				}
+				pnlCentro.setVisible(true);
+			}
+		});
 
 //FUNCIONES
 		btnCorazon.addActionListener(new ActionListener() {
@@ -296,7 +345,6 @@ public class JInicio extends JFrame
 				}
 			}
 		});
-
 
 		btnInfo.addActionListener(new ActionListener() {
 			@Override
