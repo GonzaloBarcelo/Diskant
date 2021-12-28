@@ -180,7 +180,6 @@ public class JMiPerfil extends JFrame
     {
       public void actionPerformed(ActionEvent e)
       {
-
         JInicio inicio = new JInicio(customer, cliente);
       }
     });
