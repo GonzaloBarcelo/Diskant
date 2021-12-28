@@ -42,8 +42,8 @@ public class JOpinion extends JFrame
 		pnlCentro.setLayout(new GridLayout(1,5));
 		//pnlCentro.setPreferredSize(new Dimension(450, 100));
 
-		ImageIcon imagenGris = new ImageIcon("Gris.jpg");
-		ImageIcon imagenAmarillo = new ImageIcon("Amarillo.jpg");
+		ImageIcon imagenGris = new ImageIcon("src/main/java/isw21/media/Gris.jpg");
+		ImageIcon imagenAmarillo = new ImageIcon("src/main/java/isw21/media/Amarillo.jpg");
 		JButton btn1 = new JButton();
 		JButton btn2 = new JButton();
 		JButton btn3 = new JButton();
