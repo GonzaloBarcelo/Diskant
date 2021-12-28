@@ -73,6 +73,7 @@ public class JMiPerfil extends JFrame
         JLabel lblInfo = new JLabel("info");
         lblInfo.setBorder(BorderFactory.createLineBorder(new Color(150,150,150)));
         lblInfo.setPreferredSize(new Dimension(200, 110));
+        lblInfo.setBackground(new Color(17,90,29));
 
         pnlCentroNorte.add(lblCara);
         pnlCentroNorte.add(lblEspacio);
