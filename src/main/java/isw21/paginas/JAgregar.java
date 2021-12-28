@@ -100,9 +100,9 @@ public class JAgregar extends JFrame
         JPanel pnlSur = new JPanel();
         pnlSur.setLayout(new GridLayout(1, 5));
 
-        JButton btnMas = new JButton();
+        JLabel lblMas = new JLabel();
         
-        JButton btnLupa = new JButton();
+        JLabel lblLupa = new JLabel();
 
 
         JButton btnHome = new JButton();
@@ -110,16 +110,16 @@ public class JAgregar extends JFrame
         ImageIcon imagenHome = new ImageIcon("src/main/java/isw21/media/Home.png");
         btnHome.setIcon(new ImageIcon(imagenHome.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
 
-        JButton btnCorazon = new JButton();
+        JLabel lblCorazon = new JLabel();
 
-        JButton btnMiPerfil= new JButton();
+        JLabel lblMiPerfil= new JLabel();
 
 
-        pnlSur.add(btnMas);
-        pnlSur.add(btnLupa);
+        pnlSur.add(lblMas);
+        pnlSur.add(lblLupa);
         pnlSur.add(btnHome);
-        pnlSur.add(btnCorazon);
-        pnlSur.add(btnMiPerfil);
+        pnlSur.add(lblCorazon);
+        pnlSur.add(lblMiPerfil);
   //LADOS
       JPanel pnlEste = new JPanel();
       pnlEste.setPreferredSize(new Dimension(40, 60));
