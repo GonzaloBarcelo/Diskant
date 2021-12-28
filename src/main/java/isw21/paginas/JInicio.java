@@ -13,6 +13,8 @@ import main.java.isw21.descuentos.Oferta;
 import main.java.isw21.descuentos.Porcentaje;
 import main.java.isw21.domain.Customer;
 import main.java.isw21.client.Client;
+import main.java.isw21.io.IODescuento;
+
 import java.awt.datatransfer.StringSelection;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -142,6 +144,15 @@ public class JInicio extends JFrame
 
 
 //FUNCIONES
+		btnCorazon.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				IODescuento.escribirOferta(plOfertas,"comillas");
+
+			}
+		});
+
+
 		btnMas.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
