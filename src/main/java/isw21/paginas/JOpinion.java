@@ -3,6 +3,12 @@ import main.descuentos.Descuento;
 //import main.io.App;
 import main.paginas.*;*/
 
+
+package main.java.isw21.paginas;
+import main.java.isw21.client.Client;
+import main.java.isw21.descuentos.Oferta;
+import main.java.isw21.domain.Customer;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
