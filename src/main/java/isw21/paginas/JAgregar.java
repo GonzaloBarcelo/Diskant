@@ -163,6 +163,14 @@ public class JAgregar extends JFrame
         setVisible(false);
       }
     });
+    btnMiPerfil.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        JMiPerfil perfil = new JMiPerfil();
+        setVisible(false);
+      }
+    });
 
         //this.pack();
         //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
