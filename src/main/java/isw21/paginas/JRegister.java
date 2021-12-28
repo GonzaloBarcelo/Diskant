@@ -303,6 +303,7 @@ public class JRegister extends JFrame
         });
         this.setVisible(true);
         this.setSize(400,300);
+	this.setResizable(false);
         this.setLocation(480, 200);
 
     }
