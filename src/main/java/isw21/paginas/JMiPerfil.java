@@ -60,7 +60,6 @@ public class JMiPerfil extends JFrame
         JPanel pnlCentroNorte = new JPanel();
         pnlCentroNorte.setBackground(new Color(174,200,178));
         pnlCentroNorte.setLayout(new FlowLayout());
-        pnlCentroNorte.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         JLabel lblCara = new JLabel();
         ImageIcon imagenCara= new ImageIcon("src/main/java/isw21/media/Cara.png");
@@ -82,36 +81,41 @@ public class JMiPerfil extends JFrame
         JPanel pnlCentroCentro = new JPanel();
         pnlCentroCentro.setLayout(new FlowLayout());
         pnlCentroCentro.setBackground(new Color(174,200,178));
-        pnlCentroCentro.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-        JButton btnCuenta = new JButton("Mi cuenta");
-        btnCuenta.setBorder(BorderFactory.createLineBorder(new Color(150,150,150)));
-        btnCuenta.setPreferredSize(new Dimension(500, 30));
-        //btnCuenta.setBackground(Color.red);
+      JButton btnCuenta = new JButton("Mi cuenta");
+      btnCuenta.setBorder(BorderFactory.createLineBorder(new Color(150,150,150)));
+      btnCuenta.setPreferredSize(new Dimension(500, 30));
+      btnCuenta.setBackground(new Color(17,90,29));
 
-        JButton btnConfiguracion = new JButton("Configuracion");
-        btnConfiguracion.setBorder(BorderFactory.createLineBorder(new Color(150,150,150)));
-        btnConfiguracion.setPreferredSize(new Dimension(500, 30));
+      JButton btnConfiguracion = new JButton("Configuracion");
+      btnConfiguracion.setBorder(BorderFactory.createLineBorder(new Color(150,150,150)));
+      btnConfiguracion.setPreferredSize(new Dimension(500, 30));
+      btnConfiguracion.setBackground(new Color(17,90,29));
 
-        JButton btnAyuda = new JButton("Ayuda");
-        btnAyuda.setBorder(BorderFactory.createLineBorder(new Color(150,150,150)));
-        btnAyuda.setPreferredSize(new Dimension(500, 30));
+      JButton btnAyuda = new JButton("Ayuda");
+      btnAyuda.setBorder(BorderFactory.createLineBorder(new Color(150,150,150)));
+      btnAyuda.setPreferredSize(new Dimension(500, 30));
+      btnAyuda.setBackground(new Color(17,90,29));
 
-        JButton btnPrivacidad = new JButton("Privacidad");
-        btnPrivacidad.setBorder(BorderFactory.createLineBorder(new Color(150,150,150)));
-        btnPrivacidad.setPreferredSize(new Dimension(500, 30));
+      JButton btnPrivacidad = new JButton("Privacidad");
+      btnPrivacidad.setBorder(BorderFactory.createLineBorder(new Color(150,150,150)));
+      btnPrivacidad.setPreferredSize(new Dimension(500, 30));
+      btnPrivacidad.setBackground(new Color(17,90,29));
 
-        JButton btnSesion = new JButton("Cerrar sesion");
-        btnSesion.setBorder(BorderFactory.createLineBorder(new Color(150,150,150)));
-        btnSesion.setPreferredSize(new Dimension(500, 30));
+      JButton btnSesion = new JButton("Cerrar sesion");
+      btnSesion.setBorder(BorderFactory.createLineBorder(new Color(150,150,150)));
+      btnSesion.setPreferredSize(new Dimension(500, 30));
+      btnSesion.setBackground(new Color(17,90,29));
 
-        JButton btnInvitar = new JButton("Invitar");
-        btnInvitar.setBorder(BorderFactory.createLineBorder(new Color(150,150,150)));
-        btnInvitar.setPreferredSize(new Dimension(500, 30));
+      JButton btnInvitar = new JButton("Invitar");
+      btnInvitar.setBorder(BorderFactory.createLineBorder(new Color(150,150,150)));
+      btnInvitar.setPreferredSize(new Dimension(500, 30));
+      btnInvitar.setBackground(new Color(17,90,29));
 
-        JButton btnOpinion = new JButton("¡Danos tu opinion!");
-        btnOpinion.setBorder(BorderFactory.createLineBorder(new Color(150,150,150)));
-        btnOpinion.setPreferredSize(new Dimension(500, 30));
+      JButton btnOpinion = new JButton("¡Danos tu opinion!");
+      btnOpinion.setBorder(BorderFactory.createLineBorder(new Color(150,150,150)));
+      btnOpinion.setPreferredSize(new Dimension(500, 30));
+      btnOpinion.setBackground(new Color(17,90,29));
 
 
 
