@@ -57,9 +57,9 @@ public class Client {
         mensajeEnvio.setSession(session);
 
         //
-        Customer cust = (Customer) session.get("Customer");
+        /*Customer cust = (Customer) session.get("Customer");
         System.out.println("Se esta iniciando "+cust.getUsuario());
-        System.out.println("Contraseña: "+cust.getContraseña());
+        System.out.println("Contraseña: "+cust.getContraseña());*/
 
         //
 

@@ -194,13 +194,13 @@ public class JInicio extends JFrame
 		});
 
 //FUNCIONES
-		btnCorazon.addActionListener(new ActionListener() {
+		/*btnCorazon.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				IODescuento.escribirOferta(plOfertas,"comillas");
 
 			}
-		});
+		});*/
 
 
 		btnMas.addActionListener(new ActionListener()

@@ -78,7 +78,7 @@ public abstract class Oferta implements Serializable {
     public boolean equals(Object o){
         if (o instanceof Oferta){
             Oferta ofertaIN =(Oferta)o;
-            if (ofertaIN.getCodigo().equals(this.codigo)){
+            if (ofertaIN.getCodigo().equals(this.codigo) && ofertaIN.getComercio().equals(this.comercio)){
                 return true;
             }
             else{

@@ -12,7 +12,7 @@ public class IODescuento {
         FileInputStream fis=null;
         ObjectInputStream ois= null;
         try{
-            fis=new FileInputStream(entidad+".ofrt");
+            fis=new FileInputStream("src/main/java/isw21/apis/" +entidad+".ofrt");
             ois= new ObjectInputStream(fis);
             return (ArrayList<Oferta>) ois.readObject();
         }

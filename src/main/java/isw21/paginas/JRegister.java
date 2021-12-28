@@ -6,9 +6,16 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import main.java.isw21.client.Client;
 import main.java.isw21.configuration.PropertiesISW;
+import main.java.isw21.descuentos.ChequeRegalo;
+import main.java.isw21.descuentos.Descuento;
+import main.java.isw21.descuentos.Oferta;
+import main.java.isw21.descuentos.Porcentaje;
+import main.java.isw21.io.IODescuento;
 import main.java.isw21.message.Message;
 import main.java.isw21.domain.Customer;
 import org.apache.log4j.Logger;
@@ -131,20 +138,43 @@ public class JRegister extends JFrame
                 cliente.setNombre(txtPassword.getText());
                 cliente.setId(txtUser.getText());
                 cliente.setEmail(txtMail.getText());
+                cliente.run(cliente);
                 // Con este contexto, como se puede ver en el servidor, solo es encesario saber el nombre y la contraseña. En un futuro se añadiran otros campos.
                         // Como por ejemplo numero de telefono o email.
                     try{
 
-                        cliente.run(cliente);
                         //Si el servidor, en su mensaje de vuelta, nos devuelve true, indicará que que el usuario se ha añadido correctamente a la base de datos
                         if (cliente.getIdentification()!=null){
                             System.out.println("Se ha añadido el usuario a la base de datos");
                             // Una vez introducido en la base de datos, tendrá que volver a la pantalla principal e iniciar sesion
+                            if(txtMail.getText().contains("comillas")){
+                                cliente.setContext("/addDescuento");
+                                HashMap<String,Object> session= new HashMap<String,Object>();
+                                ArrayList<Oferta> ofertas = IODescuento.leerOfertas("comillas");
+                                int tipo;
+                                for(Oferta o: ofertas){
+                                    if (o instanceof Descuento){
+                                        tipo = 0;
+                                    }else if (o instanceof Porcentaje){
+                                        tipo = 1;
+                                    }else if (o instanceof ChequeRegalo){
+                                        tipo = 2;
+                                    }else{
+                                        tipo = 0;
+                                    }
+                                    session.put("Descuento", o);
+                                    session.put("Tipo",tipo);
+                                    session.put("Customer",cliente.getIdentification());
+                                    cliente.setSession(session);
+                                    cliente.run(cliente);
+                                }
+                            }
                             JPrincipal jp = new JPrincipal();
                             setVisible(false);
                         }
                     }
                     catch (Exception exception){
+
                         JOptionPane.showMessageDialog(null,"El usuario con esa contraseña ya figura en la base de datos");
                         JPrincipal jp = new JPrincipal();
                         setVisible(false);
@@ -194,6 +224,28 @@ public class JRegister extends JFrame
                        if (cliente.getIdentification()!=null){
                            System.out.println("Se ha añadido el usuario a la base de datos");
                            // Una vez introducido en la base de datos, tendrá que volver a la pantalla principal e iniciar sesion
+                           if(txtMail.getText().contains("comillas")){
+                               cliente.setContext("/addDescuento");
+                               HashMap<String,Object> session= new HashMap<String,Object>();
+                               ArrayList<Oferta> ofertas = IODescuento.leerOfertas("comillas");
+                               int tipo;
+                               for(Oferta o: ofertas){
+                                   if (o instanceof Descuento){
+                                       tipo = 0;
+                                   }else if (o instanceof Porcentaje){
+                                       tipo = 1;
+                                   }else if (o instanceof ChequeRegalo){
+                                       tipo = 2;
+                                   }else{
+                                       tipo = 0;
+                                   }
+                                   session.put("Descuento", o);
+                                   session.put("Tipo",tipo);
+                                   session.put("Customer",cliente.getIdentification());
+                                   cliente.setSession(session);
+                                   cliente.run(cliente);
+                               }
+                           }
                            JPrincipal jp = new JPrincipal();
                            setVisible(false);
                        }
