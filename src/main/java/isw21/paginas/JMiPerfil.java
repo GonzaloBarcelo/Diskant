@@ -11,6 +11,16 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.io.IOException;
+import java.io.EOFException;
+
+
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.util.ArrayList;
+import java.util.Collection;
 
 
 
@@ -213,6 +223,15 @@ public class JMiPerfil extends JFrame
             JOptionPane.showMessageDialog(null, "Para cualquier pregunta, escribenos a diskant@gmail.com");
           }
         });
+        btnPrivacidad.addActionListener(new ActionListener()
+        {
+          public void actionPerformed(ActionEvent e)
+          {
+ 
+            Collection<String> s = JMiPerfil.importTexto();
+            JOptionPane.showMessageDialog(null,s);
+          }
+        });
 
         this.addWindowListener(new WindowAdapter() {
             @Override
@@ -228,4 +247,24 @@ public class JMiPerfil extends JFrame
 
 
     }
+     public static Collection<String> importTexto()
+        {
+          Collection<String> texto = new ArrayList<String>();
+          try
+          {
+            FileReader fr = new FileReader("Privacidad.txt");
+            BufferedReader br = new BufferedReader(fr);
+            String linea = null;
+            while((linea = br.readLine()) != null)
+            {
+              texto.add(linea);
+
+            }
+          }
+          catch(IOException ioe)
+          {
+            ioe.printStackTrace();
+          }
+          return texto;
+        }
 }
