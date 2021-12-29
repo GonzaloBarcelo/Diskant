@@ -10,15 +10,13 @@ import java.util.HashMap;
 
 import main.java.isw21.client.Client;
 import main.java.isw21.configuration.PropertiesISW;
-import main.java.isw21.paginas.JRegister;
 import org.apache.log4j.Logger;
-import main.java.isw21.client.Client;
-import main.java.isw21.configuration.PropertiesISW;
-import main.java.isw21.message.Message;
 import main.java.isw21.domain.Customer;
-import org.apache.log4j.Logger;
-import main.java.isw21.paginas.JPrincipal;
 
+/**
+ * Ventana para logearse dentro de la aplicación comprobando que el usuario y la contraseña están en la base de datos.
+ * @version 0.2
+ */
 public class JLogin extends JFrame
 {
     public Boolean logCorrect;

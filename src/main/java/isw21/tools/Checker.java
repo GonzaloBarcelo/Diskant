@@ -1,5 +1,9 @@
 package main.java.isw21.tools;
 
+/**
+ * Clase para chequear que hay solo dígitos en una cadena de caracteres.
+ * @version 0.3
+ */
 public class Checker {
     public static boolean onlyDigits(String str, int n)
     {

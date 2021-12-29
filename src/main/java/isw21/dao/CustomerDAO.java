@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import main.java.isw21.controler.CustomerControler;
 import main.java.isw21.domain.Customer;
-import main.java.isw21.dao.ConnectionDAO;
 
 /**
  * Clase encargada de ejecutar los metodos asociados a los customers

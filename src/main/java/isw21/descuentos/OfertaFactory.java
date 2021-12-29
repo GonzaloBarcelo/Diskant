@@ -1,5 +1,9 @@
 package main.java.isw21.descuentos;
 
+/**
+ * Clase que se encarga de crear ofertas distintos tipos de ofertas.
+ * @version 0.3
+ */
 public class OfertaFactory extends AbstractFactory{
     @Override
     public Oferta getOferta(String txtEntidadText, String fechaIni, String fechaFin, int i, String text, int p, double gastado) {

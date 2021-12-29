@@ -6,20 +6,21 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import main.java.isw21.controler.CustomerControler;
-import main.java.isw21.dao.OfertaDAO;
 import main.java.isw21.descuentos.ChequeRegalo;
 import main.java.isw21.descuentos.Descuento;
 import main.java.isw21.descuentos.Oferta;
 import main.java.isw21.descuentos.Porcentaje;
 import main.java.isw21.domain.Customer;
 import main.java.isw21.client.Client;
-import main.java.isw21.io.IODescuento;
 
 import java.awt.datatransfer.StringSelection;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 
+/**
+ * La ventana principal al abrir la aplicación en la que se muestran las ofertas del usuario.
+ * @version 0.3
+ */
 public class JInicio extends JFrame
 {
 	Client cliente;
@@ -150,6 +151,7 @@ public class JInicio extends JFrame
 			}
 		});
 
+		//Al pulsar la lupa, te llevará a una ventana en la que podrás buscar por comercio entre tus descuentos
 		btnLupa.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -202,7 +204,7 @@ public class JInicio extends JFrame
 			}
 		});*/
 
-
+		// El botón del más te lleva a agregar descuentos
 		btnMas.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -216,6 +218,8 @@ public class JInicio extends JFrame
 
 			}
 		});
+
+		//El botón de la cara te lleva al perfil
 		btnMiPerfil.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -231,6 +235,7 @@ public class JInicio extends JFrame
         });
         timer.start();*/
 
+		// El botón del corazón te lleva al informe de ahorro
 		btnCorazon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JAhorro ahorro = new JAhorro(customer, cliente);
@@ -251,8 +256,13 @@ public class JInicio extends JFrame
 		this.setLocation(250, 100);
 	}
 
-	// Metodo de visualización de descuentos
-	// Se ejecutará para los descuentos que tenga el usuario
+
+	/**
+	 * Método de visualización de descuentos. Se ejecutará para los descuentos que tenga el usuario
+	 * @param i oferta a mostrar
+	 * @param pnlCentro el panel donde se muestran
+	 * @param fuente1 la letra y color al mostrarlo
+	 */
 	private void mostrarDescuento(Oferta i , JPanel pnlCentro, Font fuente1) {
 		String tipo = comprobarTipo(i);
 		JPanel pnlDescuento = new JPanel();
@@ -294,6 +304,7 @@ public class JInicio extends JFrame
 		pnlBotones.add(btnEliminar);
 		pnlDescuento.add(pnlBotones);
 
+		//Botón que te permite copiar al portapapeles el descuento que quieras
 		btnCopiar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -304,6 +315,7 @@ public class JInicio extends JFrame
 			}
 		});
 
+		// Botón que te permite usar tu descuento, se añadirá a tu informe de ahorro
 		btnUsar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -371,6 +383,7 @@ public class JInicio extends JFrame
 			}
 		});
 
+		// Se muestra la información del descuento
 		btnInfo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -380,6 +393,7 @@ public class JInicio extends JFrame
 			}
 		});
 
+		//Se elimina la oferta del usuario
 		btnEliminar.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -423,6 +437,12 @@ public class JInicio extends JFrame
 	}
 
 	// Metodo que obtiene los descuentos de cada cliente.
+
+	/**
+	 * Obtiene los descuentos del usuario, para poder mostrarlos luego
+	 * @param customer
+	 * @return
+	 */
 	public ArrayList<Oferta> getDescuentos(Customer customer)
 	{
 		//Hacemos la solicitud a la base de datos medainte un mensaje con contexto de getDescuentos.
@@ -442,6 +462,12 @@ public class JInicio extends JFrame
 		return cliente.getDescuentos();
 	}
 
+	/**
+	 * Permite eliminar descuentos del usuario a través de la fachada, del controler y los DAO
+	 * @param i
+	 * @param pnlCentro
+	 * @param fuente1
+	 */
 	private void eliminarDescuento(Oferta i, JPanel pnlCentro, Font fuente1){
 		String eliminado= i.getComercio();
 

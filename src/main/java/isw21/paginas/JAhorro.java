@@ -1,16 +1,16 @@
 package main.java.isw21.paginas;
 
 import main.java.isw21.client.Client;
-import main.java.isw21.descuentos.Oferta;
 import main.java.isw21.domain.Customer;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
+/**
+ * Ventana en la que se muestra el ahorro del usuario, dividido por el tipo de descuentos.
+ */
 public class JAhorro extends JFrame {
     Customer customer;
     Client cliente;

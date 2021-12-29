@@ -1,5 +1,9 @@
 package main.java.isw21.descuentos;
 
+/**
+ * Clase para los cheques regalos, tenemos que tener en cuenta la cantidad gastada.
+ * @version 0.3
+ */
 public class ChequeRegalo extends Oferta {
     int valor;
     double gastado;

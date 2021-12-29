@@ -23,7 +23,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
 
-
+/**
+ * Ventana en la que se muestra la información del perfil del usuario, con varios botones para consultar varias cosas, entre ellas la privacidad de la aplicación
+ * @version 0.3
+ */
 
 public class JMiPerfil extends JFrame
 {
@@ -228,7 +231,7 @@ public class JMiPerfil extends JFrame
         {
           public void actionPerformed(ActionEvent e)
           {
- 
+
             Collection<String> s = JMiPerfil.importTexto();
             JOptionPane.showMessageDialog(null,s);
           }

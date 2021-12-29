@@ -3,31 +3,22 @@ package main.java.isw21.paginas;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.TitledBorder;
 
 //package main.java.isw21.paginas;
 
 import main.java.isw21.client.Client;
-import main.java.isw21.descuentos.OfertaFactory;
 import main.java.isw21.domain.Customer;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.*;
 
-import main.java.isw21.tools.Checker;
 import main.java.isw21.descuentos.Oferta;
 
 
-
+/**
+ * Ventana que nos permite agregar descuentos
+ * @version 0.3
+ */
 public class JAgregar extends JFrame
 {
     Customer customer;
@@ -135,7 +126,7 @@ public class JAgregar extends JFrame
       this.add(pnlOeste, BorderLayout.WEST);
         
 //FUNCIONES
-
+    //Si pinchamos en el lápiz se crea una ventana en la que podemos añadir un descuento
     btnLapiz.addActionListener(new ActionListener()
     {
       public void actionPerformed(ActionEvent e)

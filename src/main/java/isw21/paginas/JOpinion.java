@@ -1,14 +1,14 @@
 
 package main.java.isw21.paginas;
-import main.java.isw21.client.Client;
-import main.java.isw21.descuentos.Oferta;
-import main.java.isw21.domain.Customer;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-
+/**
+ * Ventana en la que el usuario puede valorar la aplicación con estrellas.
+ * @version 0.3
+ */
 
 public class JOpinion extends JFrame
 {

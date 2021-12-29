@@ -4,7 +4,9 @@ package main.java.isw21.descuentos;
 
 import java.io.Serializable;
 
-
+/**
+ * Clase padre de todos los tipos de ofertas diferentes que hay
+ */
 public abstract class Oferta implements Serializable {
 
     // para definir un descuento, será necesario conocer diversos parametros:
@@ -74,6 +76,11 @@ public abstract class Oferta implements Serializable {
         return codigo;
     }
 
+    /**
+     * Método para comparar dos ofertas, las consideramos igual si su código y su comercio es el mismo
+     * @param o oferta a comparar
+     * @return true si son iguales y false si no
+     */
     @Override
     public boolean equals(Object o){
         if (o instanceof Oferta){

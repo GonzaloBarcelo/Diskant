@@ -5,10 +5,12 @@ import main.java.isw21.controler.CustomerControler;
 
 import java.io.Serializable;
 
+/**
+ * Clase para los clientes
+ * @version 0.3
+ */
 public class Customer implements Serializable{
-    /**
-     *
-     */
+
     // Por ahora solo se almacenará la contrseña y el nombre de usuario. En el rpoximo Sprint se añadiran más
     // como por ejemplo mail, numero de telefono y grupos a los que pertenece.
 
@@ -62,6 +64,13 @@ public class Customer implements Serializable{
     //Metodo equals --> Establecemos que para que un usuario sea igual a otro debe tener el nombre y la contraseña igual
     //En un futuro cambiará y se podrá acceder tambien por mail y por correo electrónico.
     // El método es util  en las funciones de añadir usuario y login.
+
+    /**
+     * Establecemos que para que un usuario sea igual a otro debe tener el nombre y la contraseña igual.
+     * El método es util  en las funciones de añadir usuario y login.
+     * @param o el customer a comparar
+     * @return true si es el mismo y false si no.
+     */
     @Override
     public boolean equals(Object o){
         if (o instanceof Customer){
@@ -90,6 +99,11 @@ public class Customer implements Serializable{
         return ahorrado;
     }
 
+    /**
+     * Esta función nos permite modificar los valores de ahorro del usuario
+     * @param tipo el tipo de descuento a modificar
+     * @param valor el valor añadido que se ha ahorrado al utilizar una oferta
+     */
     public void setAhorrado(String tipo, double valor){
         CustomerControler controler = new CustomerControler();
         if (tipo == "Descuento") {

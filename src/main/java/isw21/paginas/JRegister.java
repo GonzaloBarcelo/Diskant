@@ -16,10 +16,11 @@ import main.java.isw21.descuentos.Descuento;
 import main.java.isw21.descuentos.Oferta;
 import main.java.isw21.descuentos.Porcentaje;
 import main.java.isw21.io.IODescuento;
-import main.java.isw21.message.Message;
-import main.java.isw21.domain.Customer;
 import org.apache.log4j.Logger;
 
+/**
+ * Ventana para registrarse. Tiene comprobación de contraseña y carga las apis correspondientes al correo introducido.
+ */
 public class JRegister extends JFrame
 {
     public static void main(String args[])
@@ -147,6 +148,7 @@ public class JRegister extends JFrame
                         if (cliente.getIdentification()!=null){
                             System.out.println("Se ha añadido el usuario a la base de datos");
                             // Una vez introducido en la base de datos, tendrá que volver a la pantalla principal e iniciar sesion
+                            // Si el usuario tiene un correo de comillas, se le cargarán una serie de descuentos directamente.
                             if(txtMail.getText().contains("comillas")){
                                 cliente.setContext("/addDescuento");
                                 HashMap<String,Object> session= new HashMap<String,Object>();

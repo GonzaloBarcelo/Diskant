@@ -14,13 +14,15 @@ import java.util.HashMap;
 
 import main.java.isw21.controler.CustomerControler;
 import main.java.isw21.controler.OfertaControler;
-import main.java.isw21.dao.CustomerDAO;
-import main.java.isw21.dao.OfertaDAO;
 import main.java.isw21.descuentos.ChequeRegalo;
 import main.java.isw21.descuentos.Oferta;
 import main.java.isw21.domain.Customer;
 import main.java.isw21.message.Message;
 
+/**
+ * Clase servidor que dialoga con el cliente para manipular la información necesaria para el funcionamiento de la aplicación a través de los DAOs.
+ * @version 0.3
+ */
 public class SocketServer extends Thread {
     public static final int PORT_NUMBER = 8081;
 
@@ -33,7 +35,9 @@ public class SocketServer extends Thread {
         start();
     }
 
-    //Codigo de ejecucion continua en el servidor
+    /**
+     * Código de ejecución continua en el servidor
+     */
     public void run() {
         InputStream in = null;
         OutputStream out = null;

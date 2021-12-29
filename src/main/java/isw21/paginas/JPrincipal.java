@@ -6,6 +6,10 @@ import java.awt.event.*;
 
 import main.java.isw21.paginas.*;
 
+/**
+ * Ventana que salta al abrir la aplicación. Desde ella puedes ir a hacer login o register.
+ * @version 0.1
+ */
 public class JPrincipal extends JFrame
 {
 	public static void main(String args[])
