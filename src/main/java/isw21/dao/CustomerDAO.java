@@ -9,9 +9,18 @@ import java.util.ArrayList;
 import main.java.isw21.controler.CustomerControler;
 import main.java.isw21.domain.Customer;
 import main.java.isw21.dao.ConnectionDAO;
-// Clase encargada de ejecutar los metodos asociados a los customers, como getClientes
+
+/**
+ * Clase encargada de ejecutar los metodos asociados a los customers
+ * @version 0.3
+ */
 public class CustomerDAO {
 
+    /**
+     * Llama a la base de datos para obtener un cliente
+     * @param lista lista a la que se van a añadir los clientes
+     * @return la lista que se le pasa por parámetro para el test
+     */
     public static ArrayList<Customer> getClientes(ArrayList<Customer> lista) {
         Connection con=ConnectionDAO.getInstance().getConnection();
         try (PreparedStatement pst = con.prepareStatement("SELECT * FROM usuarios");
@@ -27,6 +36,11 @@ public class CustomerDAO {
         return  lista;
     }
 
+    /**
+     * LLama a la base de datos para añadir un cliente a la base de datos
+     * @param customer el cliente a añadir
+     * @return
+     */
     public static Customer addCliente(Customer customer){
         //Deberemos comprobar que el cliente a añadir no se encuentra en la base de datos
         if (CustomerDAO.isInBase(customer)==null){
@@ -48,6 +62,11 @@ public class CustomerDAO {
         }
     }
 
+    /**
+     * Llama a la base de datos para comprobar si el usuario está en la base de datos
+     * @param customerIN el customer que queremos ver si está en la base de datos
+     * @return El customer si está en la base y null si no está
+     */
     public static Customer isInBase(Customer customerIN){
         CustomerControler customerControler=new CustomerControler();
         ArrayList<Customer> listaCust=new ArrayList<Customer>();
@@ -62,6 +81,11 @@ public class CustomerDAO {
         return null;
     }
 
+    /**
+     * Llama a la base de datos para actualizar la cantidad ahorrada en descuentos del usuario
+     * @param customer el cliente a quien pertence el descuento gastado
+     * @param valor el valor del descuento
+     */
     public static void updateDescuento(Customer customer, double valor){
         Connection con=ConnectionDAO.getInstance().getConnection();
         try (PreparedStatement pst = con.prepareStatement("UPDATE usuarios SET descuento = " + valor + " WHERE usuario = '" + customer.getUsuario()  + "';");
@@ -104,6 +128,11 @@ public class CustomerDAO {
 
     }
 
+    /**
+     * Llama a la base de datos para actualizar la cantidad ahorrada en cheques del usuario
+     * @param customer el cliente a quien pertence el cheque gastado
+     * @param valorCheque el valor de la cantidad gastada del cheque
+     */
     public static void updateCheque(Customer customer, double valorCheque) {
         Connection con=ConnectionDAO.getInstance().getConnection();
         try (PreparedStatement pst = con.prepareStatement("UPDATE usuarios SET regalo = " + valorCheque + " WHERE usuario = '" + customer.getUsuario()  + "';");
@@ -115,6 +144,12 @@ public class CustomerDAO {
         }
     }
 
+    /**
+     * Llama a la base de datos para actualizar la cantidad ahorrada en porcentajes del usuario
+     * @param customer el cliente a quien pertence el porcentaje gastado
+     * @param valorPorcentaje el valor del porcentaje
+     * @param numPorcentajes el número de porcentajes usados (para hacer la media)
+     */
     public static void updatePorcentaje(Customer customer, double valorPorcentaje, int numPorcentajes) {
         Connection con=ConnectionDAO.getInstance().getConnection();
         try (PreparedStatement pst = con.prepareStatement("UPDATE usuarios SET porcentaje = " + valorPorcentaje + ", numperc = " + numPorcentajes +" WHERE usuario = '" + customer.getUsuario()  + "';");

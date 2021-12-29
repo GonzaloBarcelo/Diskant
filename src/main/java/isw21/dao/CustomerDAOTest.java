@@ -5,6 +5,10 @@ import main.java.isw21.domain.Customer;
 
 import java.util.ArrayList;
 
+/**
+ * Clase para testear el customerDAO utilizando JUnit
+ * @version 0.2
+ */
 public class CustomerDAOTest extends TestCase {
     public ArrayList<Customer> clientes = new ArrayList<>();
     public ArrayList<Customer> clientesVac = new ArrayList<>();

@@ -1,4 +1,4 @@
-//Cla se encargada del dialogo entre servidor y cliente
+
 package main.java.isw21.client;
 
 //Importamos todas la clases neceaarios para el correcto funcionamiento de la conexión
@@ -19,7 +19,13 @@ import org.apache.log4j.Logger;
 import main.java.isw21.domain.Customer;
 import main.java.isw21.message.Message;
 
+/**
+ * Clase encargada del dialogo entre servidor y cliente
+ * @version 0.1
+ */
+
 public class Client {
+
 
     //Establecemos todos los campos que necesarios para dicha conexión: host, port, nombre del cliente, contexto, id, identifiación.logger, descuentos asociados a la cuenta y la session (elemento que viaja entre el servidor
     // el cliente y continene toda la informacion para el correcto funcionamiento del servidor)
@@ -31,14 +37,19 @@ public class Client {
     static String id;
     static Customer identification;
     final static Logger logger = Logger.getLogger(Client.class);
+
+    /**
+     * Hashmap que se utiliza para pasar información entre cliente y servidor
+     */
     public HashMap<String,Object> session=new HashMap<String, Object>();
     public ArrayList<Oferta> ofertas;
 
-    //Para iniciar el cliete, primero debemos haberlo creado, para ello debemos especificar en que puerto y se aloja
-    // y su host.
-    //
-    // El metodo run nos servirá para poder realizar la conexion entre cliente y servidor. Este método utilizará la informacion aosciada
-    //previamente al cliente como el contexto en el que se ejecuta o los campos necesarios para su desarrollo.
+
+    /**
+     * El metodo run nos servirá para poder realizar la conexion entre cliente y servidor.
+     * Este método utilizará la informacion aosciada previamente al cliente como el contexto en el que se ejecuta o los campos necesarios para su desarrollo.
+     * @param cliente cliente con el que se asocia
+     */
 
     public void run(Client cliente) {
 
@@ -67,6 +78,7 @@ public class Client {
         cliente.sent(mensajeEnvio,mensajeVuelta);
 
         //En el switch case establecemos qué se debe realizar con el mensaje devuelto por el servidor.
+
         switch (mensajeVuelta.getContext()) {
             //La respuesta al añadido de un descuento será el descuento añadido. Si este ya figura en la base de datos este será nulo.
 
@@ -104,9 +116,9 @@ public class Client {
             // Al igual que en el caso del new user, solo se podrá acceder a los decuentos si se acaba de registar o el login ha sido satisfactorio.
             case "/getAccessResponse":
                 //Extraemos el valor asociado a Customer en la sesion del mensaje de vuelta
-                // En el mensaje de vuelta, el servidor habrá puesto como true o como false este campo
+                // En el mensaje de vuelta, el servidor habrá puesto como null o como un customer este campo
                 // dependiendo de si la identificación ha sido correcta o no.
-                // Si la respuesta del servidor es True, la identificacion ha sido correcta y desde ese momento
+                // Si la respuesta del servidor es un customer, la identificacion ha sido correcta y desde ese momento
                 // El usuario podrá acceder a todo su contenido
                 identification = (Customer)(mensajeVuelta.getSession().get("Customer"));
                 break;
@@ -129,12 +141,23 @@ public class Client {
         //System.out.println("3.- En Main.- El valor devuelto es: "+((String)mensajeVuelta.getSession().get("Nombre")));
     }
 
+    /**
+     * Para iniciar el cliete, primero debemos haberlo creado, para ello debemos especificar en que puerto y se aloja
+     * y su host.
+     * @param host
+     * @param port
+     */
     public Client(String host, int port) {
         this.host=host;
         this.port=port;
     }
 
-    //Metodo de envio y recibo de mensajes entre servidor y cliente
+
+    /**
+     * Método de envio y recibo de mensajes entre servidor y cliente
+     * @param messageOut mensaje que envía al servidor
+     * @param messageIn mensaje que recibe del servidor
+     */
     public void sent(Message messageOut, Message messageIn) {
         try {
 

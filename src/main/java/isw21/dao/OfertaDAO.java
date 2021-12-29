@@ -10,8 +10,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Clase encargada de hacer las queries a la tabla de descuentos o usudescs
+ * @version 0.3
+ */
 public class OfertaDAO {
 
+    /**
+     * Llama a la base de datos para añadir una oferta
+     * @param customer el cliente a quien pertenece el descuento
+     * @param oferta la oferta a añadir
+     * @param tipo el tipo de oferta: 0 descuento, 1 porcentaje, 2 cheque.
+     * @return
+     */
     public static Oferta addDescuento(Customer customer, Oferta oferta, int tipo) {
         // iniciamos la conexion con la base de datos
         Connection con = ConnectionDAO.getInstance().getConnection();
@@ -41,6 +52,11 @@ public class OfertaDAO {
     }
 
 
+    /**
+     * Llama a la base de datos para obtener los descuentos de un usuario
+     * @param customer el cliente que solicita los descuentos
+     * @param lista la lista con ofertas a la que se añaden los descuentos
+     */
     public static ArrayList<Oferta> getDescuentos(ArrayList<Oferta> lista, Customer customer){
         Connection con = ConnectionDAO.getInstance().getConnection();
         if(lista == null || lista.size() == 0)
@@ -70,6 +86,10 @@ public class OfertaDAO {
         return lista;
     }
 
+    /**
+     * Método que devuelve todos los descuentos de la base de datos
+     * @return todos los descuentos
+     */
     private static ArrayList<Oferta> getDescuentosTotal(){
         //Como debemos extraer descuentos, necesitamos conexion a la base de datos, por lo que tenemos que gnerar una conexion
         Connection con = ConnectionDAO.getInstance().getConnection();
@@ -92,6 +112,11 @@ public class OfertaDAO {
         return lista;
     }
 
+    /**
+     * Llama a la base de datos para eliminar una oferta
+     * @param customer el cliente a quien pertenece el descuento
+     * @param oferta la oferta a eliminar
+     */
     public static void eliminarDescuento(Customer customer, Oferta oferta){
         Connection con = ConnectionDAO.getInstance().getConnection();
         try {
@@ -104,6 +129,11 @@ public class OfertaDAO {
         }
     }
 
+    /**
+     * Comprueba si un descuento ya está en la base de datos.
+     * @param ofertaIN la oferta a comprobar
+     * @return true si está y false si no
+     */
     private static boolean isInBase(Oferta ofertaIN) {
         ArrayList<Oferta> listaDesc=new ArrayList<Oferta>();
         //extraemos la lista de customers y vemos si el introducido figura en ella
@@ -116,6 +146,11 @@ public class OfertaDAO {
         return false;
     }
 
+    /**
+     * Llama a la base de datos para actualizar lo que se ha gastado de una oferta
+     * @param customer el cliente a quien pertenece el descuento
+     * @param cheque el cheque que se ha utilizado
+     */
     public static void updateGastado(Customer customer,ChequeRegalo cheque){
         Connection con = ConnectionDAO.getInstance().getConnection();
         try (PreparedStatement pst = con.prepareStatement("UPDATE usudescs SET gastado = " + cheque.getGastado() + " WHERE usuario = '" + customer.getUsuario()  + "' AND descuento = '" + cheque.getCodigo() + "';");

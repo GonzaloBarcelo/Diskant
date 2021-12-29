@@ -7,6 +7,10 @@ import main.java.isw21.domain.Customer;
 
 import java.util.ArrayList;
 
+/**
+ * Clase para testear OfertaDAO
+ * version 0.2
+ */
 public class OfertaDAOTest extends TestCase {
     private static OfertaDAO dDAO=null;
     private Customer customer= new Customer("test","test");
