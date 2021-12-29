@@ -21,6 +21,7 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Random;
 
 
 
@@ -230,6 +231,17 @@ public class JMiPerfil extends JFrame
  
             Collection<String> s = JMiPerfil.importTexto();
             JOptionPane.showMessageDialog(null,s);
+          }
+        });
+        btnInvitar.addActionListener(new ActionListener()
+        {
+          public void actionPerformed(ActionEvent e)
+          {
+            int min_val = 10000000;
+            int max_val = 99999999;
+            Random ran = new Random();
+            int x = ran.nextInt(max_val) + min_val;
+            JOptionPane.showMessageDialog(null,"El codigo para invitar a otra persona es: "+x);
           }
         });
 
