@@ -252,7 +252,7 @@ public class JMiPerfil extends JFrame
           Collection<String> texto = new ArrayList<String>();
           try
           {
-            FileReader fr = new FileReader("Privacidad.txt");
+            FileReader fr = new FileReader("src/main/java/isw21/media/Privacidad.txt");
             BufferedReader br = new BufferedReader(fr);
             String linea = null;
             while((linea = br.readLine()) != null)
