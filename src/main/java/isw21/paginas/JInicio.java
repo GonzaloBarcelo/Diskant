@@ -307,6 +307,7 @@ public class JInicio extends JFrame
 		btnUsar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				HashMap<String,Object> session= new HashMap<String,Object>();
 				if (i instanceof ChequeRegalo){
 					ChequeRegalo cheque = (ChequeRegalo) i;
 					String seleccion = JOptionPane.showInputDialog(null,"Qué cantidad del cheque has gastado? (número)");
@@ -314,14 +315,22 @@ public class JInicio extends JFrame
 						double valorCheque = Double.parseDouble(seleccion);
 						if (valorCheque + cheque.getGastado() >= cheque.getValor()){
 							JOptionPane.showMessageDialog(null,"El cheque se ha agotado. Se eliminará de tus descuentos");
-							cheque.setGastado(cheque.getValor());
 							customer.setAhorrado("Cheque",cheque.getValor()-cheque.getGastado());
+							cheque.setGastado(cheque.getValor());
 							eliminarDescuento(i,pnlCentro,fuente1);
 						}else {
 							customer.setAhorrado("Cheque", valorCheque);
 							cheque.setGastado(valorCheque + cheque.getGastado());
 						}
-						OfertaDAO.updateGastado(customer,cheque);
+						double[] ahorrado = customer.getAhorrado();
+						//lo actualizamos en la base de datos
+						cliente.setContext("/updateCheque");
+						session.put("Customer",customer);
+						session.put("Cheque",cheque);
+						session.put("Ahorrado",ahorrado[2]);
+						cliente.setSession(session);
+						cliente.run(cliente);
+						//OfertaDAO.updateGastado(customer,cheque);
 						setVisible(false);
 						new JInicio(customer,cliente);
 
@@ -336,8 +345,24 @@ public class JInicio extends JFrame
 						//setVisible(false);
 						if (i instanceof Descuento) {
 							customer.setAhorrado("Descuento", valor);
+							double[] ahorrado = customer.getAhorrado();
+							//lo actualizamos en la base de datos
+							cliente.setContext("/updateDescuento");
+							session.put("Customer",customer);
+							session.put("Ahorrado",ahorrado[0]);
+							cliente.setSession(session);
+							cliente.run(cliente);
 						}else if (i instanceof Porcentaje){
 							customer.setAhorrado("Porcentaje", valor);
+							double[] ahorrado = customer.getAhorrado();
+							int numpercs = customer.getNumPorcentajes();
+							//lo actualizamos en la base de datos
+							cliente.setContext("/updatePorcentaje");
+							session.put("Customer",customer);
+							session.put("Ahorrado",ahorrado[1]);
+							session.put("Numero", numpercs);
+							cliente.setSession(session);
+							cliente.run(cliente);
 						}
 						eliminarDescuento(i,pnlCentro,fuente1);
 						//new JInicio(customer, cliente);
@@ -419,7 +444,15 @@ public class JInicio extends JFrame
 
 	private void eliminarDescuento(Oferta i, JPanel pnlCentro, Font fuente1){
 		String eliminado= i.getComercio();
-		OfertaDAO.eliminarDescuento(customer,i);
+
+		HashMap<String,Object> session= new HashMap<String,Object>();
+		cliente.setContext("/eliminarOferta");
+		session.put("Customer",customer);
+		session.put("Oferta",i);
+		cliente.setSession(session);
+		cliente.run(cliente);
+
+		//OfertaDAO.eliminarDescuento(customer,i);
 		System.out.println("Descuento eliminado");
 		pnlCentro.removeAll();
 		pnlCentro.setVisible(false);

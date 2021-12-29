@@ -9,11 +9,15 @@ public class CustomerControler {
     public void getCustomer(ArrayList<Customer> lista) {
         CustomerDAO.getClientes(lista);
     }
+    public Customer isInBase(Customer customerIn){return CustomerDAO.isInBase(customerIn);}
     public void updateDescuento(Customer customer,double valor){CustomerDAO.updateDescuento(customer,valor);}
 
     public void updateCheque(Customer customer, double valorCheque) {CustomerDAO.updateCheque(customer,valorCheque);
     }
 
     public void updatePorcentaje(Customer customer, double valorPorcentaje, int numPorcentajes) {CustomerDAO.updatePorcentaje(customer,valorPorcentaje,numPorcentajes);
+    }
+
+    public void addCliente(Customer customerIN) { CustomerDAO.addCliente(customerIN);
     }
 }

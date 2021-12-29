@@ -95,24 +95,24 @@ public class Customer implements Serializable{
         if (tipo == "Descuento") {
             double valorDescuento = this.ahorrado[0] + valor;
             this.ahorrado[0] = valorDescuento;
-            controler.updateDescuento(this, valorDescuento);//Lo actualizamos también en la base de datos
+            //controler.updateDescuento(this, valorDescuento);//Lo actualizamos también en la base de datos
         }
         if (tipo == "Porcentaje"){
             double valorPorcentaje;
-            if (numPorcentajes == 0){
-                valorPorcentaje = valor;
-            } else{
-                numPorcentajes ++;
-                valorPorcentaje = (this.ahorrado[1] + valor)/numPorcentajes;
-            }
-            this.ahorrado[0] = valorPorcentaje;
-            controler.updatePorcentaje(this, valorPorcentaje, numPorcentajes);//Lo actualizamos también en la base de datos
+            numPorcentajes ++;
+            valorPorcentaje = (this.ahorrado[1] + valor)/numPorcentajes;
+            this.ahorrado[1] = valorPorcentaje;
+            //controler.updatePorcentaje(this, valorPorcentaje, numPorcentajes);//Lo actualizamos también en la base de datos
         }
         if (tipo == "Cheque"){
             double valorCheque = this.ahorrado[2] + valor;
             this.ahorrado[2] = valorCheque;
-            controler.updateCheque(this,valorCheque);
+            //controler.updateCheque(this,valorCheque);
         }
+    }
+
+    public int getNumPorcentajes(){
+        return this.numPorcentajes;
     }
 
 }

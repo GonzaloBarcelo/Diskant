@@ -70,7 +70,7 @@ public class OfertaDAO {
         return lista;
     }
 
-    public static ArrayList<Oferta> getDescuentosTotal(){
+    private static ArrayList<Oferta> getDescuentosTotal(){
         //Como debemos extraer descuentos, necesitamos conexion a la base de datos, por lo que tenemos que gnerar una conexion
         Connection con = ConnectionDAO.getInstance().getConnection();
         //Si la lista que debemos actualizar no existe o si su tamaño es cero, la volvemos a crear

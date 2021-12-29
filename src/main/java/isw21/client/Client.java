@@ -12,6 +12,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import main.java.isw21.descuentos.ChequeRegalo;
 import main.java.isw21.descuentos.Oferta;
 import org.apache.log4j.Logger;
 
@@ -108,6 +109,15 @@ public class Client {
                 // Si la respuesta del servidor es True, la identificacion ha sido correcta y desde ese momento
                 // El usuario podrá acceder a todo su contenido
                 identification = (Customer)(mensajeVuelta.getSession().get("Customer"));
+                break;
+            case "/updateChequeResponse":
+                ChequeRegalo cheque = (ChequeRegalo) mensajeVuelta.getSession().get("Cheque");
+                break;
+            case "/updatePorcentajeResponse":
+                double ahorrado = (Double) mensajeVuelta.getSession().get("Ahorrado");
+                break;
+            case "/updateDescuentoResponse":
+                ahorrado = (Double) mensajeVuelta.getSession().get("Ahorrado");
                 break;
 
             default:
