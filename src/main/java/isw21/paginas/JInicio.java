@@ -91,9 +91,9 @@ public class JInicio extends JFrame
 			for (Oferta i : plOfertas) {
 				//Para cada descuento que tenga el usuario, se llamará a la funcion mastrar. La cual organiza los descuentos y los muestra al usuario
 				
+				pnlCentro.setPreferredSize(new Dimension(0, l*105));
 				JScrollPane scroll = new JScrollPane(pnlCentro);
 				mostrarDescuento(i,pnlCentro,fuente1);
-				pnlCentro.setPreferredSize(new Dimension(0, l*105));
 				scroll.setViewportView(pnlCentro);
 
 				setVisible(true);
