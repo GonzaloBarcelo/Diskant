@@ -114,7 +114,7 @@ public class Customer implements Serializable{
         if (tipo == "Porcentaje"){
             double valorPorcentaje;
             numPorcentajes ++;
-            valorPorcentaje = (this.ahorrado[1] + valor)/numPorcentajes;
+            valorPorcentaje = ((this.ahorrado[1]*(numPorcentajes-1)) + valor)/numPorcentajes;
             this.ahorrado[1] = valorPorcentaje;
             //controler.updatePorcentaje(this, valorPorcentaje, numPorcentajes);//Lo actualizamos también en la base de datos
         }

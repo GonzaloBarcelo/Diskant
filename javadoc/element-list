@@ -5,6 +5,7 @@ main.java.isw21.controler
 main.java.isw21.dao
 main.java.isw21.descuentos
 main.java.isw21.domain
+main.java.isw21.excepciones
 main.java.isw21.io
 main.java.isw21.message
 main.java.isw21.paginas

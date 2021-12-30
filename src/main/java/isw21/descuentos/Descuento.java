@@ -1,5 +1,7 @@
 package main.java.isw21.descuentos;
 
+import main.java.isw21.excepciones.PorcentajeException;
+
 /**
  * Clase de descuento, hereda de oferta
  * @see Oferta

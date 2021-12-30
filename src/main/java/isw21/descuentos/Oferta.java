@@ -2,6 +2,8 @@
 
 package main.java.isw21.descuentos;
 
+import main.java.isw21.excepciones.PorcentajeException;
+
 import java.io.Serializable;
 
 /**
@@ -19,10 +21,10 @@ public abstract class Oferta implements Serializable {
     public String codigo;
     public String comercio;
 
-    public Oferta(String comercio, String fechaIn, String fechaFin,int valor, String codigo){
+    public Oferta(String comercio, String fechaIn, String fechaFin,int valor, String codigo) {
         this.fechaIn=fechaIn;
         this.fechaFin=fechaFin;
-        this.valor=valor;
+        this.valor = valor;
         //this.tipo=tipo;
         this.comercio=comercio;
         this.codigo=codigo;
@@ -64,7 +66,7 @@ public abstract class Oferta implements Serializable {
         return valor;
     }
 
-    public void setValor(int valor) {
+    public void setValor(int valor) throws PorcentajeException {
         this.valor = valor;
     }
 

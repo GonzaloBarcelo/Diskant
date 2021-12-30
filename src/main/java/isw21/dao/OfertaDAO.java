@@ -3,6 +3,7 @@ import main.java.isw21.descuentos.ChequeRegalo;
 import main.java.isw21.descuentos.Oferta;
 import main.java.isw21.descuentos.OfertaFactory;
 import main.java.isw21.domain.Customer;
+import main.java.isw21.excepciones.PorcentajeException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -76,7 +77,10 @@ public class OfertaDAO {
                         Oferta oferta = factoria.getOferta(rs1.getString(1),rs1.getString(2),rs1.getString(3),rs1.getInt(5),rs1.getString(6),rs1.getInt(4),rs.getDouble(3));
                         lista.add(oferta);
                     }
-                } catch (SQLException ex) {
+                } catch (PorcentajeException exc){
+                    System.out.println(exc);
+                }
+                catch (SQLException ex) {
                     System.out.println(ex.getMessage());
                 }
             }
@@ -106,7 +110,10 @@ public class OfertaDAO {
                 Oferta oferta = factoria.getOferta(rs.getString(1),rs.getString(2),rs.getString(3),rs.getInt(5),rs.getString(6),rs.getInt(4),0);
                 lista.add(oferta);
             }
-        } catch (SQLException ex) {
+        } catch (PorcentajeException exc) {
+            System.out.println(exc);
+        }
+        catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         return lista;

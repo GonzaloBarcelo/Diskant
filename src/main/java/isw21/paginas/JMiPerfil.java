@@ -84,7 +84,7 @@ public class JMiPerfil extends JFrame
         lblEspacio.setPreferredSize(new Dimension(20, 130));
 
 
-        JLabel lblInfo = new JLabel("info");
+        JLabel lblInfo = new JLabel(customer.getUsuario());
         lblInfo.setBorder(BorderFactory.createLineBorder(new Color(150,150,150)));
         lblInfo.setPreferredSize(new Dimension(200, 110));
         lblInfo.setBackground(new Color(17,90,29));
@@ -236,6 +236,13 @@ public class JMiPerfil extends JFrame
             JOptionPane.showMessageDialog(null,s);
           }
         });
+        btnSesion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                setVisible(false);
+                new JPrincipal();
+            }
+        });
         btnInvitar.addActionListener(new ActionListener()
         {
           public void actionPerformed(ActionEvent e)
@@ -248,13 +255,13 @@ public class JMiPerfil extends JFrame
           }
         });
 
-        this.addWindowListener(new WindowAdapter() {
+        /*this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 JPrincipal jprinc = new JPrincipal();
 
             }
-        });
+        });*/
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setVisible(true);

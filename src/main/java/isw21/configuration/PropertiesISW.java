@@ -7,7 +7,7 @@ import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
 /**
- * Codigo de conexión a la base de datos utilizado por el servidor. Singleton.
+ * Codigo para acceder a la configuración properties.xml, que contiene la información del servidor. Singleton.
  * @version 0.1
  */
 public class PropertiesISW extends Properties{

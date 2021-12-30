@@ -1,5 +1,7 @@
 package main.java.isw21.descuentos;
 
+import main.java.isw21.excepciones.PorcentajeException;
+
 /**
  * Clase para los cheques regalos, tenemos que tener en cuenta la cantidad gastada.
  * @version 0.3

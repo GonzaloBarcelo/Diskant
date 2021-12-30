@@ -88,19 +88,21 @@ public class JInicio extends JFrame
 		}
 		//En caso contrario visualizarán en el centro de la pestaña
 		else {
+			pnlCentro.setPreferredSize(new Dimension(0, l*105));
 			for (Oferta i : plOfertas) {
 				//Para cada descuento que tenga el usuario, se llamará a la funcion mastrar. La cual organiza los descuentos y los muestra al usuario
-				
-				JScrollPane scroll = new JScrollPane(pnlCentro);
-				mostrarDescuento(i,pnlCentro,fuente1);
-				pnlCentro.setPreferredSize(new Dimension(0, l*105));
-				scroll.setViewportView(pnlCentro);
 
-				setVisible(true);
-				this.add(scroll, BorderLayout.CENTER);
+
+				mostrarDescuento(i,pnlCentro,fuente1);
+
 
 
 			}
+			JScrollPane scroll = new JScrollPane(pnlCentro);
+			scroll.setViewportView(pnlCentro);
+
+			setVisible(true);
+			this.add(scroll, BorderLayout.CENTER);
 		}
 
 
@@ -482,36 +484,10 @@ public class JInicio extends JFrame
 		cliente.run(cliente);
 
 		//OfertaDAO.eliminarDescuento(customer,i);
-		System.out.println("Descuento eliminado");
-		pnlCentro.removeAll();
-		pnlCentro.setVisible(false);
-		plOfertas = getDescuentos(customer);
-		plOfertas.remove(0);
-		int l= plOfertas.size();
-		//Esto habrá que cambiarlo, pero de momento con 16 está nice
-		pnlCentro.setLayout(new GridLayout(4, 4));
+		JOptionPane.showMessageDialog(parent,"Se ha eliminado el descuento de "+eliminado+" y todos los descuentos duplicados.");
+		setVisible(false);
+		new JInicio(customer,cliente);
 
-		// Al iniciar la pestaña, se mostrarán los descuentos asociados a la cuenta
-
-		//Si no hay, se mostrará un mensaje: "En este momento no tienes descuentos".
-		if(plOfertas == null || l == 0	){
-			JLabel lno = new JLabel("En este momento no tienes descuentos");
-			lno.setFont(fuente1);
-			pnlCentro.add(lno);
-			//pnlCentro.add(btnCrearDescuento);
-			//Quitar el descuento inicial de bienvenida
-		}
-		//En caso contrario visualizarán en el centro de la pestaña
-		else {
-			for (Oferta of : plOfertas) {
-				//Para cada descuento que tenga el usuario, se llamará a la funcion mastrar. La cual organiza los descuentos y los muestra al usuario
-				mostrarDescuento(of,pnlCentro,fuente1);
-
-
-			}
-		}
-		pnlCentro.setVisible(true);
-		JOptionPane.showMessageDialog(parent,"Se ha eiliminado el descuento de "+eliminado+" y todos los descuentos duplicados.");
 	}
 
 
