@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.JScrollPane;
 
 import main.java.isw21.descuentos.ChequeRegalo;
 import main.java.isw21.descuentos.Descuento;
@@ -16,6 +17,8 @@ import main.java.isw21.client.Client;
 import java.awt.datatransfer.StringSelection;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
+
+
 
 /**
  * La ventana principal al abrir la aplicación en la que se muestran las ofertas del usuario.
@@ -71,9 +74,7 @@ public class JInicio extends JFrame
 		JPanel pnlCentro = new JPanel();
 		pnlCentro.setBackground(new Color(174,200,178));
 		int l= plOfertas.size();
-		//Esto habrá que cambiarlo, pero de momento con 16 está nice
-		pnlCentro.setLayout(new GridLayout(4, 4));
-
+		pnlCentro.setLayout(new FlowLayout());
 		// Al iniciar la pestaña, se mostrarán los descuentos asociados a la cuenta
 
 		//Si no hay, se mostrará un mensaje: "En este momento no tienes descuentos".
@@ -81,6 +82,7 @@ public class JInicio extends JFrame
 			JLabel lno = new JLabel("En este momento no tienes descuentos");
 			lno.setFont(fuente1);
 			pnlCentro.add(lno);
+			this.add(pnlCentro, BorderLayout.CENTER);
 			//pnlCentro.add(btnCrearDescuento);
 			//Quitar el descuento inicial de bienvenida
 		}
@@ -88,7 +90,14 @@ public class JInicio extends JFrame
 		else {
 			for (Oferta i : plOfertas) {
 				//Para cada descuento que tenga el usuario, se llamará a la funcion mastrar. La cual organiza los descuentos y los muestra al usuario
+				
+				JScrollPane scroll = new JScrollPane(pnlCentro);
 				mostrarDescuento(i,pnlCentro,fuente1);
+				pnlCentro.setPreferredSize(new Dimension(0, l*105));
+				scroll.setViewportView(pnlCentro);
+
+				setVisible(true);
+				this.add(scroll, BorderLayout.CENTER);
 
 
 			}
@@ -132,15 +141,7 @@ public class JInicio extends JFrame
 		pnlSur.add(btnCorazon);
 		pnlSur.add(btnMiPerfil);
 
-		//LADOS
-		JPanel pnlEste = new JPanel();
-		pnlEste.setBackground(new Color(174,200,178));
-		pnlEste.setPreferredSize(new Dimension(60, 60));
 
-
-		JPanel pnlOeste = new JPanel();
-		pnlOeste.setPreferredSize(new Dimension(60, 60));
-		pnlOeste.setBackground(new Color(174,200,178));
 
 		btnHome.addActionListener(new ActionListener()
 		{
@@ -247,10 +248,9 @@ public class JInicio extends JFrame
 
 
 		this.add(pnlNorte, BorderLayout.NORTH);
-		this.add(pnlCentro, BorderLayout.CENTER);
+
 		this.add(pnlSur, BorderLayout.SOUTH);
-		this.add(pnlEste, BorderLayout.EAST);
-		this.add(pnlOeste, BorderLayout.WEST);
+
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
@@ -268,6 +268,7 @@ public class JInicio extends JFrame
 	private void mostrarDescuento(Oferta i , JPanel pnlCentro, Font fuente1) {
 		String tipo = comprobarTipo(i);
 		JPanel pnlDescuento = new JPanel();
+		pnlDescuento.setPreferredSize(new Dimension(500, 100));
 		pnlDescuento.setLayout(new GridLayout(6, 1));
 		if (i instanceof ChequeRegalo) {
 			pnlDescuento.setLayout(new GridLayout(7, 1));
