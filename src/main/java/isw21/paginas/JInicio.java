@@ -157,41 +157,43 @@ public class JInicio extends JFrame
 			public void actionPerformed(ActionEvent e) {
 
 				String n= (String) JOptionPane.showInputDialog("Introduzca el comercio del que quiera buscar la oferta:");
-				pnlCentro.removeAll();
-				pnlCentro.setVisible(false);
-				System.out.println(n);
-				plOfertas = getDescuentos(customer);
-				plOfertas.remove(0);
-				ArrayList<Oferta> plOfertasFiltradas= new ArrayList<Oferta>();
-				for (Oferta of: plOfertas){
-					if (of.getComercio().equals(n) || n.equals("")){
-						plOfertasFiltradas.add(of);
+				if(n!=null){
+					pnlCentro.removeAll();
+					pnlCentro.setVisible(false);
+					System.out.println(n);
+					plOfertas = getDescuentos(customer);
+					plOfertas.remove(0);
+					ArrayList<Oferta> plOfertasFiltradas= new ArrayList<Oferta>();
+					for (Oferta of: plOfertas){
+						if (of.getComercio().equals(n) || n.equals("")){
+							plOfertasFiltradas.add(of);
+						}
 					}
-				}
-				int l= plOfertasFiltradas.size();
-				//Esto habrá que cambiarlo, pero de momento con 16 está nice
-				pnlCentro.setLayout(new GridLayout(4, 4));
+					int l= plOfertasFiltradas.size();
+					//Esto habrá que cambiarlo, pero de momento con 16 está nice
+					pnlCentro.setLayout(new GridLayout(4, 4));
 
-				// Al iniciar la pestaña, se mostrarán los descuentos asociados a la cuenta
+					// Al iniciar la pestaña, se mostrarán los descuentos asociados a la cuenta
 
-				//Si no hay, se mostrará un mensaje: "En este momento no tienes descuentos".
-				if(plOfertasFiltradas == null || l == 0	){
-					JLabel lno = new JLabel("En este momento no tienes descuentos de ese comercio");
-					lno.setFont(fuente1);
-					pnlCentro.add(lno);
-					//pnlCentro.add(btnCrearDescuento);
-					//Quitar el descuento inicial de bienvenida
-				}
-				//En caso contrario visualizarán en el centro de la pestaña
-				else {
-					for (Oferta of : plOfertasFiltradas) {
-						//Para cada descuento que tenga el usuario, se llamará a la funcion mastrar. La cual organiza los descuentos y los muestra al usuario
-						mostrarDescuento(of,pnlCentro,fuente1);
-
-
+					//Si no hay, se mostrará un mensaje: "En este momento no tienes descuentos".
+					if(plOfertasFiltradas == null || l == 0	){
+						JLabel lno = new JLabel("En este momento no tienes descuentos de ese comercio");
+						lno.setFont(fuente1);
+						pnlCentro.add(lno);
+						//pnlCentro.add(btnCrearDescuento);
+						//Quitar el descuento inicial de bienvenida
 					}
+					//En caso contrario visualizarán en el centro de la pestaña
+					else {
+						for (Oferta of : plOfertasFiltradas) {
+							//Para cada descuento que tenga el usuario, se llamará a la funcion mastrar. La cual organiza los descuentos y los muestra al usuario
+							mostrarDescuento(of,pnlCentro,fuente1);
+
+
+						}
+					}
+					pnlCentro.setVisible(true);
 				}
-				pnlCentro.setVisible(true);
 			}
 		});
 
