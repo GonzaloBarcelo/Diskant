@@ -188,6 +188,7 @@ public class JInicio extends JFrame
 					}
 					//En caso contrario visualizarán en el centro de la pestaña
 					else {
+
 						for (Oferta of : plOfertasFiltradas) {
 							//Para cada descuento que tenga el usuario, se llamará a la funcion mastrar. La cual organiza los descuentos y los muestra al usuario
 							mostrarDescuento(of,pnlCentro,fuente1);
