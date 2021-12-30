@@ -232,7 +232,7 @@ public class JMiPerfil extends JFrame
           public void actionPerformed(ActionEvent e)
           {
 
-            Collection<String> s = JMiPerfil.importTexto();
+            String s = JMiPerfil.importTexto();
             JOptionPane.showMessageDialog(null,s);
           }
         });
@@ -262,9 +262,10 @@ public class JMiPerfil extends JFrame
 
 
     }
-     public static Collection<String> importTexto()
+     public static String importTexto()
         {
           Collection<String> texto = new ArrayList<String>();
+          String textFinal = new String();
           try
           {
             FileReader fr = new FileReader("src/main/java/isw21/media/Privacidad.txt");
@@ -275,11 +276,17 @@ public class JMiPerfil extends JFrame
               texto.add(linea);
 
             }
+            textFinal= new String();
+            for (String i: texto){
+                textFinal =textFinal+i+"\n";
+            }
+            System.out.println(textFinal);
           }
+
           catch(IOException ioe)
           {
             ioe.printStackTrace();
           }
-          return texto;
+          return textFinal;
         }
 }

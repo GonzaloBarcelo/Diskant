@@ -33,16 +33,16 @@ public class IODescuento {
             }
             catch(IOException ioe)
             {
-                ioe.printStackTrace();
+                System.out.println("No existen descuentos asociados a la entidad");
             }
         }
         catch(IOException ioe)
         {
-            ioe.printStackTrace();
+            System.out.println("No existen descuentos asociados a la entidad");
         }
         catch(ClassNotFoundException cnfe)
         {
-            cnfe.printStackTrace();
+            System.out.println("No existen descuentos asociados a la entidad");
         }
         return new ArrayList<>();
     }
