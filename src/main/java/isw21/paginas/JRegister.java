@@ -221,15 +221,16 @@ public class JRegister extends JFrame
                    cliente.setNombre(txtPassword.getText());
                    cliente.setId(txtUser.getText());
                    cliente.setEmail(txtMail.getText());
+                   cliente.run(cliente);
                    // Con este contexto, como se puede ver en el servidor, solo es encesario saber el nombre y la contraseña. En un futuro se añadiran otros campos.
                    // Como por ejemplo numero de telefono o email.
                    try{
 
-                       cliente.run(cliente);
                        //Si el servidor, en su mensaje de vuelta, nos devuelve true, indicará que que el usuario se ha añadido correctamente a la base de datos
                        if (cliente.getIdentification()!=null){
                            System.out.println("Se ha añadido el usuario a la base de datos");
                            // Una vez introducido en la base de datos, tendrá que volver a la pantalla principal e iniciar sesion
+                           // Si el usuario tiene un correo de comillas, se le cargarán una serie de descuentos directamente.
                            if(txtMail.getText().contains("comillas")){
                                cliente.setContext("/addDescuento");
                                HashMap<String,Object> session= new HashMap<String,Object>();
@@ -254,9 +255,14 @@ public class JRegister extends JFrame
                            }
                            JPrincipal jp = new JPrincipal();
                            setVisible(false);
+                       }else{
+                           JOptionPane.showMessageDialog(null,"El usuario ya figura en la base de datos");
+                           JPrincipal jp = new JPrincipal();
+                           setVisible(false);
                        }
                    }
                    catch (Exception exception){
+
                        JOptionPane.showMessageDialog(null,"El usuario con esa contraseña ya figura en la base de datos");
                        JPrincipal jp = new JPrincipal();
                        setVisible(false);
