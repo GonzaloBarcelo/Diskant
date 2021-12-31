@@ -173,6 +173,10 @@ public class JRegister extends JFrame
                             }
                             JPrincipal jp = new JPrincipal();
                             setVisible(false);
+                        }else{
+                            JOptionPane.showMessageDialog(null,"El usuario ya figura en la base de datos");
+                            JPrincipal jp = new JPrincipal();
+                            setVisible(false);
                         }
                     }
                     catch (Exception exception){
